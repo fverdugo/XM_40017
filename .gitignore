@@ -1,0 +1,6 @@
+*.swp
+Manifest.toml
+.ipynb_checkpoints/
+.vscode/
+*.code-workspace
+*.DS_Store
