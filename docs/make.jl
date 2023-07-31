@@ -104,7 +104,14 @@ makedocs(;
         prettyurls=get(ENV, "CI", "false") == "true",
         canonical="https://fverdugo.github.io/XM_40017",
         edit_link="main",),
-    pages=["Home" => "index.md","Hello World" => "notebook-hello.md", "Notebooks"=>["Matrix Multiplication"=>"matrix_matrix.md"]],
+    pages=["Home" => "index.md","Julia Tutorial" => "julia_tutorial.md", "Notebooks"=>[
+        "Why is Julia fast?" => "julia_intro.md",
+        "Julia Basics" => "julia_basics.md",
+        "Julia Asynchronous" => "julia_async.md",
+        "Julia Distributed" => "julia_distributed.md",
+        "Matrix Multiplication"=>"matrix_matrix.md",
+        "Jacobi/SOR" => "julia_jacobi.md"
+    ]],
 )
 
 deploydocs(;
