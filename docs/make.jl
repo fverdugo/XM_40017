@@ -35,12 +35,28 @@ EditURL = "https://github.com/fverdugo/XM_40017/blob/main/docs/src/notebooks/SCR
 ```
 """
 
+function convert_embedded_img_to_base64(notebook_path)
+    doc = open(io->read(io, String), notebook_path)
+    # Regex matching: extract filename and base64 code
+    regex = r"attachments\\\":\s*\{\s*\\\"(?<filename>.*).png\\\":\s*\{\s*\\\"image/png\\\":\s*\\\"(?<base64code>.*)\\\""
+    res = eachmatch(regex, doc)
+    matches = collect(res)
+    # Replace img src with base64 code
+    for m in matches
+        filename = m[:filename]
+        base64 = m[:base64code]
+        doc = replace(doc, "attachment:$filename.png" => "data:image/png;base64,$base64")
+    end
+
+    write(notebook_path, doc);
+end
+
 # Write markdown file that includes notebook html
 function create_md_nb_file( notebook_path )
     global md_nb_template;
     script_file = splitpath(notebook_path)[end]    
     script_name = splitext(script_file)[1]
-    content = replace( md_nb_template, "SCRIPT_NAME" => script_name)
+    content = replace(md_nb_template, "SCRIPT_NAME" => script_name)
     md_path = joinpath(@__DIR__, "src", script_name * ".md" ) 
     open(md_path, "w") do md_file
         write(md_file, content)
@@ -87,6 +103,7 @@ end
 # Loop over notebooks and generate html and markdown 
 notebook_files = glob("*.ipynb", "docs/src/notebooks/")
 for filepath in notebook_files
+    convert_embedded_img_to_base64(filepath)
     create_md_nb_file(filepath)
     filename_with_ext = splitpath(filepath)[end]    
     filename = splitext(filename_with_ext)[1]
@@ -109,7 +126,7 @@ makedocs(;
         "Julia Basics" => "julia_basics.md",
         "Julia Asynchronous" => "julia_async.md",
         "Julia Distributed" => "julia_distributed.md",
-        "Matrix Multiplication"=>"matrix_matrix.md",
+        "Matrix Multiplication"=>["Matrix Multiplication" => "matrix_matrix.md", "Solutions" => "sol_matrix_matrix.md"],
         "Jacobi/SOR" => "julia_jacobi.md"
     ]],
 )
