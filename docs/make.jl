@@ -115,13 +115,14 @@ makedocs(;
     modules=[XM_40017],
     authors="Francesc Verdugo <f.verdugo.rojano@vu.nl>",
     repo="https://github.com/fverdugo/XM_40017/blob/{commit}{path}#{line}",
-    sitename="XM_40017",
+    sitename="XM_40017",    
     format=Documenter.HTML(;
-        assets = ["assets/iframeResizer.min.js", "assets/custom.css"],
+        assets = ["assets/favicon.ico", "assets/iframeResizer.min.js", "assets/custom.css"],
         prettyurls=get(ENV, "CI", "false") == "true",
         canonical="https://fverdugo.github.io/XM_40017",
         edit_link="main",),
-    pages=["Home" => "index.md","Julia Tutorial" => "julia_tutorial.md", "Notebooks"=>[
+    pages=["Home" => "index.md", "Notebooks"=>[
+        "Julia Tutorial" => "julia_tutorial.md",
         "Why is Julia fast?" => "julia_intro.md",
         "Julia Basics" => "julia_basics.md",
         "Julia Asynchronous" => "julia_async.md",
