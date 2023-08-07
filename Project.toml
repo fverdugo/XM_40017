@@ -3,8 +3,6 @@ uuid = "bac2549d-7fb4-47a9-ab16-d1e9b77d8fc7"
 authors = ["Francesc Verdugo <f.verdugo.rojano@vu.nl>"]
 version = "0.1.0"
 
-[extras]
-Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
-
-[targets]
-test = ["Test"]
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+Glob = "c27321d9-0574-5035-807b-f59d2c89b15c"
