@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>notebook-hello</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>julia_basics</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 	<script src='../assets/iframeResizer.contentWindow.min.js'></script>
 
 <style type="text/css">
@@ -7453,199 +7453,71 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="false" data-jp-theme-name="JupyterLab Dark">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=babf8079">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=faecad82">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Hello,-world!">Hello, world!<a class="anchor-link" href="#Hello,-world!">¶</a></h1>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f71f2545">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="p">]</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">Distributed</span>
-</pre></div>
+<img alt="No description has been provided for this image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/VU_logo.png/800px-VU_logo.png?20161029201021" width="350"/>
+<h3 id="Programming-large-scale-parallel-systems">Programming large-scale parallel systems<a class="anchor-link" href="#Programming-large-scale-parallel-systems">¶</a></h3><h3 id="Lectures-on-Julia-for-HPC">Lectures on Julia for HPC<a class="anchor-link" href="#Lectures-on-Julia-for-HPC">¶</a></h3><h1 id="Basics-of-Julia">Basics of Julia<a class="anchor-link" href="#Basics-of-Julia">¶</a></h1><p>by Francesc Verdugo (VU Amsterdam)</p>
+<p>Version fall 2022</p>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4d6b67b6">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="p">]</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">https</span><span class="o">://</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">fverdugo</span><span class="o">/</span><span class="n">W2bYx4</span><span class="o">.</span><span class="n">git</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=815d977e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">W2bYx4</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2cf68b65">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">W2bYx4</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=81236a40">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0f54a3f8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>This is an attached picture:</p>
+<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">¶</a></h2><p>In this notebook, we will cover the basic parts of Julia needed later to learn parallel computing. In particular, we will learn about:</p>
+<ul>
+<li>Variables</li>
+<li>Functions</li>
+<li>Arrays</li>
+</ul>
+<p>For a more general introduction to Julia see the nice tutorials made available by JuliaAcademy <a href="https://github.com/JuliaAcademy/JuliaTutorials/">here</a> or the official Julia educational resources <a href="https://julialang.org/learning/">here</a>.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7c2e8d25">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a23a48f4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<div>
-<img align="left" alt="No description has been provided for this image" src="data:image/png;base64,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" width="200"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d0f1685d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Another attached picture with markdown syntax <code>![]()</code>:</p>
-<p><img alt="logo.png" src="data:image/png;base64,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"/></p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7f4de0d2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>A picture embedded with Base64:</p>
-<div>
-<img align="left" alt="No description has been provided for this image" src="data:image/png;base64,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" width="200"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0d36cf9e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>This is a linked picture:</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0b541664">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<div>
-<img align="left" alt="No description has been provided for this image" src="https://raw.githubusercontent.com/fverdugo/W2bYx4/main/notebooks/figures/logo.png" width="200"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cae7f8ac">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6603cd99">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c3b59ed4">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<div class="alert alert-block alert-warning">
-<b>Warning:</b> Make sure that the file <code>"hello.jl"</code> is located in the current working directory of your Julia session.
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5b3e3d68">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Using-Jupyter-notebooks-in-Julia">Using Jupyter notebooks in Julia<a class="anchor-link" href="#Using-Jupyter-notebooks-in-Julia">¶</a></h2><p>We are going to use Jupyter notebooks in this and other lectures. You provably have worked with notebooks (in Python). If not, here are the basic concepts you need to know to follow the lessons.</p>
 <div class="alert alert-block alert-info">
-<b>Tip:</b> Avoid calling Julia code from the terminal
+<b>Tip:</b> Did you know that Jupyter stands for Julia, Python and R?
+</div>
+<h3 id="How-to-start-a-Jupyter-nootebook-in-Julia">How to start a Jupyter nootebook in Julia<a class="anchor-link" href="#How-to-start-a-Jupyter-nootebook-in-Julia">¶</a></h3><p>To run a Julia Jupyther notebook, open a Julia REPL and type</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="p">]</span>
+<span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">IJulia</span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">IJulia</span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">notebook</span><span class="p">()</span>
+</pre></div>
+<p>A new browser window will open. Navigate to the corresponding notebook and open it.</p>
+<div class="alert alert-block alert-warning">
+<b>Warning:</b> Make sure that the notebook is using the same Julia version as the one you used to launch `IJulia`. If it is not the same, go to Kernel &gt; Change Kernel and choose the right version.
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b7267f6e">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bcefe994">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Running-a-cell">Running a cell<a class="anchor-link" href="#Running-a-cell">¶</a></h3><p>To run a cell, click on a cell and press <code>Shift</code> + <code>Enter</code>. You can also use the "Run" button in the toolbar above.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4eae9070">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7653,7 +7525,1900 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span>
+<div class="highlight hl-julia"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="mi">3</span>
+<span class="mi">4</span><span class="o">*</span><span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0a02fb75">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>As you can see from the output of previous cell, the value of the last line is displayed. We can suppress the output with a semicolon. Try it. Execute next cell.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3923b7a5">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="mi">3</span>
+<span class="mi">4</span><span class="o">*</span><span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ffd3a444">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Cell-order-is-important">Cell order is important<a class="anchor-link" href="#Cell-order-is-important">¶</a></h3><p>Running the two cells below in reverse order won't work (try it).</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f7597471">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">foo</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Well done!"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4a5d4f50">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">foo</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=92112bd1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="REPL-modes">REPL modes<a class="anchor-link" href="#REPL-modes">¶</a></h3><p>This is particular to Julia notebooks. You can use package, help, and shell mode just like in the Julia REPL.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9a445020">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="p">]</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">MPI</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=edefc54f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="o">?</span><span class="w"> </span><span class="n">print</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e69fd5f1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="p">;</span><span class="w"> </span><span class="n">ls</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8b94fc33">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Variables">Variables<a class="anchor-link" href="#Variables">¶</a></h2><p>The usage of variables in Julia is pretty similar to Python and quite different from C/C++ and Fortran. However, there are also some differences with Python.</p>
+<h3 id="Creating-a-variable">Creating a variable<a class="anchor-link" href="#Creating-a-variable">¶</a></h3><p>A variable is a name associated (bound) to a value. We associate variables with values with <code>=</code> as usual.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=149b7a62">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=77b557a8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>When assigning a variable, the value on the right hand side is not copied into the variable. It is just an association of a name with a value (much like in Python).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ba08ea11">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Re-assign-a-variable">Re-assign a variable<a class="anchor-link" href="#Re-assign-a-variable">¶</a></h3><p>We can re-assign a variable, even with a value of another type. However, avoid changing the variable type for performance reasons.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f62e49c9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=86ac71ec">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e67d8480">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Hi!"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=767563a7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Unreachable-objects">Unreachable objects<a class="anchor-link" href="#Unreachable-objects">¶</a></h3><p>When an object is not associated with a variable any more,  it cannot be reached by the user. This can happen, e.g., when we re-assign a variable. Another case is when local variables, e.g in a function, go out of scope. The following line allocates a large array and assigns it to variable a</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=202e222b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="mi">300000000</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=35742a64">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>If we re-assign the variable to another value, the large array will be inaccessible.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e6cd1c24">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nothing</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2883bf04">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Garbage-collector">Garbage collector<a class="anchor-link" href="#Garbage-collector">¶</a></h3><p>Luckily, Julia has a garbage collector that deallocates unreachable objects. You don't need to bother about manual deallocation! Julia is not constantly looking for unreachable objects. Thus, garbage collection does not happen instantaneously, but it will happen at some point. You can also explicitly call the garbage collector, but it is almost never done in practice.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=89516ede">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">GC</span><span class="o">.</span><span class="n">gc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c110aa22">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Type-declarations-are-optional">Type declarations are optional<a class="anchor-link" href="#Type-declarations-are-optional">¶</a></h3><p>Julia knows the type of the object associated with a variable.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c8d93d64">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">typeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=df2e48c2">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We can annotate types if we want, but this will not improve performance (except in very special situations). Thus, annotating types is not done in practice.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=95fd3ef4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">c</span><span class="o">::</span><span class="kt">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">typeof</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=67883016">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>If you annotate a variable with a type, then it cannot refer to objects of other types.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f3cdc27b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"I am a string"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=64f5aa94">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Variable-names">Variable names<a class="anchor-link" href="#Variable-names">¶</a></h3><p>There is a great flexibility to choose variable names in Julia. See all the rules in the <a href="https://docs.julialang.org/en/v1/manual/variables/#man-allowed-variable-names">manual</a> if you are interested.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=09eb4365">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We can use Unicode (UTF-8 encoding) characters in variables and function names.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=94667496">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">🐱</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"I am a cat"</span>
+<span class="n">🐶</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"I am a dog"</span>
+<span class="n">🐱</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">🐶</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=beaf9680">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We can also use Greek letters and other mathematical symbols. Just write the corresponding <a href="https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols">LaTeX</a> command and press <code>Tab</code>. For example: <code>ω</code> is written <code>\omega</code> + <code>Tab</code></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b9b3079e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">ω</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.234</span>
+<span class="n">sin</span><span class="p">(</span><span class="n">ω</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4f7de553">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>In fact, some useful mathematical constants are predefined in Julia with math Greek letters.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=89d6d94e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">sin</span><span class="p">(</span><span class="nb">π</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d36ba0ae">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Question-1">Question 1<a class="anchor-link" href="#Question-1">¶</a></h3><p>Which will be the value of <code>x</code> in the last line ?</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f6f4e13e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span>
+<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4d2cb752">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Functions">Functions<a class="anchor-link" href="#Functions">¶</a></h2><p>Julia is very much a functional programming language. In consequence, Julia is more centered on functions than on types. This is in contrast to object-oriented languages, which are more centered on types (classes). For instance, you don't need to know the details of the Julia type system to learn parallel programming in Julia, but you need to have a quite advanced knowledge of how Julia functions work.</p>
+<h3 id="Defining-functions">Defining functions<a class="anchor-link" href="#Defining-functions">¶</a></h3><p>Functions are defined as shown in next cell. The closing <code>end</code> is necessary. Do to forget it! However, the <code>return</code> is optional. The value of last line is returned by default. Indentation is recommended, but it is also optional. That's why the closing <code>end</code> is needed.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=266b0e1b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w">  </span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=de95c63c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Once defined, a function can be called using bracket notation.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=39b452a7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=afceb0fc">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Broadcast-syntax">Broadcast syntax<a class="anchor-link" href="#Broadcast-syntax">¶</a></h3><p>We can apply functions to arrays element by element using broadcast (dot) syntax.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e65be5e8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">add</span><span class="o">.</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e4ca76a4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Mathematical operators can also be broadcasted (like in Matlab). The following cell won't work. If we want to multiply element by element, we can use the broadcasted version below.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ae0b3f6d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d20bc3a4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Defining-functions-(shorter-way)">Defining functions (shorter way)<a class="anchor-link" href="#Defining-functions-(shorter-way)">¶</a></h3><p>For short functions, we can skip the <code>function</code> and <code>end</code> keywords as follows.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7815aea5">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">add_short</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="o">+</span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7aa48db2">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">add_short</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f39c31c0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Anonymous-(lambda)-functions">Anonymous (lambda) functions<a class="anchor-link" href="#Anonymous-(lambda)-functions">¶</a></h3><p>Since we can assign function to variables, it is not needed for a function to have a function name in many cases. We can simply create an anonymous function (i.e., a function without name) and assign it to a variable.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=94ce2be7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">add_anonymous</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="o">+</span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b15b84d8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We can call the function by using the variable name.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=96d80a59">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">add_anonymous</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">3.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1723e4f1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Note that <code>add_anonymous</code> is not a function name. It is just a variable associated with a function with no function name (well, it has a name technically, but with an arbitrary value).</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5bf111a0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">nameof</span><span class="p">(</span><span class="n">add_anonymous</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7e23f9f8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">nameof</span><span class="p">(</span><span class="n">add</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e530acd3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Functions-are-first-class-objects">Functions are first-class objects<a class="anchor-link" href="#Functions-are-first-class-objects">¶</a></h3><p>We can work with Julia functions like with any other type of object. For instance, we can assign functions to variables.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e57fe028">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7a8f4bb0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now, we can call the function using the variable name.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c7e4d4ec">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c01be92e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We can also create an array of functions (this will not work in Python).</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3837bf25">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">funs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">+</span><span class="p">,</span><span class="o">-</span><span class="p">,</span><span class="o">*</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0aac151b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>To call a specific function in the array, we index the array and then call the returned function</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=aab45992">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">funs</span><span class="p">[</span><span class="mi">2</span><span class="p">](</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f0c668c8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Higher-order-functions">Higher-order functions<a class="anchor-link" href="#Higher-order-functions">¶</a></h3><p>Higher order functions are functions that take and/or return other functions. And example is the <code>count</code> function in Julia.</p>
+<p>For instance, we can pass a user-defined function to count the number of even elements in an array.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=22115f82">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="o">-&gt;</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">count</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0b352cdc">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Do-blocks">Do-blocks<a class="anchor-link" href="#Do-blocks">¶</a></h3><p>There is yet another way to define anonymous functions. If a function takes a function in its first argument (like <code>count</code>) we can skip the first argument, when calling the function, and define the function we want to pass in a do-block. This is useful, e.g., if we want to define a multi-line anonymous function. The two next cells are equivalent.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=533a21f3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="o">%</span><span class="mi">2</span>
+<span class="w">    </span><span class="n">m</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span>
+<span class="k">end</span>
+<span class="n">count</span><span class="p">(</span><span class="n">f</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=68b5165a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">count</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">i</span>
+<span class="w">    </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="o">%</span><span class="mi">2</span>
+<span class="w">    </span><span class="n">m</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=559a084d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Returning-multiple-values">Returning multiple values<a class="anchor-link" href="#Returning-multiple-values">¶</a></h3><p>Julia functions always return a single variable. To return multiple values, we can wrap them in a tuple.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=eba30561">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">divrem</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="w">    </span><span class="n">α</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">div</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="w">    </span><span class="n">β</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rem</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="w">    </span><span class="p">(</span><span class="n">α</span><span class="p">,</span><span class="n">β</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1a6e9d0d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The output is a tuple as expected, but we can recover the individual values by unpacking the tuple.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cb0c2806">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">d</span><span class="p">,</span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">divrem</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=31428737">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">d</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=76424bb5">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">r</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c73ae75b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Variable-number-of-input-arguments">Variable number of input arguments<a class="anchor-link" href="#Variable-number-of-input-arguments">¶</a></h3><p>Functions with multiple arguments are also supported. The following example iterates over the given arguments and prints them. <code>args</code> is just a tuple with all arguments.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a7f94ff0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">showargs</span><span class="p">(</span><span class="n">args</span><span class="o">...</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">enumerate</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">"args[</span><span class="si">$i</span><span class="s">] = </span><span class="si">$arg</span><span class="s">"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7828534e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">showargs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">"Hi!"</span><span class="p">,</span><span class="nb">π</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f31fc3ff">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">showargs</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dc47d83b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Positional-and-keyword-arguments">Positional and keyword arguments<a class="anchor-link" href="#Positional-and-keyword-arguments">¶</a></h3><p>Functions can combine positional and keyword arguments much like in Python, but keyword arguments start with semicolon <code>;</code> in Julia.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=37cd0314">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">;</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"Positional: a=</span><span class="si">$a</span><span class="s">, b=</span><span class="si">$b</span><span class="s">. Keyword: c=</span><span class="si">$c</span><span class="s">, d=</span><span class="si">$d</span><span class="s">"</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ee19db3d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">foo</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4919ef95">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Optional-arguments">Optional arguments<a class="anchor-link" href="#Optional-arguments">¶</a></h3><p>We can provide default values to arguments to make them optional.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=650e6d67">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"Positional: a=</span><span class="si">$a</span><span class="s">, b=</span><span class="si">$b</span><span class="s">. Keyword: c=</span><span class="si">$c</span><span class="s">, d=</span><span class="si">$d</span><span class="s">"</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e5d03536">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=94599fa3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Question-2">Question 2<a class="anchor-link" href="#Question-2">¶</a></h3><p>Which will be the value of <code>x</code> below?</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=79bd84bd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">hofun</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="o">*</span><span class="n">y</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a9a7b774">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">f2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hofun</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f6606086">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f2</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bc8e9bcf">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Arrays">Arrays<a class="anchor-link" href="#Arrays">¶</a></h2><p>Julia supports multi-dimensional arrays. They are very similar to Numpy arrays in Python. Let's learn the basics of Julia arrays.</p>
+<h3 id="Array-literals">Array literals<a class="anchor-link" href="#Array-literals">¶</a></h3><p>We can create (small) arrays from the given values using array literals.</p>
+<p>Next cell creates a vector with 3 integers. Note for Python users: there is no difference between vectors and lists in Julia.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=08652696">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">vec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=70f15e92">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We can create a matrix as follows.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a3aacf71">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">mat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">       </span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="mi">8</span>
+<span class="w">       </span><span class="mi">9</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="mi">12</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e096b198">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Array-initialization">Array initialization<a class="anchor-link" href="#Array-initialization">¶</a></h3><p>We can create arrays with all the entries equal to zero, to one, or to a specific given value. The value can be any Julia object, even a function!</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9357edac">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">zeros</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=dfc88af3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=49e5a779">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6bbde94a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">fill</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d2c44cce">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">fill</span><span class="p">(</span><span class="n">add</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=495827bc">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Array-comprehensions">Array comprehensions<a class="anchor-link" href="#Array-comprehensions">¶</a></h3><p>We can also create the items in the array using a loop within an array comprehension.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4b3c56b4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">squares</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">i</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">8</span><span class="w"> </span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cee954ce">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Indexing">Indexing<a class="anchor-link" href="#Indexing">¶</a></h3><p>We can get and set the items of an array by indexing the array.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=df901c08">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">squares</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=dc58cf4c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">squares</span><span class="p">[</span><span class="k">end</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=aa7936e0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">squares</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6cf66ef0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">squares</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9125cbeb">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">squares</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f64021ab">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Immutable-element-type">Immutable element type<a class="anchor-link" href="#Immutable-element-type">¶</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6650d6e7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Note that once set, the type of the elements in the array cannot be changed. If we try to set an item with an object of a different type, Julia will try to do a conversion, which can fail depending on the passed value.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c79b297e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2694f3d4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Hi!"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=92bae51d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Arrays-of-any-element-type">Arrays of any element type<a class="anchor-link" href="#Arrays-of-any-element-type">¶</a></h3><p>Arrays of fixed element type seem to be very rigid, right? Python list have not this limitation. However, we can use arrays of <code>Any</code> type, which are as flexible as Python lists, or even more since they can also contain functions.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d656b9ce">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Any</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3d08e4ba">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"HI!"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=92bf2cab">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1c72351a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Loops">Loops<a class="anchor-link" href="#Loops">¶</a></h3><p>The loop in next cell visits the elements in <code>a</code> one after the other.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=72dfc0f2">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">]</span>
+<span class="k">for</span><span class="w"> </span><span class="n">ai</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">a</span>
+<span class="w">    </span><span class="nd">@show</span><span class="w"> </span><span class="n">ai</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d4906337">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>This loop visits the integers from 1 to the length of the array and indexes the array at each of these integers.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=75f5ab89">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="w">    </span><span class="n">ai</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="w">    </span><span class="nd">@show</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">ai</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e7abfdd6">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>This loop "enumerates" the items in the array.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=96dfab12">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">ai</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">enumerate</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@show</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">ai</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b4747037">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Arrays-indices-are-1-based-by-default">Arrays indices are 1-based by default<a class="anchor-link" href="#Arrays-indices-are-1-based-by-default">¶</a></h3><p>Be aware of this if you are a C or Python user.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=694ec903">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">]</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a2ed5b01">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Slicing-allocates-a-new-array">Slicing allocates a new array<a class="anchor-link" href="#Slicing-allocates-a-new-array">¶</a></h3><p>This is also different from Numpy in Python.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=961a82a3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">     </span><span class="mi">4</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1c9f2162">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4664eeb7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c356e67d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b75a2b83">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Array-views">Array views<a class="anchor-link" href="#Array-views">¶</a></h3><p>If you want to modify the original array, use <code>view</code> instead.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3d8e2ab7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">view</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="o">:</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=329079bd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3b26a483">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fef8495e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Exercises">Exercises<a class="anchor-link" href="#Exercises">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7d84ceaf">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Exercise-1">Exercise 1<a class="anchor-link" href="#Exercise-1">¶</a></h3><p>Implement a function <code>ex1(a)</code> that finds the largest item in the array <code>a</code>. It should return the largest item and its corresponding position in the array. If there are multiple maximal elements, then the first one will be returned. Assume that the array is not empty. Implement the function in the next cell. Test your implementation with the other one.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8e6c7091">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="c"># Implement here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=370afcca">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Test</span>
+<span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="nd">@test</span><span class="w"> </span><span class="n">ex1</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7be19eb4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Exercise-2">Exercise 2<a class="anchor-link" href="#Exercise-2">¶</a></h3><p>Implement a function <code>ex2(f,g)</code> that takes two functions <code>f(x)</code> and <code>g(x)</code> and returns a new function <code>h(x)</code> representing the sum of <code>f</code> and <code>g</code>, i.e., <code>h(x)=f(x)+g(x)</code>.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=331e90b6">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="c"># Implement here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9e86c981">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ex2</span><span class="p">(</span><span class="n">sin</span><span class="p">,</span><span class="n">cos</span><span class="p">)</span>
+<span class="n">xs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="nb">π</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="nd">@test</span><span class="w"> </span><span class="n">all</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">xs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3324a991">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Exercise-3-(hard)">Exercise 3 (hard)<a class="anchor-link" href="#Exercise-3-(hard)">¶</a></h3><p>Function <code>mandel</code> estimates if a given point <code>(x,y)</code> in the complex plane belongs to the <a href="https://en.wikipedia.org/wiki/Mandelbrot_set">Mandelbrot set</a>.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0ac481c1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">mandel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">max_iters</span><span class="p">)</span>
+<span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Complex</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z</span>
+<span class="w">    </span><span class="n">threshold</span><span class="o">=</span><span class="mi">2</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">max_iters</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">&gt;</span><span class="n">threshold</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="o">-</span><span class="mi">1</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="n">c</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">max_iters</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=86ea2591">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>If the value of <code>mandel</code> is less than <code>max_iters</code>, the point is provably outside the Mandelbrot set. If <code>mandel</code> is equal to  <code>max_iters</code>, then the point is provably inside the set. The larger <code>max_iters</code>, the better the quality of the estimate (the nicer will be your plot).</p>
+<p>Plot the value of function <code>mandel</code> for each pixel in a 2D grid of the box.</p>
+<p>$$(-1.7,0.7)\times(-1.2,1.2).$$</p>
+<p>Use a grid resolution of at least 1000 points in each direction and <code>max_iters</code> at least 10. You can increase these values to get nicer plots. To plot the values use function <code>heatmap</code> from the Julia package <code>GLMakie</code>. Use <code>LinRange</code> to divide the horizontal and vertical axes into pixels. See the documentation of these functions for help. <code>GLMakie</code> is a GPU-accelerated plotting back-end for Julia. It is a large package and it can take some time to install and to generate the first plot. Be patient.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=33137ad9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="c"># Implement here</span>
 </pre></div>
 </div>
 </div>

@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>notebook-hello</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>julia_async</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 	<script src='../assets/iframeResizer.contentWindow.min.js'></script>
 
 <style type="text/css">
@@ -7453,17 +7453,46 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="false" data-jp-theme-name="JupyterLab Dark">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=babf8079">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f64b009a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Hello,-world!">Hello, world!<a class="anchor-link" href="#Hello,-world!">¶</a></h1>
+<img alt="No description has been provided for this image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/VU_logo.png/800px-VU_logo.png?20161029201021" width="350"/>
+<h3 id="Programming-large-scale-parallel-systems">Programming large-scale parallel systems<a class="anchor-link" href="#Programming-large-scale-parallel-systems">¶</a></h3><h3 id="Lectures-on-Julia-for-HPC">Lectures on Julia for HPC<a class="anchor-link" href="#Lectures-on-Julia-for-HPC">¶</a></h3><h1 id="Asynchronous-programming-in-Julia">Asynchronous programming in Julia<a class="anchor-link" href="#Asynchronous-programming-in-Julia">¶</a></h1><p>by Francesc Verdugo (VU Amsterdam)</p>
+<p>Version fall 2022</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f71f2545">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bf68ad38">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">¶</a></h2><p>In this notebook, we will learn the basics of asynchronous programming in Julia. In particular, we will learn about:</p>
+<ul>
+<li>Tasks</li>
+<li>Channels</li>
+</ul>
+<p>Understanding these concepts is important to learn later distributed computing.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=caf64254">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Tasks">Tasks<a class="anchor-link" href="#Tasks">¶</a></h2><h3 id="Creating--a-task">Creating  a task<a class="anchor-link" href="#Creating--a-task">¶</a></h3><p>A task is a piece of computation work that can be run asynchronously (i.e., that can be run in the background).  To create a task, we first need to create a function that represents the work to be done in the task. In next cell, we generate a task that generates and sums two matrices.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fe668cb1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7471,13 +7500,21 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="p">]</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">Distributed</span>
+<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">work</span><span class="p">()</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"Starting work"</span><span class="p">)</span>
+<span class="w">    </span><span class="n">sleep</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"Finishing work"</span><span class="p">)</span>
+<span class="w">    </span><span class="n">r</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4d6b67b6">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=67ee0328">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7485,13 +7522,24 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="p">]</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">https</span><span class="o">://</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">fverdugo</span><span class="o">/</span><span class="n">W2bYx4</span><span class="o">.</span><span class="n">git</span>
+<div class="highlight hl-julia"><pre><span></span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Task</span><span class="p">(</span><span class="n">work</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=815d977e">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e459c5c2">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Scheduling-a-task">Scheduling a task<a class="anchor-link" href="#Scheduling-a-task">¶</a></h3><p>The task has been created, but the corresponding work has not started. Note that we do not see any output from function <code>work</code> yet. To run the task we need to schedule it.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8778c199">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7499,13 +7547,24 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">W2bYx4</span>
+<div class="highlight hl-julia"><pre><span></span><span class="n">schedule</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2cf68b65">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f1fb9283">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Fetching-the-task-result">Fetching the task result<a class="anchor-link" href="#Fetching-the-task-result">¶</a></h3><p>The task has been executed, but we do not see the result. To get the result we need to fetch it.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0c7b626e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7513,99 +7572,209 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">W2bYx4</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
+<div class="highlight hl-julia"><pre><span></span><span class="n">fetch</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=81236a40">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fedbbd71">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>This is an attached picture:</p>
+<h3 id="Tasks-run-asynchronously">Tasks run asynchronously<a class="anchor-link" href="#Tasks-run-asynchronously">¶</a></h3><p>It is important to note that tasks run asynchronously. To illustrate this let's create and schedule a new task.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7c2e8d25">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4ccc996c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<div>
-<img align="left" alt="No description has been provided for this image" src="data:image/png;base64,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" width="200"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d0f1685d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Another attached picture with markdown syntax <code>![]()</code>:</p>
-<p><img alt="logo.png" src="data:image/png;base64,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"/></p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7f4de0d2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>A picture embedded with Base64:</p>
-<div>
-<img align="left" alt="No description has been provided for this image" src="data:image/png;base64,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" width="200"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0d36cf9e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>This is a linked picture:</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0b541664">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<div>
-<img align="left" alt="No description has been provided for this image" src="https://raw.githubusercontent.com/fverdugo/W2bYx4/main/notebooks/figures/logo.png" width="200"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cae7f8ac">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Task</span><span class="p">(</span><span class="n">work</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6603cd99">
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=015bea27">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">schedule</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5ec0718e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Note that while the task is running we can execute Julia code. To check this, execute the next two cells while the task is running.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a70fcbe8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">sin</span><span class="p">(</span><span class="mi">4</span><span class="nb">π</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6def444b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d483d4d0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>How is this possible? Tasks run in the brackground and this particular task is sleeping for most of the time. Thus, it is possible to use the current Julia process for other operations while the tasks is sleeping.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=910323fd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Tasks-do-not-run-in-parallel">Tasks do not run in parallel<a class="anchor-link" href="#Tasks-do-not-run-in-parallel">¶</a></h3><p>It is also important to note that tasks do not run in parallel. We were able to run code while previous tasks was running because the task was idling most of the time.  If the task does actual work, the current process will be busy running this task and it is likely that we cannot run other code at the same time. Let's illustrate this with an example. The following code computes an approximation of $\pi$ using <a href="https://en.wikipedia.org/wiki/Leibniz_formula_for_pi">Leibniz formula</a>. The quality of the approximation increases with the value of <code>n</code>.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b53ac640">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">isodd</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="mi">4</span><span class="o">*</span><span class="n">s</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7614df94">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Call this function with a large number. Note that it will take some time.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=63f2aec3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">compute_π</span><span class="p">(</span><span class="mi">4_000_000_000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=840ff590">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Create a task that performs this computation.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f16ade6c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">fun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">4_000_000_000</span><span class="p">)</span>
+<span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Task</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=60c2567c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Schedule the tasks and then try to execute the 2nd cell bellow. Note that the current process will be busy running the task.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1f28a388">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">schedule</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=52e060e7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7620,32 +7789,17 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c3b59ed4">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=25048665">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<div class="alert alert-block alert-warning">
-<b>Warning:</b> Make sure that the file <code>"hello.jl"</code> is located in the current working directory of your Julia session.
+<h3 id="Tasks-take-a-function-with-no-arguments">Tasks take a function with no arguments<a class="anchor-link" href="#Tasks-take-a-function-with-no-arguments">¶</a></h3><p>This function needs to have zero arguments, but it can capture variables if needed. If we try to create a task with a function that has arguments, it will result in an error when we schedule it.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5b3e3d68">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<div class="alert alert-block alert-info">
-<b>Tip:</b> Avoid calling Julia code from the terminal
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b7267f6e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=87397749">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7653,7 +7807,561 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span>
+<div class="highlight hl-julia"><pre><span></span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e99766c7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Task</span><span class="p">(</span><span class="n">add</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1a785bae">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">schedule</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ebfce725">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>If we need, we can capture variables in the function to be run by the task as shown in the next cells.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=06f54fa0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4c9e586e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">fun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+<span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Task</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span>
+<span class="n">schedule</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cd829a64">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Useful-macro:-@async">Useful macro: <code>@async</code><a class="anchor-link" href="#Useful-macro:-@async">¶</a></h3><p>So far, we have created tasks using low-level functions, but there are more convenient ways of creating and scheduling tasks. For instance using the <code>@async</code> macro. This macro is used to run a piece of code asynchronously. Under the hood it puts the code in an anonymous function, creates a task, and schedules it. For instance, the next cell is equivalent to previous one.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9b5152d1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@async</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ac3262d8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Another-useful-macro:-@sync">Another useful macro: <code>@sync</code><a class="anchor-link" href="#Another-useful-macro:-@sync">¶</a></h3><p>This macro is used to wait for all the tasks created with <code>@async</code> in a given block of code.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ef2e49f9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@sync</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=98f0d685">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Channels">Channels<a class="anchor-link" href="#Channels">¶</a></h2><h3 id="Sending-data-between-tasks">Sending data between tasks<a class="anchor-link" href="#Sending-data-between-tasks">¶</a></h3><p>Julia provides channels as a way to send data between tasks. A channel is like a FIFO queue in which tasks can put and take values from. In next example, we create a channel and a task that puts five values into the channel. Finally, the task closes the channel.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b88d5308">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">chnl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3421c7a6">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@async</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span>
+<span class="w">        </span><span class="n">put!</span><span class="p">(</span><span class="n">chnl</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">close</span><span class="p">(</span><span class="n">chnl</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1df0508c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>By executing next cell several times, we will get the values from the channel. We are indeed communicating values from two different tasks. If we execute the cell more than 5 times, it will raise an error since the channel is closed.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=64b9436e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">take!</span><span class="p">(</span><span class="n">chnl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=757a1b07">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Channels-are-iterable">Channels are iterable<a class="anchor-link" href="#Channels-are-iterable">¶</a></h3><p>Instead of taking values from a channel until an error occurs, we can also iterate over the channel in a for loop until the channel is closed.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2fc22dfa">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">chnl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fa62a4df">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@async</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span>
+<span class="w">        </span><span class="n">put!</span><span class="p">(</span><span class="n">chnl</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">close</span><span class="p">(</span><span class="n">chnl</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e511e19b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">chnl</span>
+<span class="w">    </span><span class="nd">@show</span><span class="w"> </span><span class="n">i</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b1a2a557">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Calls-to-put!-and-take!-are-blocking">Calls to <code>put!</code> and <code>take!</code> are blocking<a class="anchor-link" href="#Calls-to-put!-and-take!-are-blocking">¶</a></h3><p>Note that <code>put!</code> and <code>take!</code> are blocking operations. Calling <code>put!</code> blocks the tasks until another task calls <code>take!</code> and viceversa. Thus, we need at least 2 tasks for this to work. If we call <code>put!</code> and <code>take!</code> from the same task, it will result in a dead lock.  We have added a print statement to previous example. Run it again and note how <code>put!</code> blocks until we call <code>take!</code>.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f34373ca">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">chnl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bfde2ecd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@async</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span>
+<span class="w">        </span><span class="n">put!</span><span class="p">(</span><span class="n">chnl</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">"I have put </span><span class="si">$i</span><span class="s">"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">close</span><span class="p">(</span><span class="n">chnl</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5830659d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">take!</span><span class="p">(</span><span class="n">chnl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=006140bd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Buffered-channels">Buffered channels<a class="anchor-link" href="#Buffered-channels">¶</a></h3><p>We can be a bit more flexible and use a buffered channel. In this case, <code>put!</code> will block only if the channel is full and <code>take!</code> will block if the channel is empty. We repeat previous example, but with a buffered channel of size 2. Note that we can call <code>put!</code> until the channel is full. At this point, we need to wait to until we call <code>take!</code> which removes an item from the channel, making room for a new item.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=dfe06b5f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">buffer_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">chnl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="n">buffer_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6289bc2e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@async</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span>
+<span class="w">        </span><span class="n">put!</span><span class="p">(</span><span class="n">chnl</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">"I have put </span><span class="si">$i</span><span class="s">"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">close</span><span class="p">(</span><span class="n">chnl</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2a87cd5f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">take!</span><span class="p">(</span><span class="n">chnl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2a23b1c3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Questions">Questions<a class="anchor-link" href="#Questions">¶</a></h2><p>How long the next cells will take each?</p>
+<h3 id="Q1-(Asynchronous.ipynb)">Q1 (Asynchronous.ipynb)<a class="anchor-link" href="#Q1-(Asynchronous.ipynb)">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=dd45ae08">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">100_000_000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=18d6cfe3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<span class="w">    </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">100_000_000</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5f19d38c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Q2-(Asynchronous.ipynb)">Q2 (Asynchronous.ipynb)<a class="anchor-link" href="#Q2-(Asynchronous.ipynb)">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=dac0c92a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">100_000_000</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5041c355">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Q3-(Asynchronous.ipynb)">Q3 (Asynchronous.ipynb)<a class="anchor-link" href="#Q3-(Asynchronous.ipynb)">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c06dc4a5">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="nd">@sync</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">100_000_000</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=841b690e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Q4-(Asynchronous.ipynb)">Q4 (Asynchronous.ipynb)<a class="anchor-link" href="#Q4-(Asynchronous.ipynb)">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6ac116bb">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">buffer_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<span class="n">chnl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="n">buffer_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=25363a90">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">put!</span><span class="p">(</span><span class="n">chnl</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">take!</span><span class="p">(</span><span class="n">chnl</span><span class="p">)</span>
+<span class="w">    </span><span class="n">sleep</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=df663f11">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Q5-(Asynchronous.ipynb)">Q5 (Asynchronous.ipynb)<a class="anchor-link" href="#Q5-(Asynchronous.ipynb)">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9abeed40">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">chnl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8e8428ce">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">put!</span><span class="p">(</span><span class="n">chnl</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">take!</span><span class="p">(</span><span class="n">chnl</span><span class="p">)</span>
+<span class="w">    </span><span class="n">sleep</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 </div>

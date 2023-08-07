@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>notebook</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>julia_tutorial</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 	<script src='../assets/iframeResizer.contentWindow.min.js'></script>
 
 
@@ -15123,233 +15123,418 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="false" data-jp-theme-name="JupyterLab Dark">
 
-<div id="cell-id=babf8079" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Hello,-world!">Hello, world!<a class="anchor-link" href="#Hello,-world!">&#182;</a></h1>
-</div>
-</div>
-</div>
-</div><div id="cell-id=f71f2545" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-julia"><pre><span></span><span class="p">]</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">Distributed</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div id="cell-id=4d6b67b6" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-julia"><pre><span></span><span class="p">]</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">https</span><span class="o">://</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">fverdugo</span><span class="o">/</span><span class="n">XM_40017</span><span class="o">.</span><span class="n">git</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div id="cell-id=815d977e" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">XM_40017</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div id="cell-id=2cf68b65" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-julia"><pre><span></span><span class="n">XM_40017</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/VU_logo.png/800px-VU_logo.png?20161029201021" width="350">
+<h3 id="Programming-large-scale-parallel-systems">Programming large-scale parallel systems<a class="anchor-link" href="#Programming-large-scale-parallel-systems">&#182;</a></h3><h3 id="Lectures-on-Julia-for-HPC">Lectures on Julia for HPC<a class="anchor-link" href="#Lectures-on-Julia-for-HPC">&#182;</a></h3><h1 id="Tutorial:-Getting-started-with-Julia">Tutorial: Getting started with Julia<a class="anchor-link" href="#Tutorial:-Getting-started-with-Julia">&#182;</a></h1><p>by Francesc Verdugo (VU Amsterdam)</p>
+<p>Version fall 2022</p>
 
 </div>
-<div id="cell-id=81236a40" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This is an attached picture:</p>
+<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h2><ul>
+<li>Using the Julia REPL</li>
+<li>Running serial and parallel code</li>
+<li>Installing and managing packages</li>
+</ul>
 
 </div>
 </div>
 </div>
 </div>
-<div id="cell-id=7c2e8d25" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
- <div>
-<img src="attachment:logo.png" align="left" width="200"/>
-</div>
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>Julia has its own way of running code and using packages. Many educational sources about Julia assume that you have this basic knowledge, which can be confusing to new users. In this lesson, we will learn these basic skills so that you can start learning more on Julia.</p>
 
 </div>
 </div>
 </div>
 </div>
-<div id="cell-id=d0f1685d" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Another attached picture with markdown syntax <code>![]()</code>:</p>
-<p><img src="data:image/png;base64,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" alt="logo.png" /></p>
+<h2 id="Preliminaries">Preliminaries<a class="anchor-link" href="#Preliminaries">&#182;</a></h2><p>This is a tutorial. To follow it:</p>
+<ul>
+<li>Download and install Julia from <a href="https://julialang.org/">https://julialang.org/</a></li>
+<li>Download and install VSCode and its Julia extension. How to: <a href="https://www.julia-vscode.org/docs/dev/gettingstarted/">https://www.julia-vscode.org/docs/dev/gettingstarted/</a></li>
+<li>Continue reading this document</li>
+</ul>
 
 </div>
 </div>
 </div>
 </div>
-<div id="cell-id=7f4de0d2" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>A picture embedded with Base64:</p>
-<div>
-<img src="data:image/png;base64,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" align="left" width="200"/>
-</div>
-
-</div>
-</div>
-</div>
-</div>
-<div id="cell-id=0d36cf9e" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This is a linked picture:</p>
-
-</div>
-</div>
-</div>
-</div>
-<div id="cell-id=0b541664" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div>
-<img src="https://raw.githubusercontent.com/fverdugo/XM_40017main/notebooks/figures/logo.png" align="left" width="200"/>
-</div>
-
-</div>
-</div>
-</div>
-</div>
-<div id="cell-id=cae7f8ac" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="The-Julia-REPL">The Julia REPL<a class="anchor-link" href="#The-Julia-REPL">&#182;</a></h2><p>There are several ways of opening Julia depending on your operating system and your IDE, but it is usually as simple as launching the Julia app. With VSCode, open a folder (File &gt; Open Folder). Then,  press <code>Ctrl</code>+<code>Shift</code>+<code>P</code> to open the command bar, and execute <code>Julia: Start REPL</code>. If this does not work, make sure you have the Julia extension for VSCode installed. Independently of the method you use, opening Julia results in a window with some text ending with:</p>
+<pre><code>julia&gt; 
+</code></pre>
+<p>You have just opened the Julia <em>read-evaluate-print loop</em>, or simply the Julia <em>REPL</em>. Congrats! You will spend most of time using the REPL, when working in Julia. The REPL is a console waiting for user input. Just as in other consoles, the string of text right before the input area (<code>julia&gt;</code> in the case) is called the <em>command prompt</em> or simply the <em>prompt</em>.</p>
+<p>The usage is as follows:</p>
+<ul>
+<li>You write some input</li>
+<li>press enter</li>
+<li>you get the output</li>
+</ul>
+<p>For instance, try this</p>
 <div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
 </pre></div>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=6603cd99" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-julia"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div id="cell-id=c3b59ed4" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Hello-world!">Hello world!<a class="anchor-link" href="#Hello-world!">&#182;</a></h2><p>A &quot;Hello world&quot; example looks like this in Julia</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">)</span>
+</pre></div>
+<p>Try to run it in the REPL.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Help-mode">Help mode<a class="anchor-link" href="#Help-mode">&#182;</a></h2><p>Curious about what function <code>println</code> does? Enter into <em>help</em> mode to look into the documentation. This is done by typing a question mark (<code>?</code>) into the inut field:</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="o">?</span>
+</pre></div>
+<p>After typing <code>?</code>, the command prompt changes to <code>help?&gt;</code>. It means we are in help mode. Now, we can type a function name to see its documentation.</p>
+<div class="highlight"><pre><span></span><span class="n">help</span><span class="o">?&gt;</span><span class="w"> </span><span class="n">println</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Package-and-shell-modes">Package and shell modes<a class="anchor-link" href="#Package-and-shell-modes">&#182;</a></h2><p>The REPL comes with two more modes, namely <em>package</em> and <em>shell</em> modes. To enter package mode type</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="p">]</span>
+</pre></div>
+<p>Package mode is used to install and manage packages. We are going to discuss the package mode in greater detail later. To return back to normal mode press the backspace key several times.</p>
+<p>To enter shell mode type semicolon (<code>;</code>)</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="p">;</span>
+</pre></div>
+<p>The prompt should have changed to <code>shell&gt;</code> indicating that we are in shell mode. Now you can type commands that you would normally do on your system command line. For instance,</p>
+<div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ls</span>
+</pre></div>
+<p>will display the contents of the current folder in Mac or Linux. Using shell mode in Windows is not straightforward, and thus not recommended for beginners.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Running-more-complex-code">Running more complex code<a class="anchor-link" href="#Running-more-complex-code">&#182;</a></h2><p>Real-world Julia programs are not typed in the REPL in practice. They are written in one or more files and <em>included</em> in the REPL. To try this, create a new file called <code>hello.jl</code>, write the code of the &quot;Hello world&quot; example above, and save it. If you are using VSCode, you can create the file using File &gt; New File &gt; Julia File. Once the file is saved with the name <code>hello.jl</code>, execute it as follows</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">include</span><span class="p">(</span><span class="s">&quot;hello.jl&quot;</span><span class="p">)</span>
+</pre></div>
 <div class="alert alert-block alert-warning">
-<b>Warning:</b> Make sure that the file <code>"hello.jl"</code> is located in the current working directory of your Julia session.
+<b>Warning:</b> Make sure that the file <code>"hello.jl"</code> is located in the current working directory of your Julia session. You can query the current directory with function <code>pwd()</code>. You can change to another directory with function <code>cd()</code> if needed.  Also, make sure that the file extension is <code>.jl</code>.
+</div>
+<p>The recommended way of running Julia code is using the REPL as we did. But it is also possible to run code directly from the system command line. To this end, open a terminal and call Julia followed buy the path to the file containing the code you want to execute.</p>
+<pre><code>$ julia hello.jl
+</code></pre>
+<p>Previous line assumes that you have Julia properly installed in the system and that is usable from the terminal. In UNIX systems (Linux and Mac), the Julia binary needs to be in one of the directories listed in the <code>PATH</code> environment variable. To check that Julia is properly installed, you can use</p>
+<pre><code>$ julia --version
+</code></pre>
+<p>If this runs without error and you see a version number, you are good to go!</p>
+<div class="alert alert-block alert-info">
+<b>Tip:</b> In this tutorial, when a code snipped starts with <code>$</code>, it should be run in the terminal. Otherwise, the code is to be run in the Julia REPL.
+</div>
+<div class="alert alert-block alert-info">
+<b>Tip:</b> Avoid calling Julia code from the terminal, use the Julia REPL instead! Each time you call Julia from the terminal, you start a fresh Julia session and Julia will need to compile your code from scratch. This can be time consuming for large projects. In contrast, if you execute code in the REPL, Julia will compile code incrementally, which is much faster. Running code in a cluster (like in DAS-5 for the Julia assignment) is among the few situations you need to run Julia code from the terminal.
 </div>
 
 </div>
 </div>
 </div>
 </div>
-<div id="cell-id=5b3e3d68" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="alert alert-block alert-info">
-<b>Tip:</b> Avoid calling Julia code from the terminal
-</div>
+<h2 id="Running-parallel-code">Running parallel code<a class="anchor-link" href="#Running-parallel-code">&#182;</a></h2><p>Since we are in a parallel computing course, let's run a parallel &quot;hello world&quot; example in Julia. Open a Julia REPL and write</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Distributed</span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="nd">@everywhere</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello, world! I am proc </span><span class="si">$</span><span class="p">(</span><span class="n">myid</span><span class="p">())</span><span class="s"> from </span><span class="si">$</span><span class="p">(</span><span class="n">nprocs</span><span class="p">())</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+<p>Here, we are using the <code>Distributed</code> package, which is part of the Julia standard library that provides distributed memory parallel support. The code prints the process id and the number of processes in the current Julia session.</p>
+<p>You will provably only see output from 1 proces. We need to add more processes to run the example in parallel. This is done with the <code>addprocs</code> function.</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">addprocs</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<p>We have added 3 new processes, plus the old one, we have 4 processes. Run the code again.</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="nd">@everywhere</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello, world! I am proc </span><span class="si">$</span><span class="p">(</span><span class="n">myid</span><span class="p">())</span><span class="s"> from </span><span class="si">$</span><span class="p">(</span><span class="n">nprocs</span><span class="p">())</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+<p>Now, you should see output from 4 processes.</p>
+<p>It is possible to specify the number of processes when starting Julia from the terminal with the <code>-p</code> argument (useful, e.g., when running in a cluster).  If you launch Julia from the terminal as</p>
+<pre><code>$ julia -p 3
+</code></pre>
+<p>and then run</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="nd">@everywhere</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello, world! I am proc </span><span class="si">$</span><span class="p">(</span><span class="n">myid</span><span class="p">())</span><span class="s"> from </span><span class="si">$</span><span class="p">(</span><span class="n">nprocs</span><span class="p">())</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+<p>You should get output from 4 processes as before.</p>
 
 </div>
 </div>
 </div>
-</div><div id="cell-id=b7267f6e" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-julia"><pre><span></span>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Installing-packages">Installing packages<a class="anchor-link" href="#Installing-packages">&#182;</a></h2><p>One of the most useful features of Julia is its package manager. It allows one to install Julia packages in a straightforward and platform independent way. To illustrate this, let us consider the following parallel &quot;Hello world&quot; example.</p>
+<p>Copy the following block of code into a new file named <code>&quot;hello_mpi.jl&quot;</code></p>
+<div class="highlight"><pre><span></span><span class="c"># file hello_mpi.jl</span>
+<span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
+<span class="n">MPI</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
+<span class="n">comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+<span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_rank</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
+<span class="n">nranks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_size</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello world, I am rank </span><span class="si">$rank</span><span class="s"> of </span><span class="si">$nranks</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+<p>As you can see from this example, one can access MPI from Julia in a clean way, without type annotations and other complexities of C/C++ code.</p>
+<p>Now, run the file from the REPL</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">incude</span><span class="p">(</span><span class="s">&quot;hello_mpi.jl&quot;</span><span class="p">)</span>
+</pre></div>
+<p>It provably didn't work, right? Read the error message and note that the MPI package needs to be installed to run this code.</p>
+<p>To install a package, we need to enter <em>package</em> mode. Remember that we entered into help mode by typing <code>?</code>. Package mode is activated by typing <code>]</code></p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="p">]</span>
+</pre></div>
+<p>At this point, the promp should have changed to <code>(@v1.8) pkg&gt;</code> indicating that we are in package mode. The text between parenthesis indicates which is the active <em>project</em>, i.e., where packages are going to be installed. In this case, we are working with the global project associated with our Julia installation (which is Julia 1.8 in this example, but it can be another version in your case).</p>
+<p>To install the MPI package, type</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">MPI</span>
+</pre></div>
+<p>Congrats, you have installed MPI!</p>
+<div class="alert alert-block alert-info">
+    <b>Tip:</b>  Many Julia package names end with <code>.jl</code>. This is just a way of signaling that a package is written in Julia. When using such packages, the <code>.jl</code> needs to be ommited. In this case, we have isntalled the <code>MPI.jl</code> package even though we have only typed <code>MPI</code> in the REPL.
+</div>
+<div class="alert alert-block alert-info">
+    <b>Tip:</b>
+The package you have installed it is the Julia interface to MPI, called  <code>MPI.jl</code>. Note that it is not a MPI library by itself. It is just a thin wrapper between MPI and Julia. To use this interface, you need an actual MPI library installed in your system such as OpenMPI or MPICH. Julia downloads and installs a MPI library for you, but it is also possible to use a MPI library already available in your system. This is useful, e.g., when running on HPC clusters. See the documentation of <code>MPI.jl</code> for further details.
+</div>
+<p>To check that the package was installed properly, exit package mode by pressing the backspace key several times, and run it again</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">incude</span><span class="p">(</span><span class="s">&quot;hello_mpi.jl&quot;</span><span class="p">)</span>
+</pre></div>
+<p>Now, it should work, but you provably get output from a single MPI rank only.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Running-MPI-code">Running MPI code<a class="anchor-link" href="#Running-MPI-code">&#182;</a></h2><p>To run MPI applications in parallel, you need a launcher like <code>mpiexec</code>. MPI codes written in Julia are not an exception to this rule. From the system terminal, you can run</p>
+<pre><code>$ mpiexec -np 4 julia hello_mpi.jl
+</code></pre>
+<p>But it will provably don't work since the version of <code>mpiexec</code> needs to match with the MPI version we are using from Julia. You can find the path to the <code>mpiexec</code> binary you need to use with these commands</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">mpiexec_path</span>
+</pre></div>
+<p>and then try again</p>
+<pre><code>$ /path/to/my/mpiexec -np 4 julia hello_mpi.jl
+</code></pre>
+<p>with your particular path.</p>
+<p>However, this is not very convenient. Don't worry if you could not make it work! A more elegant way to run MPI code is from the Julia REPL directly, by using these commands:</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mpiexec</span><span class="p">(</span><span class="n">cmd</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">(</span><span class="sb">`</span><span class="si">$cmd</span><span class="sb"> -np 4 julia hello_mpi.jl`</span><span class="p">))</span>
+</pre></div>
+<p>Now, you should see output from 4 ranks.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Installing-packages-locally">Installing packages locally<a class="anchor-link" href="#Installing-packages-locally">&#182;</a></h2><p>We have installed the <code>MPI</code> package globally and it will be available in all Julia sessions. However, in some situations, we want to work with different versions of the same package or to install packages in an isolated way to avoid potential conflicts with other packages. This can be done by using local projects.</p>
+<p>A project is simply a folder in the hard disk. To use a particular folder as your project, you need to <em>activate</em> it. This is done by entering package mode and using the <code>activate</code> command followed by the path to the folder you want to activate.</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">activate</span><span class="w"> </span><span class="o">.</span>
+</pre></div>
+<p>Previous command will activate the current working directory. Note that the dot <code>.</code> is indeed the path to the current folder.</p>
+<p>The prompt has changed to <code>(lessons) pkg&gt;</code> indicating that we are in the project within the <code>lessons</code> folder. The particular folder name can be different in your case.</p>
+<div class="alert alert-block alert-info">
+    <b>Tip:</b>  You can activate a project directly when opening Julia from the terminal using the <code>--project</code> flag. The command <code>$ julia --project=.</code> will open Julia and activate a project in the current directory. You can also achieve the same effect by setting the environment variable  <code>JULIA_PROJECT</code> with the path of the folder you want to activate.
+    </div>
+  <div class="alert alert-block alert-info">
+    <b>Tip:</b>  The active project folder and the current working directory are two independent concepts! For instance,  <code>(@v1.8) pkg> activate folderB</code> and then <code>julia> cd("folderA")</code>, will activate the project in <code>folderB</code> and change the current working directory to <code>folderA</code>.
+</div>
+<p>At this point all package-related operations will be local to the new project. For instance, install the <code>DataFrames</code> package.</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">lessons</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">DataFrames</span>
+</pre></div>
+<p>Use the package to check that it is installed</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">DataFrames</span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+<p>Now, we can return to the global project to check that <code>DataFrames</code> has not been installed there. To return to the global environment, use <code>activate</code> without a folder name.</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">lessons</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">activate</span>
+</pre></div>
+<p>The prompt is again <code>(@v1.8) pkg&gt;</code></p>
+<p>Now, try to use <code>DataFrames</code>.</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">DataFrames</span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+<p>You should get an error or a warning unless you already had <code>DataFrames</code> installed globally.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Project-and-Manifest-files">Project and Manifest files<a class="anchor-link" href="#Project-and-Manifest-files">&#182;</a></h2><p>The information about a project is stored in two files <code>Project.toml</code> and <code>Manifest.toml</code>.</p>
+<ul>
+<li><p><code>Project.toml</code> contains the packages explicitly installed (the direct dependencies)</p>
+</li>
+<li><p><code>Manifest.toml</code> contains direct and indirect dependencies along with the concrete version of each package.</p>
+</li>
+</ul>
+<p>In other words, <code>Project.toml</code> contains the packages relevant for the user, whereas <code>Manifest.toml</code> is the detailed snapshot of all dependencies. The <code>Manifest.toml</code> can be used to reproduce the same envinonment in another machine.</p>
+<p>You can see the path to the current <code>Project.toml</code> file by using the <code>status</code> operator (or <code>st</code> in its short form) while in package mode</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">status</span>
+</pre></div>
+<p>The information about the <code>Manifest.toml</code> can be inspected by passing the <code>-m</code> flag.</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">-</span><span class="n">m</span>
 </pre></div>
 
-     </div>
 </div>
 </div>
 </div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Installing-packages-from-a-project-file">Installing packages from a project file<a class="anchor-link" href="#Installing-packages-from-a-project-file">&#182;</a></h2><p>Project files can be used to install lists of packages defined by others. E.g., to install all the dependencies of a Julia application.</p>
+<p>Assume that a colleague has sent to you a <code>Project.toml</code> file with this content:</p>
+<pre><code>[deps]
+BenchmarkTools = &quot;6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf&quot;
+DataFrames = &quot;a93c6f00-e57d-5684-b7b6-d8193f3e46c0&quot;
+MPI = &quot;da04e1cc-30fd-572f-bb4f-1f8673147195&quot;
+</code></pre>
+<p>Copy the contents of previous code block into a file called  <code>Project.toml</code> and place it in an empty folder named <code>newproject</code>. It is important that the file is named <code>Project.toml</code>. You can create a new folder from the REPL with</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mkdir</span><span class="p">(</span><span class="s">&quot;newproject&quot;</span><span class="p">)</span>
+</pre></div>
+<p>To install all the packages registered in this file you need to activate the folder containing your <code>Project.toml</code> file</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">activate</span><span class="w"> </span><span class="n">newproject</span>
+</pre></div>
+<p>and then <em>instantiating</em> it</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">newproject</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">instantiate</span>
+</pre></div>
+<p>The instantiate command will download and install all listed packages and their dependencies in just one click.</p>
 
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Getting-help-in-package-mode">Getting help in package mode<a class="anchor-link" href="#Getting-help-in-package-mode">&#182;</a></h2><p>You can get help about a particular package operator by writing <code>help</code> in front of it</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="n">activate</span>
+</pre></div>
+<p>You can get an overview of all package commands by typing <code>help</code> alone</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">help</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Package-operations-in-Julia-code">Package operations in Julia code<a class="anchor-link" href="#Package-operations-in-Julia-code">&#182;</a></h2><p>In some situations it is required to use package commands in Julia code, e.g., to automatize installation and deployment of Julia applications. This can be done using the <code>Pkg</code> package. For instance</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Pkg</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+</pre></div>
+<p>is equivalent to call <code>status</code> in package mode.</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">status</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2><p>We have learned the basics of how to work with Julia. Now, you should be ready to start learning more on the language. If you want to further dig into the topics we have covered here, you can take a look and the following links</p>
+<ul>
+<li>Julia Manual   <a href="https://docs.julialang.org/en/v1/manual/getting-started/">https://docs.julialang.org/en/v1/manual/getting-started/</a></li>
+<li>Package manager <a href="https://pkgdocs.julialang.org/v1/getting-started/">https://pkgdocs.julialang.org/v1/getting-started/</a></li>
+</ul>
+<p>If you want to interact with the Julia community on discourse, sign in at <a href="https://discourse.julialang.org/">https://discourse.julialang.org/</a></p>
+
+</div>
+</div>
+</div>
 </div>
 </body>
 
