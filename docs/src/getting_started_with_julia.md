@@ -15,6 +15,10 @@ The programming of this course will be done using the [Julia programming languag
 Courses related with high-performance computing (HPC) often use languages such as C, C++, or Fortran. We use Julia instead to make the course accessible to a wider set of students, including the ones that have no experience with 
 C/C++ or Fortran, but are willing to learn parallel programming. Julia is a relatively new programming language specifically designed for scientific computing. It combines a high-level syntax close to interpreted languages like Python with the performance of compiled languages like C, C++, or Fortran. Thus, Julia will allow us to write efficient parallel algorithms with a syntax that is convenient in a teaching setting. In addition, Julia provides easy access to different programming models to write distributed algorithms, which will be useful to learn and experiment with them.
 
+!!! tip
+    You can run the code [in this link](https://github.com/JuliaAcademy/JuliaTutorials/blob/724e15a350d150a9773afe51a3830709dbed422f/introductory-tutorials/intro-to-julia/09.%20Julia%20is%20fast.ipynb) to learn how Julia compares to other languages (C and Python) in terms of performance.
+
+
 ## Installing Julia
 
 This is a tutorial-like page. Follow these steps before you continue reading the document.

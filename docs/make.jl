@@ -122,10 +122,9 @@ makedocs(;
         canonical="https://fverdugo.github.io/XM_40017",
         edit_link="main",),
     pages=["Home" => "index.md","Getting started"=>"getting_started_with_julia.md", "Notebooks"=>[
-        "Is Julia fast?" => "julia_intro.md",
         "Julia Basics" => "julia_basics.md",
-        "Julia Asynchronous" => "julia_async.md",
-        "Julia Distributed" => "julia_distributed.md",
+        "Tasks and channels" => "julia_async.md",
+        "Remote calls and remote channels" => "julia_distributed.md",
         "Matrix Multiplication"=>["Matrix Multiplication" => "matrix_matrix.md", "Solutions" => "sol_matrix_matrix.md"],
         "Jacobi/SOR" => "julia_jacobi.md"
     ]],
