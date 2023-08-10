@@ -65,7 +65,7 @@ function create_md_nb_file( notebook_path )
 end
 
 # Convert to html using nbconvert
-function convert_notebook_to_html(notebook_path; output_name = "index", output_dir = "./docs/src/notebook-output", theme = "dark")
+function convert_notebook_to_html(notebook_path; output_name = "index", output_dir = "./docs/src/notebook-output", theme = "light")
     command_jup = "jupyter"
     command_nbc = "nbconvert"
     output_format = "--to=html"
@@ -95,21 +95,21 @@ end
 
 # Replace colors to match Documenter.jl 
 function replace_colors(content)
-    content = replace( content, "--jp-layout-color0: #111111;" => "--jp-layout-color0: #1f2424;")
-    content = replace(content, "--md-grey-900: #212121;" => "--md-grey-900: #282f2f;")
+    #content = replace( content, "--jp-layout-color0: #111111;" => "--jp-layout-color0: #1f2424;")
+    #content = replace(content, "--md-grey-900: #212121;" => "--md-grey-900: #282f2f;")
     return content
 end
 
 # Loop over notebooks and generate html and markdown 
 notebook_files = glob("*.ipynb", "docs/src/notebooks/")
-for filepath in notebook_files
-    convert_embedded_img_to_base64(filepath)
-    create_md_nb_file(filepath)
-    filename_with_ext = splitpath(filepath)[end]    
-    filename = splitext(filename_with_ext)[1]
-    convert_notebook_to_html(filepath, output_name = filename)
-    modify_notebook_html("docs/src/notebook-output/$(filename).html")
-end
+#for filepath in notebook_files
+#    convert_embedded_img_to_base64(filepath)
+#    create_md_nb_file(filepath)
+#    filename_with_ext = splitpath(filepath)[end]    
+#    filename = splitext(filename_with_ext)[1]
+#    convert_notebook_to_html(filepath, output_name = filename)
+#    modify_notebook_html("docs/src/notebook-output/$(filename).html")
+#end
 
 makedocs(;
     modules=[XM_40017],
@@ -122,7 +122,7 @@ makedocs(;
         canonical="https://fverdugo.github.io/XM_40017",
         edit_link="main",),
     pages=["Home" => "index.md", "Notebooks"=>[
-        "Julia Tutorial" => "julia_tutorial.md",
+        "Getting started" => "julia_tutorial.md",
         "Why is Julia fast?" => "julia_intro.md",
         "Julia Basics" => "julia_basics.md",
         "Julia Asynchronous" => "julia_async.md",
