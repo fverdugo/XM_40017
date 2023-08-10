@@ -121,9 +121,8 @@ makedocs(;
         prettyurls=get(ENV, "CI", "false") == "true",
         canonical="https://fverdugo.github.io/XM_40017",
         edit_link="main",),
-    pages=["Home" => "index.md", "Notebooks"=>[
-        "Getting started" => "julia_tutorial.md",
-        "Why is Julia fast?" => "julia_intro.md",
+    pages=["Home" => "index.md","Getting started"=>"getting_started_with_julia.md", "Notebooks"=>[
+        "Is Julia fast?" => "julia_intro.md",
         "Julia Basics" => "julia_basics.md",
         "Julia Asynchronous" => "julia_async.md",
         "Julia Distributed" => "julia_distributed.md",

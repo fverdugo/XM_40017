@@ -27,9 +27,9 @@ You also have the static version of the notebooks displayed in this webpage for 
 
 To run a notebook locally follow these steps:
 
-- Install Julia (if not done already). More information here.
+- Install Julia (if not done already). More information in [Getting started](@ref).
 - Download the notebook.
-- Launch Julia. More information here.
+- Launch Julia. More information in [Getting started](@ref).
 ```
    _       _ _(_)_     |  Documentation: https://docs.julialang.org
   (_)     | (_) (_)    |
@@ -51,7 +51,16 @@ julia> notebook()
 ```
 - These commands will open a jupyter in your web browser. Navigate in jupyter to the notebook file you have downloaded and open it.
 
+## Authorship
+
+This material was created by [Francesc Verdugo](https://github.com/fverdugo/) with the help of Gelieza Kötterheinrich. Part of the notebooks are based on the course slides by [Henri Bal](https://www.vuhpdc.net/henri-bal/).
+
+
+## License
+
+All material in this page that is original to this course may be used under a [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
+
 
 ## Acknowledgment
 
-This page was created with the support of Faculty of Science of [Vrije Universiteit Amsterdam](https://vu.nl) in the framework of the project "Interactive lecture notes and exercises for the Programming Large-Scale Parallel Systems course" funded by the "Innovation budget BETA 2023 Studievoorschotmiddelen (SVM) towards Activated Blended Learning".
+This page was created with the support of the Faculty of Science of [Vrije Universiteit Amsterdam](https://vu.nl) in the framework of the project "Interactive lecture notes and exercises for the Programming Large-Scale Parallel Systems course" funded by the "Innovation budget BETA 2023 Studievoorschotmiddelen (SVM) towards Activated Blended Learning".
