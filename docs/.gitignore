@@ -4,3 +4,4 @@ docs/src/notebook-output
 Manifest.toml
 *.md
 !index.md
+!getting_started_with_julia.md
