@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>julia_intro</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>tsp</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 	<script src='../assets/iframeResizer.contentWindow.min.js'></script>
 
 <style type="text/css">
@@ -7437,893 +7437,190 @@ a.anchor-link {
 </style>
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ae2a0512">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Is-Julia-fast?">Is Julia fast?<a class="anchor-link" href="#Is-Julia-fast?">¶</a></h1>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e040636a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">¶</a></h2><p>With this notebook, you will learn</p>
-<ul>
-<li>Two basic julia concepts related performance:<ul>
-<li>type-inference</li>
-<li>JIT compilation</li>
-</ul>
-</li>
-<li>Some Julia syntax</li>
-<li>Some useful Julia packages</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=beef4d5e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Using-Jupyter-notebooks-in-Julia">Using Jupyter notebooks in Julia<a class="anchor-link" href="#Using-Jupyter-notebooks-in-Julia">¶</a></h2><p>We are going to use Jupyter notebooks in this and other lectures. You provably have worked with notebooks (in Python). If not, here are the basic concepts you need to know to follow the lessons.</p>
-<div class="alert alert-block alert-info">
-<b>Tip:</b> Did you know that Jupyter stands for Julia, Python and R?
-</div>
-<h3 id="How-to-start-a-Jupyter-nootebook-in-Julia">How to start a Jupyter nootebook in Julia<a class="anchor-link" href="#How-to-start-a-Jupyter-nootebook-in-Julia">¶</a></h3><p>To run a Julia Jupyther notebook, open a Julia REPL and type</p>
-<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="p">]</span>
-<span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">IJulia</span>
-<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">IJulia</span>
-<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">notebook</span><span class="p">()</span>
-</pre></div>
-<p>A new browser window will open. Navigate to the corresponding notebook and open it.</p>
-<div class="alert alert-block alert-warning">
-<b>Warning:</b> Make sure that the notebook is using the same Julia version as the one you used to launch `IJulia`. If it is not the same, go to Kernel &gt; Change Kernel and choose the right version.
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7cdd5195">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Running-a-cell">Running a cell<a class="anchor-link" href="#Running-a-cell">¶</a></h3><p>To run a cell, click on a cell and press <code>Shift</code> + <code>Enter</code>. You can also use the "Run" button in the toolbar above.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ec0f9041">
+<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8850d90e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="mi">3</span>
-<span class="mi">4</span><span class="o">*</span><span class="mi">5</span>
+<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Distributed</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a8474251">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>As you can see from the output of previous cell, the value of the last line is displayed. We can suppress the output with a semicolon. Try it. Execute next cell.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fb3eaec4">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5d4935ee">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="mi">3</span>
-<span class="mi">4</span><span class="o">*</span><span class="mi">5</span><span class="p">;</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0823876a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Cell-order-is-important">Cell order is important<a class="anchor-link" href="#Cell-order-is-important">¶</a></h3><p>Running the two cells below in reverse order won't work (try it).</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bc1da6cb">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">foo</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Well done!"</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ddea57d8">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">foo</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=629189d9">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="REPL-modes">REPL modes<a class="anchor-link" href="#REPL-modes">¶</a></h3><p>This is particular to Julia notebooks. You can use package, help, and shell mode just like in the Julia REPL.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=defa851f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="p">]</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">MPI</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1e6fbe66">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="o">?</span><span class="w"> </span><span class="n">print</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=123c0f6a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="p">;</span><span class="w"> </span><span class="n">ls</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=44c03fde">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="How-fast-is-Julia-code?">How fast is Julia code?<a class="anchor-link" href="#How-fast-is-Julia-code?">¶</a></h2>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f1e716db">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>NB. Most of the examples below are taken from the lecture by S.G. Johnson at MIT. See here:
-<a href="https://github.com/mitmath/18S096/blob/master/lectures/lecture1/Boxes-and-registers.ipynb">https://github.com/mitmath/18S096/blob/master/lectures/lecture1/Boxes-and-registers.ipynb</a></p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6c088d9e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Example">Example<a class="anchor-link" href="#Example">¶</a></h3><p>Sum entries of a  given array $a = [a_1,a_2,...,a_n]$</p>
-<p>$$s = \sum_{i=1}^n a_i$$</p>
-<h3 id=""><a class="anchor-link" href="#">¶</a></h3>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=34e3c7dd">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hand-written-sum-function">Hand-written sum function<a class="anchor-link" href="#Hand-written-sum-function">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a672edac">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">eltype</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">ai</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">a</span>
-<span class="w">        </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">ai</span>
-<span class="w">    </span><span class="k">end</span>
-<span class="w">    </span><span class="n">s</span>
+<div class="highlight hl-julia"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="n">procs</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span>
+<span class="w">    </span><span class="n">addprocs</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0494a1b3">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Test-it">Test it<a class="anchor-link" href="#Test-it">¶</a></h3><p>The Julia macro <code>@test</code> which is provided in the <code>Test</code> package is useful to write (unit) tests in Julia.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ebac7b9e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Test</span>
-</pre></div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>4-element Vector{Int64}:
+ 2
+ 3
+ 4
+ 5</pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=aa5505d4">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4a2756ae">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fc11923c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@test</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e23f3ddf">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Benchmarking">Benchmarking<a class="anchor-link" href="#Benchmarking">¶</a></h2><p>In Julia, the most straight-forward way of measuring the computation time of a piece of code is with the macro <code>@time</code>.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=caff0307">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="o">^</span><span class="mi">7</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6d073236">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=443ac8da">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Note that <code>@time</code> also measures the compile time of a function if it's the first call to that function. So make sure to run <code>@time</code> twice on a freshly compiled function in order to get a more meaningful result.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c664522e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>A part of getting rid of compilation time, one typically wants to measure the runtime several times and compute sole. To do this we can call our code in a for-loop and gather the runtimes using the Julia macro <code>@elapsed</code>. This measures the runtime of an expression in seconds, just as the <code>@time</code> macro, only <code>@elapsed</code> discards the result of the computation and returns the elapsed time instead.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bba864c1">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=70317d33">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="BenchmarkTools">BenchmarkTools<a class="anchor-link" href="#BenchmarkTools">¶</a></h2><p>The <code>BenchmarkTools</code> extension package provides useful macros for sampling runtimes automatically.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=424ffe03">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=079ef7d0">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>First of all, the <code>@benchmark</code> macro runs the code multiple times and gives out a lot of details: the minimum and maximum time, mean time, median time, number of samples taken, memory allocations, etc.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b5bb9a12">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">bch_sum_hand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c77d454b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>For quick sanity checks, one can use the <code>@btime</code> macro, which is a convenience wrapper around <code>@benchmark</code>. It returns only the minimum execution time and memory allocations.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fee5493d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3a1a774c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Similar to the <code>@elapsed</code> macro, <code>BenchmarkTool</code>'s <code>@belapsed</code> discards the return value of the function and instead returns the minimum runtime in seconds.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8e0cdb8c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@belapsed</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fb530b87">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>As opposed to <code>@time</code> and <code>@elapsed</code>, <code>@btime</code> and <code>@belapsed</code> run the code several times and return the minimum runtime, thus eliminating possible compilation times from the measurement.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=782be14f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Built-in-sum-function">Built-in sum function<a class="anchor-link" href="#Built-in-sum-function">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=07df4939">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">bch_sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=18972fa7">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hand-written-sum-in-Python">Hand-written sum in Python<a class="anchor-link" href="#Hand-written-sum-in-Python">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=038702c0">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">PyCall</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8e1dcbfa">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="sa">py</span><span class="s">"""</span>
-<span class="s">def sum_py_hand(A):</span>
-<span class="s">    s = 0.0</span>
-<span class="s">    for a in A:</span>
-<span class="s">        s += a</span>
-<span class="s">    return s</span>
-<span class="s">"""</span>
-<span class="n">sum_py_hand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sa">py</span><span class="s">"sum_py_hand"</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=60ca4517">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@test</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">sum_py_hand</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2f009076">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">bch_sum_py_hand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">sum_py_hand</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=22d29afa">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Numpy-sum">Numpy sum<a class="anchor-link" href="#Numpy-sum">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0f7ffb8e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Conda</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e667fc80">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">numpy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pyimport</span><span class="p">(</span><span class="s">"numpy"</span><span class="p">)</span>
-<span class="n">sum_numpy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numpy</span><span class="p">[</span><span class="s">"sum"</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ee0361df">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@test</span><span class="w"> </span><span class="n">sum_numpy</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d2f4e9ea">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">bch_sum_numpy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">sum_numpy</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d7c3cbd6">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Sumary-of-the-results">Sumary of the results<a class="anchor-link" href="#Sumary-of-the-results">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5ce4c97a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">timings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">bch_sum_hand</span><span class="p">,</span><span class="n">bch_sum</span><span class="p">,</span><span class="n">bch_sum_py_hand</span><span class="p">,</span><span class="n">bch_sum_numpy</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9d5caabd">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">methods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"sum_hand"</span><span class="p">,</span><span class="s">"sum"</span><span class="p">,</span><span class="s">"sum_py_hand"</span><span class="p">,</span><span class="s">"sum_numpy"</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8b7a3661">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">DataFrames</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=82b11610">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">methods</span><span class="p">,</span><span class="n">time</span><span class="o">=</span><span class="n">timings</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f03c4281">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Improving-the-hand-written-sum-in-Julia">Improving the hand-written sum in Julia<a class="anchor-link" href="#Improving-the-hand-written-sum-in-Julia">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7696719c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="c"># ✍️ Exercise 3</span>
-<span class="k">function</span><span class="w"> </span><span class="n">sum_hand_fast</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
-<span class="w">    </span><span class="nd">@simd</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">ai</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">a</span>
-<span class="w">       </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">ai</span>
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">visited</span><span class="p">(</span><span class="n">city</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">hops</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">city</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span>
+<span class="w">        </span><span class="k">end</span>
 <span class="w">    </span><span class="k">end</span>
-<span class="w">    </span><span class="n">s</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0b461036">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=39e9e667">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@test</span><span class="w"> </span><span class="n">sum_hand_fast</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fc228cba">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">sum_hand_fast</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=328f9128">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Conlcusions-so-far">Conlcusions so far<a class="anchor-link" href="#Conlcusions-so-far">¶</a></h2><ul>
-<li>Julia code (for loops) are much faster than in Python</li>
-<li>Julia code can be as fast as optimized C code</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f9ce5464">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Why-Julia-is-fast?">Why Julia is fast?<a class="anchor-link" href="#Why-Julia-is-fast?">¶</a></h2><ul>
-<li>Julia is a compiled language (like C, C++, Fortran)</li>
-<li>Julia is JIT compiled (C, C++, Fortran are AOT compiled)</li>
-<li>Type declarations are optional in Julia</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=aa5254e4">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Conclusion:-Why-we-use-Julia-in-this-course">Conclusion: Why we use Julia in this course<a class="anchor-link" href="#Conclusion:-Why-we-use-Julia-in-this-course">¶</a></h1><ul>
-<li>Julia code is fast (it can be as fast as C)</li>
-<li>Julia is a high-level language with simpler syntax than C</li>
-<li>Julia supports different parallel programming models</li>
-</ul>
-<p>We will look into the third point in a later section of this course.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d4efafe2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Solution-to-the-exercises">Solution to the exercises<a class="anchor-link" href="#Solution-to-the-exercises">¶</a></h2><h3 id="Solution-to-Exercise-1">Solution to Exercise 1<a class="anchor-link" href="#Solution-to-Exercise-1">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=17f73c0f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">ai</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">a</span>
-<span class="w">        </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">ai</span>
+<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">tsp_serial_impl</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">,</span><span class="n">min_distance</span><span class="p">)</span>
+<span class="w">    </span><span class="n">num_cities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">connections</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">hops</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">num_cities</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">current_distance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">min_distance</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">current_distance</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">current_city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">path</span><span class="p">[</span><span class="n">hops</span><span class="p">]</span>
+<span class="w">        </span><span class="n">next_hops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hops</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">next_city</span><span class="p">,</span><span class="n">distance_increment</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">connections</span><span class="p">[</span><span class="n">current_city</span><span class="p">]</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">visited</span><span class="p">(</span><span class="n">next_city</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">)</span>
+<span class="w">                </span><span class="n">path</span><span class="p">[</span><span class="n">next_hops</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_city</span>
+<span class="w">                </span><span class="n">next_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_distance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">distance_increment</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">next_distance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">min_distance</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">tsp_serial_impl</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">next_hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">next_distance</span><span class="p">,</span><span class="n">min_distance</span><span class="p">)</span>
+<span class="w">                </span><span class="k">end</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">        </span><span class="k">end</span><span class="w">        </span>
 <span class="w">    </span><span class="k">end</span>
-<span class="w">    </span><span class="n">s</span>
+<span class="w">    </span><span class="n">min_distance</span>
 <span class="k">end</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d12d6400">
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>tsp_serial_impl (generic function with 1 method)</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=83b58881">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Solution-to-Exercise-2">Solution to Exercise 2<a class="anchor-link" href="#Solution-to-Exercise-2">¶</a></h3>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">tsp_serial</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">city</span><span class="p">)</span>
+<span class="w">    </span><span class="n">num_cities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">connections</span><span class="p">)</span>
+<span class="w">    </span><span class="n">path</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="n">num_cities</span><span class="p">)</span>
+<span class="w">    </span><span class="n">hops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="n">path</span><span class="p">[</span><span class="n">hops</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city</span>
+<span class="w">    </span><span class="n">current_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">min_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">typemax</span><span class="p">(</span><span class="kt">Int</span><span class="p">)</span>
+<span class="w">    </span><span class="n">min_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tsp_serial_impl</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">,</span><span class="n">min_distance</span><span class="p">)</span>
+<span class="w">    </span><span class="p">(;</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="n">min_distance</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e39094da">
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>tsp_serial (generic function with 1 method)</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=78095098">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">39</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">76</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">78</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">94</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">97</span><span class="p">)],</span>
+<span class="w">    </span><span class="p">[(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">25</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">58</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">62</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">97</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">109</span><span class="p">)],</span>
+<span class="w">    </span><span class="p">[(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">58</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">62</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">68</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">70</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">94</span><span class="p">)],</span>
+<span class="w">    </span><span class="p">[(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">38</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">39</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">58</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">68</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">78</span><span class="p">)],</span>
+<span class="w">    </span><span class="p">[(</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">25</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">38</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">70</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">76</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">104</span><span class="p">)],</span>
+<span class="w">    </span><span class="p">[(</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">58</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">78</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">78</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">104</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">109</span><span class="p">)]</span>
+<span class="p">]</span>
+<span class="n">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">tsp_serial</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">city</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>(path = [1, 4, 5, 2, 3, 6], distance = 222)</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=03f0dd8e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8331,24 +7628,81 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Statistics</span>
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">tsp_dist_impl</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">,</span><span class="n">min_distance</span><span class="p">,</span><span class="n">max_hops</span><span class="p">,</span><span class="n">jobs_chnl</span><span class="p">,</span><span class="n">ftr_result</span><span class="p">)</span>
+<span class="w">    </span><span class="n">num_cities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">connections</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">hops</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">num_cities</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">current_distance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">min_distance</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">ftr_result</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nb">nothing</span>
+<span class="w">                </span><span class="nd">@spawnat</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">                    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetch</span><span class="p">(</span><span class="n">ftr_result</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">result</span><span class="o">.</span><span class="n">path</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">path</span>
+<span class="w">                    </span><span class="n">result</span><span class="o">.</span><span class="n">min_distance_ref</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_distance</span>
+<span class="w">                </span><span class="k">end</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">wait</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">current_distance</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">elseif</span><span class="w"> </span><span class="n">hops</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">max_hops</span>
+<span class="w">        </span><span class="n">current_city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">path</span><span class="p">[</span><span class="n">hops</span><span class="p">]</span>
+<span class="w">        </span><span class="n">next_hops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hops</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">next_city</span><span class="p">,</span><span class="n">distance_increment</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">connections</span><span class="p">[</span><span class="n">current_city</span><span class="p">]</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">visited</span><span class="p">(</span><span class="n">next_city</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">)</span>
+<span class="w">                </span><span class="n">path</span><span class="p">[</span><span class="n">next_hops</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_city</span>
+<span class="w">                </span><span class="n">next_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_distance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">distance_increment</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">next_distance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">min_distance</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">tsp_dist_impl</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">next_hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">next_distance</span><span class="p">,</span><span class="n">min_distance</span><span class="p">,</span><span class="n">max_hops</span><span class="p">,</span><span class="n">jobs_chnl</span><span class="p">,</span><span class="n">ftr_result</span><span class="p">)</span>
+<span class="w">                </span><span class="k">end</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">        </span><span class="k">end</span><span class="w"> </span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">jobs_channel</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nb">nothing</span>
+<span class="w">            </span><span class="n">put!</span><span class="p">(</span><span class="n">jobs_chnl</span><span class="p">,(;</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">))</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">min_distance</span>
+<span class="k">end</span>
 
-<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="o">^</span><span class="mi">7</span><span class="p">)</span>
-<span class="n">num_it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">15</span>
-<span class="n">runtimes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">num_it</span><span class="p">)</span>
-<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">num_it</span>
-<span class="w">    </span><span class="n">runtimes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">function</span><span class="w"> </span><span class="n">tsp_dist</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">city</span><span class="p">)</span>
+<span class="w">    </span><span class="n">max_hops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="n">num_cities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">connections</span><span class="p">)</span>
+<span class="w">    </span><span class="n">path</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="n">num_cities</span><span class="p">)</span>
+<span class="w">    </span><span class="n">hops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="n">path</span><span class="p">[</span><span class="n">hops</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city</span>
+<span class="w">    </span><span class="n">current_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">min_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">typemax</span><span class="p">(</span><span class="kt">Int</span><span class="p">)</span>
+<span class="w">    </span><span class="n">jobs_chnl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RemoteChannel</span><span class="p">(()</span><span class="o">-&gt;</span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Any</span><span class="p">}(</span><span class="mi">10</span><span class="p">))</span>
+<span class="w">    </span><span class="n">ftr_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@spawnat</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(;</span><span class="n">path</span><span class="p">,</span><span class="n">min_distance_ref</span><span class="o">=</span><span class="kt">Ref</span><span class="p">(</span><span class="n">min_distance</span><span class="p">))</span>
+<span class="w">    </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@async</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">tsp_dist_impl</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">,</span><span class="n">min_distance</span><span class="p">,</span><span class="n">max_hops</span><span class="p">,</span><span class="n">jobs_chnl</span><span class="p">,</span><span class="nb">nothing</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span>
+<span class="w">            </span><span class="n">put!</span><span class="p">(</span><span class="n">job_chnl</span><span class="p">,</span><span class="nb">nothing</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="nd">@sync</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span>
+<span class="w">        </span><span class="nd">@spawnat</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">max_hops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">typemax</span><span class="p">(</span><span class="kt">Int</span><span class="p">)</span>
+<span class="w">            </span><span class="n">jobs_channel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">nothing</span>
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="nb">true</span>
+<span class="w">                </span><span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">take!</span><span class="p">(</span><span class="n">jobs_chnl</span><span class="p">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">nothing</span>
+<span class="w">                    </span><span class="k">break</span>
+<span class="w">                </span><span class="k">end</span>
+<span class="w">                </span><span class="n">hobs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="o">.</span><span class="n">hobs</span>
+<span class="w">                </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="o">.</span><span class="n">path</span>
+<span class="w">                </span><span class="n">current_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="o">.</span><span class="n">current_distance</span>
+<span class="w">                </span><span class="n">tsp_dist_impl</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">,</span><span class="n">min_distance</span><span class="p">,</span><span class="n">max_hops</span><span class="p">,</span><span class="n">jobs_chnl</span><span class="p">,</span><span class="n">ftr_result</span><span class="p">)</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span><span class="w"> </span>
+<span class="w">    </span><span class="p">(;</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="n">min_distance</span><span class="p">)</span>
 <span class="k">end</span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">runtimes</span><span class="p">)</span><span class="w"> </span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">std</span><span class="p">(</span><span class="n">runtimes</span><span class="p">)</span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">minimum</span><span class="p">(</span><span class="n">runtimes</span><span class="p">)</span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">maximum</span><span class="p">(</span><span class="n">runtimes</span><span class="p">);</span>
+<span class="n">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">tsp_dist</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">city</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7943f1cc">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=370a1205">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8356,14 +7710,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="c"># ✍️ Exercise 3</span>
-<span class="k">function</span><span class="w"> </span><span class="n">sum_hand_fast</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
-<span class="w">    </span><span class="nd">@simd</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">ai</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">a</span>
-<span class="w">       </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">ai</span>
-<span class="w">    </span><span class="k">end</span>
-<span class="w">    </span><span class="n">s</span>
-<span class="k">end</span>
+<div class="highlight hl-julia"><pre><span></span>
 </pre></div>
 </div>
 </div>

@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>julia_intro</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>julia_tutorial</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 	<script src='../assets/iframeResizer.contentWindow.min.js'></script>
 
 <style type="text/css">
@@ -7438,934 +7438,398 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ae2a0512">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Is-Julia-fast?">Is Julia fast?<a class="anchor-link" href="#Is-Julia-fast?">¶</a></h1>
+<img alt="No description has been provided for this image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/VU_logo.png/800px-VU_logo.png?20161029201021" width="350"/>
+<h3 id="Programming-large-scale-parallel-systems">Programming large-scale parallel systems<a class="anchor-link" href="#Programming-large-scale-parallel-systems">¶</a></h3><h3 id="Lectures-on-Julia-for-HPC">Lectures on Julia for HPC<a class="anchor-link" href="#Lectures-on-Julia-for-HPC">¶</a></h3><h1 id="Tutorial:-Getting-started-with-Julia">Tutorial: Getting started with Julia<a class="anchor-link" href="#Tutorial:-Getting-started-with-Julia">¶</a></h1><p>by Francesc Verdugo (VU Amsterdam)</p>
+<p>Version fall 2022</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e040636a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">¶</a></h2><p>With this notebook, you will learn</p>
+<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">¶</a></h2><ul>
+<li>Using the Julia REPL</li>
+<li>Running serial and parallel code</li>
+<li>Installing and managing packages</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">¶</a></h2><p>Julia has its own way of running code and using packages. Many educational sources about Julia assume that you have this basic knowledge, which can be confusing to new users. In this lesson, we will learn these basic skills so that you can start learning more on Julia.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Preliminaries">Preliminaries<a class="anchor-link" href="#Preliminaries">¶</a></h2><p>This is a tutorial. To follow it:</p>
 <ul>
-<li>Two basic julia concepts related performance:<ul>
-<li>type-inference</li>
-<li>JIT compilation</li>
-</ul>
-</li>
-<li>Some Julia syntax</li>
-<li>Some useful Julia packages</li>
+<li>Download and install Julia from <a href="https://julialang.org/">https://julialang.org/</a></li>
+<li>Download and install VSCode and its Julia extension. How to: <a href="https://www.julia-vscode.org/docs/dev/gettingstarted/">https://www.julia-vscode.org/docs/dev/gettingstarted/</a></li>
+<li>Continue reading this document</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=beef4d5e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Using-Jupyter-notebooks-in-Julia">Using Jupyter notebooks in Julia<a class="anchor-link" href="#Using-Jupyter-notebooks-in-Julia">¶</a></h2><p>We are going to use Jupyter notebooks in this and other lectures. You provably have worked with notebooks (in Python). If not, here are the basic concepts you need to know to follow the lessons.</p>
-<div class="alert alert-block alert-info">
-<b>Tip:</b> Did you know that Jupyter stands for Julia, Python and R?
+<h2 id="The-Julia-REPL">The Julia REPL<a class="anchor-link" href="#The-Julia-REPL">¶</a></h2><p>There are several ways of opening Julia depending on your operating system and your IDE, but it is usually as simple as launching the Julia app. With VSCode, open a folder (File &gt; Open Folder). Then,  press <code>Ctrl</code>+<code>Shift</code>+<code>P</code> to open the command bar, and execute <code>Julia: Start REPL</code>. If this does not work, make sure you have the Julia extension for VSCode installed. Independently of the method you use, opening Julia results in a window with some text ending with:</p>
+<pre><code>julia&gt; 
+</code></pre>
+<p>You have just opened the Julia <em>read-evaluate-print loop</em>, or simply the Julia <em>REPL</em>. Congrats! You will spend most of time using the REPL, when working in Julia. The REPL is a console waiting for user input. Just as in other consoles, the string of text right before the input area (<code>julia&gt;</code> in the case) is called the <em>command prompt</em> or simply the <em>prompt</em>.</p>
+<p>The usage is as follows:</p>
+<ul>
+<li>You write some input</li>
+<li>press enter</li>
+<li>you get the output</li>
+</ul>
+<p>For instance, try this</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+</pre></div>
 </div>
-<h3 id="How-to-start-a-Jupyter-nootebook-in-Julia">How to start a Jupyter nootebook in Julia<a class="anchor-link" href="#How-to-start-a-Jupyter-nootebook-in-Julia">¶</a></h3><p>To run a Julia Jupyther notebook, open a Julia REPL and type</p>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Hello-world!">Hello world!<a class="anchor-link" href="#Hello-world!">¶</a></h2><p>A "Hello world" example looks like this in Julia</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
+</pre></div>
+<p>Try to run it in the REPL.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Help-mode">Help mode<a class="anchor-link" href="#Help-mode">¶</a></h2><p>Curious about what function <code>println</code> does? Enter into <em>help</em> mode to look into the documentation. This is done by typing a question mark (<code>?</code>) into the inut field:</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="o">?</span>
+</pre></div>
+<p>After typing <code>?</code>, the command prompt changes to <code>help?&gt;</code>. It means we are in help mode. Now, we can type a function name to see its documentation.</p>
+<div class="highlight"><pre><span></span><span class="n">help</span><span class="o">?&gt;</span><span class="w"> </span><span class="n">println</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Package-and-shell-modes">Package and shell modes<a class="anchor-link" href="#Package-and-shell-modes">¶</a></h2><p>The REPL comes with two more modes, namely <em>package</em> and <em>shell</em> modes. To enter package mode type</p>
 <div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="p">]</span>
-<span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">IJulia</span>
-<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">IJulia</span>
-<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">notebook</span><span class="p">()</span>
 </pre></div>
-<p>A new browser window will open. Navigate to the corresponding notebook and open it.</p>
+<p>Package mode is used to install and manage packages. We are going to discuss the package mode in greater detail later. To return back to normal mode press the backspace key several times.</p>
+<p>To enter shell mode type semicolon (<code>;</code>)</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="p">;</span>
+</pre></div>
+<p>The prompt should have changed to <code>shell&gt;</code> indicating that we are in shell mode. Now you can type commands that you would normally do on your system command line. For instance,</p>
+<div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ls</span>
+</pre></div>
+<p>will display the contents of the current folder in Mac or Linux. Using shell mode in Windows is not straightforward, and thus not recommended for beginners.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Running-more-complex-code">Running more complex code<a class="anchor-link" href="#Running-more-complex-code">¶</a></h2><p>Real-world Julia programs are not typed in the REPL in practice. They are written in one or more files and <em>included</em> in the REPL. To try this, create a new file called <code>hello.jl</code>, write the code of the "Hello world" example above, and save it. If you are using VSCode, you can create the file using File &gt; New File &gt; Julia File. Once the file is saved with the name <code>hello.jl</code>, execute it as follows</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">include</span><span class="p">(</span><span class="s">"hello.jl"</span><span class="p">)</span>
+</pre></div>
 <div class="alert alert-block alert-warning">
-<b>Warning:</b> Make sure that the notebook is using the same Julia version as the one you used to launch `IJulia`. If it is not the same, go to Kernel &gt; Change Kernel and choose the right version.
+<b>Warning:</b> Make sure that the file <code>"hello.jl"</code> is located in the current working directory of your Julia session. You can query the current directory with function <code>pwd()</code>. You can change to another directory with function <code>cd()</code> if needed.  Also, make sure that the file extension is <code>.jl</code>.
+</div>
+<p>The recommended way of running Julia code is using the REPL as we did. But it is also possible to run code directly from the system command line. To this end, open a terminal and call Julia followed buy the path to the file containing the code you want to execute.</p>
+<pre><code>$ julia hello.jl
+</code></pre>
+<p>Previous line assumes that you have Julia properly installed in the system and that is usable from the terminal. In UNIX systems (Linux and Mac), the Julia binary needs to be in one of the directories listed in the <code>PATH</code> environment variable. To check that Julia is properly installed, you can use</p>
+<pre><code>$ julia --version
+</code></pre>
+<p>If this runs without error and you see a version number, you are good to go!</p>
+<div class="alert alert-block alert-info">
+<b>Tip:</b> In this tutorial, when a code snipped starts with <code>$</code>, it should be run in the terminal. Otherwise, the code is to be run in the Julia REPL.
+</div>
+<div class="alert alert-block alert-info">
+<b>Tip:</b> Avoid calling Julia code from the terminal, use the Julia REPL instead! Each time you call Julia from the terminal, you start a fresh Julia session and Julia will need to compile your code from scratch. This can be time consuming for large projects. In contrast, if you execute code in the REPL, Julia will compile code incrementally, which is much faster. Running code in a cluster (like in DAS-5 for the Julia assignment) is among the few situations you need to run Julia code from the terminal.
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7cdd5195">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Running-a-cell">Running a cell<a class="anchor-link" href="#Running-a-cell">¶</a></h3><p>To run a cell, click on a cell and press <code>Shift</code> + <code>Enter</code>. You can also use the "Run" button in the toolbar above.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ec0f9041">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="mi">3</span>
-<span class="mi">4</span><span class="o">*</span><span class="mi">5</span>
+<h2 id="Running-parallel-code">Running parallel code<a class="anchor-link" href="#Running-parallel-code">¶</a></h2><p>Since we are in a parallel computing course, let's run a parallel "hello world" example in Julia. Open a Julia REPL and write</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Distributed</span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="nd">@everywhere</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">"Hello, world! I am proc </span><span class="si">$</span><span class="p">(</span><span class="n">myid</span><span class="p">())</span><span class="s"> from </span><span class="si">$</span><span class="p">(</span><span class="n">nprocs</span><span class="p">())</span><span class="s">"</span><span class="p">)</span>
 </pre></div>
+<p>Here, we are using the <code>Distributed</code> package, which is part of the Julia standard library that provides distributed memory parallel support. The code prints the process id and the number of processes in the current Julia session.</p>
+<p>You will provably only see output from 1 proces. We need to add more processes to run the example in parallel. This is done with the <code>addprocs</code> function.</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">addprocs</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+<p>We have added 3 new processes, plus the old one, we have 4 processes. Run the code again.</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="nd">@everywhere</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">"Hello, world! I am proc </span><span class="si">$</span><span class="p">(</span><span class="n">myid</span><span class="p">())</span><span class="s"> from </span><span class="si">$</span><span class="p">(</span><span class="n">nprocs</span><span class="p">())</span><span class="s">"</span><span class="p">)</span>
+</pre></div>
+<p>Now, you should see output from 4 processes.</p>
+<p>It is possible to specify the number of processes when starting Julia from the terminal with the <code>-p</code> argument (useful, e.g., when running in a cluster).  If you launch Julia from the terminal as</p>
+<pre><code>$ julia -p 3
+</code></pre>
+<p>and then run</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="nd">@everywhere</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">"Hello, world! I am proc </span><span class="si">$</span><span class="p">(</span><span class="n">myid</span><span class="p">())</span><span class="s"> from </span><span class="si">$</span><span class="p">(</span><span class="n">nprocs</span><span class="p">())</span><span class="s">"</span><span class="p">)</span>
+</pre></div>
+<p>You should get output from 4 processes as before.</p>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a8474251">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>As you can see from the output of previous cell, the value of the last line is displayed. We can suppress the output with a semicolon. Try it. Execute next cell.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fb3eaec4">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="mi">3</span>
-<span class="mi">4</span><span class="o">*</span><span class="mi">5</span><span class="p">;</span>
+<h2 id="Installing-packages">Installing packages<a class="anchor-link" href="#Installing-packages">¶</a></h2><p>One of the most useful features of Julia is its package manager. It allows one to install Julia packages in a straightforward and platform independent way. To illustrate this, let us consider the following parallel "Hello world" example.</p>
+<p>Copy the following block of code into a new file named <code>"hello_mpi.jl"</code></p>
+<div class="highlight"><pre><span></span><span class="c"># file hello_mpi.jl</span>
+<span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
+<span class="n">MPI</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
+<span class="n">comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+<span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_rank</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
+<span class="n">nranks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_size</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">"Hello world, I am rank </span><span class="si">$rank</span><span class="s"> of </span><span class="si">$nranks</span><span class="s">"</span><span class="p">)</span>
 </pre></div>
+<p>As you can see from this example, one can access MPI from Julia in a clean way, without type annotations and other complexities of C/C++ code.</p>
+<p>Now, run the file from the REPL</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">incude</span><span class="p">(</span><span class="s">"hello_mpi.jl"</span><span class="p">)</span>
+</pre></div>
+<p>It provably didn't work, right? Read the error message and note that the MPI package needs to be installed to run this code.</p>
+<p>To install a package, we need to enter <em>package</em> mode. Remember that we entered into help mode by typing <code>?</code>. Package mode is activated by typing <code>]</code></p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="p">]</span>
+</pre></div>
+<p>At this point, the promp should have changed to <code>(@v1.8) pkg&gt;</code> indicating that we are in package mode. The text between parenthesis indicates which is the active <em>project</em>, i.e., where packages are going to be installed. In this case, we are working with the global project associated with our Julia installation (which is Julia 1.8 in this example, but it can be another version in your case).</p>
+<p>To install the MPI package, type</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">MPI</span>
+</pre></div>
+<p>Congrats, you have installed MPI!</p>
+<div class="alert alert-block alert-info">
+<b>Tip:</b>  Many Julia package names end with <code>.jl</code>. This is just a way of signaling that a package is written in Julia. When using such packages, the <code>.jl</code> needs to be ommited. In this case, we have isntalled the <code>MPI.jl</code> package even though we have only typed <code>MPI</code> in the REPL.
+</div>
+<div class="alert alert-block alert-info">
+<b>Tip:</b>
+The package you have installed it is the Julia interface to MPI, called  <code>MPI.jl</code>. Note that it is not a MPI library by itself. It is just a thin wrapper between MPI and Julia. To use this interface, you need an actual MPI library installed in your system such as OpenMPI or MPICH. Julia downloads and installs a MPI library for you, but it is also possible to use a MPI library already available in your system. This is useful, e.g., when running on HPC clusters. See the documentation of <code>MPI.jl</code> for further details.
+</div>
+<p>To check that the package was installed properly, exit package mode by pressing the backspace key several times, and run it again</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">incude</span><span class="p">(</span><span class="s">"hello_mpi.jl"</span><span class="p">)</span>
+</pre></div>
+<p>Now, it should work, but you provably get output from a single MPI rank only.</p>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0823876a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Cell-order-is-important">Cell order is important<a class="anchor-link" href="#Cell-order-is-important">¶</a></h3><p>Running the two cells below in reverse order won't work (try it).</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bc1da6cb">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">foo</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Well done!"</span>
+<h2 id="Running-MPI-code">Running MPI code<a class="anchor-link" href="#Running-MPI-code">¶</a></h2><p>To run MPI applications in parallel, you need a launcher like <code>mpiexec</code>. MPI codes written in Julia are not an exception to this rule. From the system terminal, you can run</p>
+<pre><code>$ mpiexec -np 4 julia hello_mpi.jl
+</code></pre>
+<p>But it will provably don't work since the version of <code>mpiexec</code> needs to match with the MPI version we are using from Julia. You can find the path to the <code>mpiexec</code> binary you need to use with these commands</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">mpiexec_path</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ddea57d8">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">foo</span><span class="p">()</span>
+<p>and then try again</p>
+<pre><code>$ /path/to/my/mpiexec -np 4 julia hello_mpi.jl
+</code></pre>
+<p>with your particular path.</p>
+<p>However, this is not very convenient. Don't worry if you could not make it work! A more elegant way to run MPI code is from the Julia REPL directly, by using these commands:</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mpiexec</span><span class="p">(</span><span class="n">cmd</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">(</span><span class="sb">`</span><span class="si">$cmd</span><span class="sb"> -np 4 julia hello_mpi.jl`</span><span class="p">))</span>
 </pre></div>
+<p>Now, you should see output from 4 ranks.</p>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=629189d9">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="REPL-modes">REPL modes<a class="anchor-link" href="#REPL-modes">¶</a></h3><p>This is particular to Julia notebooks. You can use package, help, and shell mode just like in the Julia REPL.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=defa851f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="p">]</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">MPI</span>
+<h2 id="Installing-packages-locally">Installing packages locally<a class="anchor-link" href="#Installing-packages-locally">¶</a></h2><p>We have installed the <code>MPI</code> package globally and it will be available in all Julia sessions. However, in some situations, we want to work with different versions of the same package or to install packages in an isolated way to avoid potential conflicts with other packages. This can be done by using local projects.</p>
+<p>A project is simply a folder in the hard disk. To use a particular folder as your project, you need to <em>activate</em> it. This is done by entering package mode and using the <code>activate</code> command followed by the path to the folder you want to activate.</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">activate</span><span class="w"> </span><span class="o">.</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=1e6fbe66">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="o">?</span><span class="w"> </span><span class="n">print</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=123c0f6a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="p">;</span><span class="w"> </span><span class="n">ls</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=44c03fde">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="How-fast-is-Julia-code?">How fast is Julia code?<a class="anchor-link" href="#How-fast-is-Julia-code?">¶</a></h2>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f1e716db">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>NB. Most of the examples below are taken from the lecture by S.G. Johnson at MIT. See here:
-<a href="https://github.com/mitmath/18S096/blob/master/lectures/lecture1/Boxes-and-registers.ipynb">https://github.com/mitmath/18S096/blob/master/lectures/lecture1/Boxes-and-registers.ipynb</a></p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6c088d9e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Example">Example<a class="anchor-link" href="#Example">¶</a></h3><p>Sum entries of a  given array $a = [a_1,a_2,...,a_n]$</p>
-<p>$$s = \sum_{i=1}^n a_i$$</p>
-<h3 id=""><a class="anchor-link" href="#">¶</a></h3>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=34e3c7dd">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hand-written-sum-function">Hand-written sum function<a class="anchor-link" href="#Hand-written-sum-function">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a672edac">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">eltype</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">ai</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">a</span>
-<span class="w">        </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">ai</span>
-<span class="w">    </span><span class="k">end</span>
-<span class="w">    </span><span class="n">s</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0494a1b3">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Test-it">Test it<a class="anchor-link" href="#Test-it">¶</a></h3><p>The Julia macro <code>@test</code> which is provided in the <code>Test</code> package is useful to write (unit) tests in Julia.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ebac7b9e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Test</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=aa5505d4">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fc11923c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@test</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e23f3ddf">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Benchmarking">Benchmarking<a class="anchor-link" href="#Benchmarking">¶</a></h2><p>In Julia, the most straight-forward way of measuring the computation time of a piece of code is with the macro <code>@time</code>.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=caff0307">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="o">^</span><span class="mi">7</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=6d073236">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=443ac8da">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Note that <code>@time</code> also measures the compile time of a function if it's the first call to that function. So make sure to run <code>@time</code> twice on a freshly compiled function in order to get a more meaningful result.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c664522e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>A part of getting rid of compilation time, one typically wants to measure the runtime several times and compute sole. To do this we can call our code in a for-loop and gather the runtimes using the Julia macro <code>@elapsed</code>. This measures the runtime of an expression in seconds, just as the <code>@time</code> macro, only <code>@elapsed</code> discards the result of the computation and returns the elapsed time instead.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=bba864c1">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=70317d33">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="BenchmarkTools">BenchmarkTools<a class="anchor-link" href="#BenchmarkTools">¶</a></h2><p>The <code>BenchmarkTools</code> extension package provides useful macros for sampling runtimes automatically.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=424ffe03">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">BenchmarkTools</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=079ef7d0">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>First of all, the <code>@benchmark</code> macro runs the code multiple times and gives out a lot of details: the minimum and maximum time, mean time, median time, number of samples taken, memory allocations, etc.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b5bb9a12">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">bch_sum_hand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c77d454b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>For quick sanity checks, one can use the <code>@btime</code> macro, which is a convenience wrapper around <code>@benchmark</code>. It returns only the minimum execution time and memory allocations.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fee5493d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@btime</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3a1a774c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Similar to the <code>@elapsed</code> macro, <code>BenchmarkTool</code>'s <code>@belapsed</code> discards the return value of the function and instead returns the minimum runtime in seconds.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8e0cdb8c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@belapsed</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fb530b87">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>As opposed to <code>@time</code> and <code>@elapsed</code>, <code>@btime</code> and <code>@belapsed</code> run the code several times and return the minimum runtime, thus eliminating possible compilation times from the measurement.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=782be14f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Built-in-sum-function">Built-in sum function<a class="anchor-link" href="#Built-in-sum-function">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=07df4939">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">bch_sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=18972fa7">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hand-written-sum-in-Python">Hand-written sum in Python<a class="anchor-link" href="#Hand-written-sum-in-Python">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=038702c0">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">PyCall</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8e1dcbfa">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="sa">py</span><span class="s">"""</span>
-<span class="s">def sum_py_hand(A):</span>
-<span class="s">    s = 0.0</span>
-<span class="s">    for a in A:</span>
-<span class="s">        s += a</span>
-<span class="s">    return s</span>
-<span class="s">"""</span>
-<span class="n">sum_py_hand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sa">py</span><span class="s">"sum_py_hand"</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=60ca4517">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@test</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">sum_py_hand</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2f009076">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">bch_sum_py_hand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">sum_py_hand</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=22d29afa">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Numpy-sum">Numpy sum<a class="anchor-link" href="#Numpy-sum">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0f7ffb8e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Conda</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e667fc80">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">numpy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pyimport</span><span class="p">(</span><span class="s">"numpy"</span><span class="p">)</span>
-<span class="n">sum_numpy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numpy</span><span class="p">[</span><span class="s">"sum"</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ee0361df">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@test</span><span class="w"> </span><span class="n">sum_numpy</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d2f4e9ea">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">bch_sum_numpy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">sum_numpy</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d7c3cbd6">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Sumary-of-the-results">Sumary of the results<a class="anchor-link" href="#Sumary-of-the-results">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=5ce4c97a">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">timings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">bch_sum_hand</span><span class="p">,</span><span class="n">bch_sum</span><span class="p">,</span><span class="n">bch_sum_py_hand</span><span class="p">,</span><span class="n">bch_sum_numpy</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9d5caabd">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">methods</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"sum_hand"</span><span class="p">,</span><span class="s">"sum"</span><span class="p">,</span><span class="s">"sum_py_hand"</span><span class="p">,</span><span class="s">"sum_numpy"</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8b7a3661">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">DataFrames</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=82b11610">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">methods</span><span class="p">,</span><span class="n">time</span><span class="o">=</span><span class="n">timings</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f03c4281">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Improving-the-hand-written-sum-in-Julia">Improving the hand-written sum in Julia<a class="anchor-link" href="#Improving-the-hand-written-sum-in-Julia">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7696719c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="c"># ✍️ Exercise 3</span>
-<span class="k">function</span><span class="w"> </span><span class="n">sum_hand_fast</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
-<span class="w">    </span><span class="nd">@simd</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">ai</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">a</span>
-<span class="w">       </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">ai</span>
-<span class="w">    </span><span class="k">end</span>
-<span class="w">    </span><span class="n">s</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0b461036">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@test</span><span class="w"> </span><span class="n">sum_hand_fast</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=fc228cba">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@benchmark</span><span class="w"> </span><span class="n">sum_hand_fast</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=328f9128">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Conlcusions-so-far">Conlcusions so far<a class="anchor-link" href="#Conlcusions-so-far">¶</a></h2><ul>
-<li>Julia code (for loops) are much faster than in Python</li>
-<li>Julia code can be as fast as optimized C code</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f9ce5464">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Why-Julia-is-fast?">Why Julia is fast?<a class="anchor-link" href="#Why-Julia-is-fast?">¶</a></h2><ul>
-<li>Julia is a compiled language (like C, C++, Fortran)</li>
-<li>Julia is JIT compiled (C, C++, Fortran are AOT compiled)</li>
-<li>Type declarations are optional in Julia</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=aa5254e4">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Conclusion:-Why-we-use-Julia-in-this-course">Conclusion: Why we use Julia in this course<a class="anchor-link" href="#Conclusion:-Why-we-use-Julia-in-this-course">¶</a></h1><ul>
-<li>Julia code is fast (it can be as fast as C)</li>
-<li>Julia is a high-level language with simpler syntax than C</li>
-<li>Julia supports different parallel programming models</li>
-</ul>
-<p>We will look into the third point in a later section of this course.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d4efafe2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Solution-to-the-exercises">Solution to the exercises<a class="anchor-link" href="#Solution-to-the-exercises">¶</a></h2><h3 id="Solution-to-Exercise-1">Solution to Exercise 1<a class="anchor-link" href="#Solution-to-Exercise-1">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=17f73c0f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">ai</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">a</span>
-<span class="w">        </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">ai</span>
-<span class="w">    </span><span class="k">end</span>
-<span class="w">    </span><span class="n">s</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d12d6400">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Solution-to-Exercise-2">Solution to Exercise 2<a class="anchor-link" href="#Solution-to-Exercise-2">¶</a></h3>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e39094da">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Statistics</span>
+<p>Previous command will activate the current working directory. Note that the dot <code>.</code> is indeed the path to the current folder.</p>
+<p>The prompt has changed to <code>(lessons) pkg&gt;</code> indicating that we are in the project within the <code>lessons</code> folder. The particular folder name can be different in your case.</p>
+<div class="alert alert-block alert-info">
+<b>Tip:</b>  You can activate a project directly when opening Julia from the terminal using the <code>--project</code> flag. The command <code>$ julia --project=.</code> will open Julia and activate a project in the current directory. You can also achieve the same effect by setting the environment variable  <code>JULIA_PROJECT</code> with the path of the folder you want to activate.
+    </div>
+<div class="alert alert-block alert-info">
+<b>Tip:</b>  The active project folder and the current working directory are two independent concepts! For instance,  <code>(@v1.8) pkg&gt; activate folderB</code> and then <code>julia&gt; cd("folderA")</code>, will activate the project in <code>folderB</code> and change the current working directory to <code>folderA</code>.
 
-<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="o">^</span><span class="mi">7</span><span class="p">)</span>
-<span class="n">num_it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">15</span>
-<span class="n">runtimes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">num_it</span><span class="p">)</span>
-<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">num_it</span>
-<span class="w">    </span><span class="n">runtimes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">sum_hand</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="k">end</span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">runtimes</span><span class="p">)</span><span class="w"> </span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">std</span><span class="p">(</span><span class="n">runtimes</span><span class="p">)</span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">minimum</span><span class="p">(</span><span class="n">runtimes</span><span class="p">)</span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">maximum</span><span class="p">(</span><span class="n">runtimes</span><span class="p">);</span>
+</div>
+<p>At this point all package-related operations will be local to the new project. For instance, install the <code>DataFrames</code> package.</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">lessons</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">DataFrames</span>
 </pre></div>
+<p>Use the package to check that it is installed</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">DataFrames</span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+<p>Now, we can return to the global project to check that <code>DataFrames</code> has not been installed there. To return to the global environment, use <code>activate</code> without a folder name.</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">lessons</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">activate</span>
+</pre></div>
+<p>The prompt is again <code>(@v1.8) pkg&gt;</code></p>
+<p>Now, try to use <code>DataFrames</code>.</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">DataFrames</span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+<p>You should get an error or a warning unless you already had <code>DataFrames</code> installed globally.</p>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7943f1cc">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="c"># ✍️ Exercise 3</span>
-<span class="k">function</span><span class="w"> </span><span class="n">sum_hand_fast</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
-<span class="w">    </span><span class="nd">@simd</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">ai</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">a</span>
-<span class="w">       </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">ai</span>
-<span class="w">    </span><span class="k">end</span>
-<span class="w">    </span><span class="n">s</span>
-<span class="k">end</span>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Project-and-Manifest-files">Project and Manifest files<a class="anchor-link" href="#Project-and-Manifest-files">¶</a></h2><p>The information about a project is stored in two files <code>Project.toml</code> and <code>Manifest.toml</code>.</p>
+<ul>
+<li><p><code>Project.toml</code> contains the packages explicitly installed (the direct dependencies)</p>
+</li>
+<li><p><code>Manifest.toml</code> contains direct and indirect dependencies along with the concrete version of each package.</p>
+</li>
+</ul>
+<p>In other words, <code>Project.toml</code> contains the packages relevant for the user, whereas <code>Manifest.toml</code> is the detailed snapshot of all dependencies. The <code>Manifest.toml</code> can be used to reproduce the same envinonment in another machine.</p>
+<p>You can see the path to the current <code>Project.toml</code> file by using the <code>status</code> operator (or <code>st</code> in its short form) while in package mode</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">status</span>
+</pre></div>
+<p>The information about the <code>Manifest.toml</code> can be inspected by passing the <code>-m</code> flag.</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">-</span><span class="n">m</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Installing-packages-from-a-project-file">Installing packages from a project file<a class="anchor-link" href="#Installing-packages-from-a-project-file">¶</a></h2><p>Project files can be used to install lists of packages defined by others. E.g., to install all the dependencies of a Julia application.</p>
+<p>Assume that a colleague has sent to you a <code>Project.toml</code> file with this content:</p>
+<pre><code>[deps]
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+MPI = "da04e1cc-30fd-572f-bb4f-1f8673147195"
+</code></pre>
+<p>Copy the contents of previous code block into a file called  <code>Project.toml</code> and place it in an empty folder named <code>newproject</code>. It is important that the file is named <code>Project.toml</code>. You can create a new folder from the REPL with</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mkdir</span><span class="p">(</span><span class="s">"newproject"</span><span class="p">)</span>
+</pre></div>
+<p>To install all the packages registered in this file you need to activate the folder containing your <code>Project.toml</code> file</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">activate</span><span class="w"> </span><span class="n">newproject</span>
+</pre></div>
+<p>and then <em>instantiating</em> it</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="n">newproject</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">instantiate</span>
+</pre></div>
+<p>The instantiate command will download and install all listed packages and their dependencies in just one click.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Getting-help-in-package-mode">Getting help in package mode<a class="anchor-link" href="#Getting-help-in-package-mode">¶</a></h2><p>You can get help about a particular package operator by writing <code>help</code> in front of it</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="n">activate</span>
+</pre></div>
+<p>You can get an overview of all package commands by typing <code>help</code> alone</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">help</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Package-operations-in-Julia-code">Package operations in Julia code<a class="anchor-link" href="#Package-operations-in-Julia-code">¶</a></h2><p>In some situations it is required to use package commands in Julia code, e.g., to automatize installation and deployment of Julia applications. This can be done using the <code>Pkg</code> package. For instance</p>
+<div class="highlight"><pre><span></span><span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span>
+<span class="n">julia</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Pkg</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+</pre></div>
+<p>is equivalent to call <code>status</code> in package mode.</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nd">@v1</span><span class="mf">.8</span><span class="p">)</span><span class="w"> </span><span class="n">pkg</span><span class="o">&gt;</span><span class="w"> </span><span class="n">status</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p>We have learned the basics of how to work with Julia. Now, you should be ready to start learning more on the language. If you want to further dig into the topics we have covered here, you can take a look and the following links</p>
+<ul>
+<li>Julia Manual   <a href="https://docs.julialang.org/en/v1/manual/getting-started/">https://docs.julialang.org/en/v1/manual/getting-started/</a></li>
+<li>Package manager <a href="https://pkgdocs.julialang.org/v1/getting-started/">https://pkgdocs.julialang.org/v1/getting-started/</a></li>
+</ul>
+<p>If you want to interact with the Julia community on discourse, sign in at <a href="https://discourse.julialang.org/">https://discourse.julialang.org/</a></p>
 </div>
 </div>
 </div>
