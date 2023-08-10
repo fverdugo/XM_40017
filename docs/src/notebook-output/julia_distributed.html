@@ -14600,36 +14600,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/VU_logo.png/800px-VU_logo.png?20161029201021" width="350">
-<h3 id="Programming-large-scale-parallel-systems">Programming large-scale parallel systems<a class="anchor-link" href="#Programming-large-scale-parallel-systems">&#182;</a></h3><h3 id="Lectures-on-Julia-for-HPC">Lectures on Julia for HPC<a class="anchor-link" href="#Lectures-on-Julia-for-HPC">&#182;</a></h3>
+<h3 id="Programming-large-scale-parallel-systems">Programming large-scale parallel systems<a class="anchor-link" href="#Programming-large-scale-parallel-systems">&#182;</a></h3>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Printf</span>
-
-<span class="k">function</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="n">solution</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">answer</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">solution</span>
-<span class="w">        </span><span class="s">&quot;🥳 Well done! &quot;</span>
-<span class="w">    </span><span class="k">else</span>
-<span class="w">        </span><span class="s">&quot;It&#39;s not correct. Keep trying! 💪&quot;</span>
-<span class="w">    </span><span class="k">end</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">println</span>
-<span class="k">end</span>
-<span class="n">q_1_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="s">&quot;a&quot;</span><span class="p">)</span>
-<span class="n">q_2_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="s">&quot;b&quot;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -14637,9 +14611,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Distributed-computing-in-Julia">Distributed computing in Julia<a class="anchor-link" href="#Distributed-computing-in-Julia">&#182;</a></h1><p>by Francesc Verdugo (VU Amsterdam)</p>
-<p>Version fall 2022</p>
-
+<h1 id="Distributed-computing-in-Julia">Distributed computing in Julia<a class="anchor-link" href="#Distributed-computing-in-Julia">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -14661,6 +14633,45 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="alert alert-block alert-info">
+<b>Note:</b> Do not forget to execute the next cell before starting this notebook! 
+</div>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Printf</span>
+<span class="k">function</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="n">solution</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">answer</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">solution</span>
+<span class="w">        </span><span class="s">&quot;🥳 Well done! &quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="s">&quot;It&#39;s not correct. Keep trying! 💪&quot;</span>
+<span class="w">    </span><span class="k">end</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">println</span>
+<span class="k">end</span>
+<span class="n">q_1_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="s">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">q_2_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="s">&quot;b&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -15625,7 +15636,9 @@ bottlenecks. Being aware of the data we are moving when using functions such as 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Q1-(Distributed.ipynb)">Q1 (Distributed.ipynb)<a class="anchor-link" href="#Q1-(Distributed.ipynb)">&#182;</a></h3><p>How many integers are transferred between master and worker? Including both directions.</p>
+<div class="alert alert-block alert-success">
+<b>Question (Q1):</b>  How many integers are transferred between master and worker? Including both directions. 
+</div>
 <div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">proc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
 <span class="nd">@fetchfrom</span><span class="w"> </span><span class="n">proc</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
@@ -15663,7 +15676,9 @@ d) 65
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Q2-(Distributed.ipynb)">Q2 (Distributed.ipynb)<a class="anchor-link" href="#Q2-(Distributed.ipynb)">&#182;</a></h3><p>How many integers are transferred between master and worker? Including both directions.</p>
+<div class="alert alert-block alert-success">
+<b>Question (Q2):</b>  How many integers are transferred between master and worker? Including both directions. 
+</div>
 <div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">proc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
 <span class="nd">@fetchfrom</span><span class="w"> </span><span class="n">proc</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
@@ -15701,7 +15716,9 @@ d) 32
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Q3-(Distributed.ipynb)">Q3 (Distributed.ipynb)<a class="anchor-link" href="#Q3-(Distributed.ipynb)">&#182;</a></h3><p>Which value will be the value of <code>x</code> ?</p>
+<div class="alert alert-block alert-success">
+<b>Question (Q3):</b>  Which value will be the value of `x` ? 
+</div>
 
 </div>
 </div>
@@ -15733,7 +15750,10 @@ d) 32
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Q4-(Distributed.ipynb)">Q4 (Distributed.ipynb)<a class="anchor-link" href="#Q4-(Distributed.ipynb)">&#182;</a></h3><p>Which value will be the value of <code>x</code> ?</p>
+<div class="alert alert-block alert-success">
+<b>Question (Q4):</b>  Which value will be the value of `x` ? 
+</div>
+<p>Which value will be the value of <code>x</code> ?</p>
 
 </div>
 </div>

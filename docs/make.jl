@@ -102,14 +102,14 @@ end
 
 # Loop over notebooks and generate html and markdown 
 notebook_files = glob("*.ipynb", "docs/src/notebooks/")
-#for filepath in notebook_files
-#    convert_embedded_img_to_base64(filepath)
-#    create_md_nb_file(filepath)
-#    filename_with_ext = splitpath(filepath)[end]    
-#    filename = splitext(filename_with_ext)[1]
-#    convert_notebook_to_html(filepath, output_name = filename)
-#    modify_notebook_html("docs/src/notebook-output/$(filename).html")
-#end
+for filepath in notebook_files
+    convert_embedded_img_to_base64(filepath)
+    create_md_nb_file(filepath)
+    filename_with_ext = splitpath(filepath)[end]    
+    filename = splitext(filename_with_ext)[1]
+    convert_notebook_to_html(filepath, output_name = filename)
+    modify_notebook_html("docs/src/notebook-output/$(filename).html")
+end
 
 makedocs(;
     modules=[XM_40017],
@@ -125,8 +125,9 @@ makedocs(;
         "Julia Basics" => "julia_basics.md",
         "Tasks and channels" => "julia_async.md",
         "Remote calls and remote channels" => "julia_distributed.md",
-        "Matrix Multiplication"=>["Matrix Multiplication" => "matrix_matrix.md", "Solutions" => "sol_matrix_matrix.md"],
-        "Jacobi/SOR" => "julia_jacobi.md"
+        "Matrix Multiplication"=>"matrix_matrix.md",
+        "Jacobi/SOR" => "julia_jacobi.md",
+        "Solutions" => "sol_matrix_matrix.md"
     ]],
 )
 

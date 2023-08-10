@@ -8,8 +8,9 @@ Welcome to the interactive lecture notes of the [Programming Large-Scale Paralle
 ## What
 
 This page contains part of the course material of the Programming Large-Scale Parallel Systems course at VU Amsterdam.
-Further information about this course is found in the study guide
-([click here](https://studiegids.vu.nl/EN/courses/2023-2024/XM_40017#/)) and our Canvas page (for registered students). This material consists of several lecture notes in jupyter notebook format, which will help you to learn how to design, analyze, and program parallel algorithms on multi-node computing systems.
+In this page, we provide several lecture notes in jupyter notebook format, which will help you to learn how to design, analyze, and program parallel algorithms on multi-node computing systems.
+Further information about the course is found in the study guide
+([click here](https://studiegids.vu.nl/EN/courses/2023-2024/XM_40017#/)) and our Canvas page (for registered students). 
 
 !!! note
     This page contains only part of the course material. The rest is available on Canvas. In particular, **the lecture notes in this public webpage do not fully cover all topics in the final exam**.
@@ -30,17 +31,6 @@ To run a notebook locally follow these steps:
 - Install Julia (if not done already). More information in [Getting started](@ref).
 - Download the notebook.
 - Launch Julia. More information in [Getting started](@ref).
-```
-   _       _ _(_)_     |  Documentation: https://docs.julialang.org
-  (_)     | (_) (_)    |
-   _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
-  | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.9.0 (2023-05-07)
- _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
-|__/                   |
-
-julia> 
-```
 - Execute these commands in the Julia command line:
 
 ```

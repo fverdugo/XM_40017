@@ -14600,9 +14600,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/VU_logo.png/800px-VU_logo.png?20161029201021" width="350">
-<h3 id="Programming-large-scale-parallel-systems">Programming large-scale parallel systems<a class="anchor-link" href="#Programming-large-scale-parallel-systems">&#182;</a></h3><h3 id="Lectures-on-Julia-for-HPC">Lectures on Julia for HPC<a class="anchor-link" href="#Lectures-on-Julia-for-HPC">&#182;</a></h3><h1 id="Basics-of-Julia">Basics of Julia<a class="anchor-link" href="#Basics-of-Julia">&#182;</a></h1><p>by Francesc Verdugo (VU Amsterdam)</p>
-<p>Version fall 2022</p>
-
+<h3 id="Programming-large-scale-parallel-systems">Programming large-scale parallel systems<a class="anchor-link" href="#Programming-large-scale-parallel-systems">&#182;</a></h3><h1 id="Julia-basics">Julia basics<a class="anchor-link" href="#Julia-basics">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -15188,7 +15186,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Question-1">Question 1<a class="anchor-link" href="#Question-1">&#182;</a></h3><p>Which will be the value of <code>x</code> in the last line ?</p>
+<div class="alert alert-block alert-success">
+<b>Question:</b>  Which will be the value of `x` in the last line ? (Think your answer before executing next cell to find out the result)    
+</div>
 
 </div>
 </div>
@@ -15250,7 +15250,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Once defined, a function can be called using bracket notation.</p>
+<p>Once defined, a function can be called using bracket notation as you would expect.</p>
 
 </div>
 </div>
@@ -15263,7 +15263,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-julia"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<div class=" highlight hl-julia"><pre><span></span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15322,6 +15322,57 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-julia"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">b</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="alert alert-block alert-success">
+<b>Question:</b>  Which will be the value of `x` in the last line ?
+</div>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">q</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="n">x</span>
+<span class="k">end</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-julia"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span>
 </pre></div>
 
      </div>
@@ -15922,7 +15973,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Question-2">Question 2<a class="anchor-link" href="#Question-2">&#182;</a></h3><p>Which will be the value of <code>x</code> below?</p>
+<div class="alert alert-block alert-success">
+<b>Question:</b>  Which will be the value of `x` below?  
+</div>
 
 </div>
 </div>

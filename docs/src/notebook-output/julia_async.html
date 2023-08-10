@@ -14600,9 +14600,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/VU_logo.png/800px-VU_logo.png?20161029201021" width="350">
-<h3 id="Programming-large-scale-parallel-systems">Programming large-scale parallel systems<a class="anchor-link" href="#Programming-large-scale-parallel-systems">&#182;</a></h3><h3 id="Lectures-on-Julia-for-HPC">Lectures on Julia for HPC<a class="anchor-link" href="#Lectures-on-Julia-for-HPC">&#182;</a></h3><h1 id="Asynchronous-programming-in-Julia">Asynchronous programming in Julia<a class="anchor-link" href="#Asynchronous-programming-in-Julia">&#182;</a></h1><p>by Francesc Verdugo (VU Amsterdam)</p>
-<p>Version fall 2022</p>
-
+<h3 id="Programming-large-scale-parallel-systems">Programming large-scale parallel systems<a class="anchor-link" href="#Programming-large-scale-parallel-systems">&#182;</a></h3><h1 id="Asynchronous-programming-in-Julia">Asynchronous programming in Julia<a class="anchor-link" href="#Asynchronous-programming-in-Julia">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -15416,8 +15414,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Questions">Questions<a class="anchor-link" href="#Questions">&#182;</a></h2><p>How long the next cells will take each?</p>
-<h3 id="Q1-(Asynchronous.ipynb)">Q1 (Asynchronous.ipynb)<a class="anchor-link" href="#Q1-(Asynchronous.ipynb)">&#182;</a></h3>
+<h2 id="Questions">Questions<a class="anchor-link" href="#Questions">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -15429,7 +15426,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">100_000_000</span><span class="p">)</span>
+<div class=" highlight hl-julia"><pre><span></span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">100_000_000</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15437,6 +15434,25 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="alert alert-block alert-success">
+<b>Question (Q1):</b>  How long will the compute time of next cell be? 
+</div>
+<pre><code>a) 10*t
+b) t
+c) 0.1*t
+d) near 0*t 
+</code></pre>
+
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15462,7 +15478,16 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Q2-(Asynchronous.ipynb)">Q2 (Asynchronous.ipynb)<a class="anchor-link" href="#Q2-(Asynchronous.ipynb)">&#182;</a></h3>
+<div class="alert alert-block alert-success">
+<b>Question (Q2):</b>  How long will the compute time of next cell be? 
+</div>
+<pre><code>a) 10*t
+b) t
+c) 0.1*t
+d) near 0*t 
+
+</code></pre>
+
 </div>
 </div>
 </div>
@@ -15491,7 +15516,15 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Q3-(Asynchronous.ipynb)">Q3 (Asynchronous.ipynb)<a class="anchor-link" href="#Q3-(Asynchronous.ipynb)">&#182;</a></h3>
+<div class="alert alert-block alert-success">
+<b>Question (Q3):</b>  How long will the compute time of next cell be? 
+</div>
+<pre><code>a) 10*t
+b) t
+c) 0.1*t
+d) near 0*t 
+</code></pre>
+
 </div>
 </div>
 </div>
@@ -15520,7 +15553,15 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Q4-(Asynchronous.ipynb)">Q4 (Asynchronous.ipynb)<a class="anchor-link" href="#Q4-(Asynchronous.ipynb)">&#182;</a></h3>
+<div class="alert alert-block alert-success">
+<b>Question (Q4):</b>  How long will the compute time of the 2nd cell be? 
+</div>
+<pre><code>a) infinity
+b) 1 second
+c) near 0 seconds
+d) 3 seconds
+</code></pre>
+
 </div>
 </div>
 </div>
@@ -15568,7 +15609,15 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Q5-(Asynchronous.ipynb)">Q5 (Asynchronous.ipynb)<a class="anchor-link" href="#Q5-(Asynchronous.ipynb)">&#182;</a></h3>
+<div class="alert alert-block alert-success">
+<b>Question (Q5):</b>  How long will the compute time of the 2nd cell be? 
+</div>
+<pre><code>a) infinity
+b) 1 second
+c) near 0 seconds
+d) 3 seconds
+</code></pre>
+
 </div>
 </div>
 </div>
