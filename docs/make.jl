@@ -126,7 +126,7 @@ makedocs(;
         "Tasks and channels" => "julia_async.md",
         "Remote calls and remote channels" => "julia_distributed.md",
         "Matrix Multiplication"=>"matrix_matrix.md",
-        "Jacobi/SOR" => "julia_jacobi.md",
+        "Jacobi" => "jacobi_method.md",
         "Solutions" => "sol_matrix_matrix.md"
     ]],
 )
