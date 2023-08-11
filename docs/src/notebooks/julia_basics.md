@@ -8,7 +8,7 @@ EditURL = "https://github.com/fverdugo/XM_40017/blob/main/docs/src/notebooks/jul
     <div class="admonition-body">
         <ul>
             <li>
-                Download this notebook and run it locally on your machine [recommended]. Click <a href="notebooks/julia_basics.ipynb" download>here</a>.
+                Download this notebook and run it locally on your machine [recommended]. Click <a href="julia_basics.ipynb" download>here</a>.
             </li>
             <li>
                 You can also run this notebook in the cloud using Binder. Click <a href="https://mybinder.org/v2/gh/fverdugo/XM_40017/gh-pages?filepath=dev/notebooks/julia_basics.ipynb">here</a>
@@ -20,7 +20,7 @@ EditURL = "https://github.com/fverdugo/XM_40017/blob/main/docs/src/notebooks/jul
 ```
 
 ```@raw html
-<iframe id="notebook" src="../notebook-output/julia_basics.html" style="width:100%"></iframe>
+<iframe id="notebook" src="../notebook-html/julia_basics.html" style="width:100%"></iframe>
 <script>
   document.addEventListener('DOMContentLoaded', function(){
     var myIframe = document.getElementById("notebook");

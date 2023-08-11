@@ -1,7 +1,5 @@
 build/
 site/
 docs/src/notebook-output
+docs/src/notebooks
 Manifest.toml
-*.md
-!index.md
-!getting_started_with_julia.md

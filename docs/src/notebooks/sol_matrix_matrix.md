@@ -8,7 +8,7 @@ EditURL = "https://github.com/fverdugo/XM_40017/blob/main/docs/src/notebooks/sol
     <div class="admonition-body">
         <ul>
             <li>
-                Download this notebook and run it locally on your machine [recommended]. Click <a href="notebooks/sol_matrix_matrix.ipynb" download>here</a>.
+                Download this notebook and run it locally on your machine [recommended]. Click <a href="sol_matrix_matrix.ipynb" download>here</a>.
             </li>
             <li>
                 You can also run this notebook in the cloud using Binder. Click <a href="https://mybinder.org/v2/gh/fverdugo/XM_40017/gh-pages?filepath=dev/notebooks/sol_matrix_matrix.ipynb">here</a>
@@ -20,7 +20,7 @@ EditURL = "https://github.com/fverdugo/XM_40017/blob/main/docs/src/notebooks/sol
 ```
 
 ```@raw html
-<iframe id="notebook" src="../notebook-output/sol_matrix_matrix.html" style="width:100%"></iframe>
+<iframe id="notebook" src="../notebook-html/sol_matrix_matrix.html" style="width:100%"></iframe>
 <script>
   document.addEventListener('DOMContentLoaded', function(){
     var myIframe = document.getElementById("notebook");
