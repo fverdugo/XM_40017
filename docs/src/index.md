@@ -8,7 +8,7 @@ Welcome to the interactive lecture notes of the [Programming Large-Scale Paralle
 ## What
 
 This page contains part of the course material of the Programming Large-Scale Parallel Systems course at VU Amsterdam.
-In this page, we provide several lecture notes in jupyter notebook format, which will help you to learn how to design, analyze, and program parallel algorithms on multi-node computing systems.
+We provide several lecture notes in jupyter notebook format, which will help you to learn how to design, analyze, and program parallel algorithms on multi-node computing systems.
 Further information about the course is found in the study guide
 ([click here](https://studiegids.vu.nl/EN/courses/2023-2024/XM_40017#/)) and our Canvas page (for registered students). 
 
@@ -41,9 +41,9 @@ julia> notebook()
 ```
 - These commands will open a jupyter in your web browser. Navigate in jupyter to the notebook file you have downloaded and open it.
 
-## Authorship
+## Authors
 
-This material was created by [Francesc Verdugo](https://github.com/fverdugo/) with the help of Gelieza Kötterheinrich. Part of the notebooks are based on the course slides by [Henri Bal](https://www.vuhpdc.net/henri-bal/).
+This material is created by [Francesc Verdugo](https://github.com/fverdugo/) with the help of Gelieza Kötterheinrich. Part of the notebooks are based on the course slides by [Henri Bal](https://www.vuhpdc.net/henri-bal/).
 
 
 ## License
