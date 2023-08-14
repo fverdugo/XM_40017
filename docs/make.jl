@@ -48,7 +48,9 @@ function convert_embedded_img_to_base64(notebook_path)
         doc = replace(doc, "attachment:$filename.png" => "data:image/png;base64,$base64")
     end
     filename = splitpath(notebook_path)[end]  
-    write("docs/src/notebooks/$filename", doc);
+    open("docs/src/notebooks/$filename","w") do f
+        write(f, doc)
+    end
 end
 
 # Write markdown file that includes notebook html
@@ -93,7 +95,9 @@ end
 
 
 # Loop over notebooks and generate html and markdown 
-notebook_files = glob("*.ipynb", "notebooks/")
+repo_root = joinpath(@__DIR__,"..") |> normpath
+mkpath(joinpath(repo_root,"docs","src","notebooks"))
+notebook_files = glob("*.ipynb", joinpath(repo_root,"notebooks/"))
 for filepath in notebook_files
     convert_embedded_img_to_base64(filepath)
     filename_with_ext = splitpath(filepath)[end]    
@@ -119,7 +123,7 @@ makedocs(;
         "Remote calls and remote channels" => "notebooks/julia_distributed.md",
         "Matrix Multiplication"=>"notebooks/matrix_matrix.md",
         "Jacobi" => "notebooks/jacobi_method.md",
-        "Solutions" => "notebooks/sol_matrix_matrix.md"
+        "Solutions" => "notebooks/solutions.md"
     ]],
 )
 
