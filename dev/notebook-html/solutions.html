@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>sol_matrix_matrix</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>solutions</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 	<script src='../assets/iframeResizer.contentWindow.min.js'></script>
 
 <style type="text/css">
@@ -7444,7 +7444,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Solution-to-Matrix-Multiplication-Exercises">Solution to Matrix Multiplication Exercises<a class="anchor-link" href="#Solution-to-Matrix-Multiplication-Exercises">¶</a></h1><h2 id="Implementation-of-Algorithm-3">Implementation of Algorithm 3<a class="anchor-link" href="#Implementation-of-Algorithm-3">¶</a></h2>
+<h1 id="Solutions-to-Notebook-Exercises">Solutions to Notebook Exercises<a class="anchor-link" href="#Solutions-to-Notebook-Exercises">¶</a></h1><h2 id="Matrix-Multiplication-:-Implementation-of-Algorithm-3">Matrix Multiplication : Implementation of Algorithm 3<a class="anchor-link" href="#Matrix-Multiplication-:-Implementation-of-Algorithm-3">¶</a></h2>
 </div>
 </div>
 </div>
@@ -7477,6 +7477,82 @@ a.anchor-link {
 <span class="w">        </span><span class="nd">@async</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="n">rows_w</span><span class="p">,</span><span class="o">:</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetch</span><span class="p">(</span><span class="n">ftr</span><span class="p">)</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="n">C</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2d9f4813">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Jacobi-Method-:-Exercise-1">Jacobi Method : Exercise 1<a class="anchor-link" href="#Jacobi-Method-:-Exercise-1">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cf3b1e72">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
+<span class="w">    </span><span class="n">MPI</span><span class="o">.</span><span class="n">Initialized</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
+<span class="w">    </span><span class="n">comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_dup</span><span class="p">(</span><span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span><span class="p">)</span>
+<span class="w">    </span><span class="n">nw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_size</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
+<span class="w">    </span><span class="n">iw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_rank</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">jacobi_mpi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">niters</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">mod</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">nw</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">            </span><span class="n">println</span><span class="p">(</span><span class="s">"n must be a multiple of nw"</span><span class="p">)</span>
+<span class="w">            </span><span class="n">MPI</span><span class="o">.</span><span class="n">Abort</span><span class="p">(</span><span class="n">comm</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="n">n_own</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">div</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">nw</span><span class="p">)</span>
+<span class="w">        </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n_own</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">        </span><span class="n">u</span><span class="p">[</span><span class="k">end</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">u_new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">niters</span>
+<span class="w">            </span><span class="n">reqs_snd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Request</span><span class="p">[]</span>
+<span class="w">            </span><span class="n">reqs_rcv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Request</span><span class="p">[]</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">iw</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">                </span><span class="n">neig_rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">iw</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+<span class="w">                </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Isend</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="mi">2</span><span class="o">:</span><span class="mi">2</span><span class="p">),</span><span class="n">comm</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="n">neig_rank</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">                </span><span class="n">push!</span><span class="p">(</span><span class="n">reqs_snd</span><span class="p">,</span><span class="n">req</span><span class="p">)</span>
+<span class="w">                </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Irecv!</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="p">),</span><span class="n">comm</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="n">neig_rank</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">                </span><span class="n">push!</span><span class="p">(</span><span class="n">reqs_rcv</span><span class="p">,</span><span class="n">req</span><span class="p">)</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">iw</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">nw</span>
+<span class="w">                </span><span class="n">neig_rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">iw</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+<span class="w">                </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_own</span><span class="o">-</span><span class="mi">1</span>
+<span class="w">                </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_own</span>
+<span class="w">                </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Isend</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">s</span><span class="o">:</span><span class="n">s</span><span class="p">),</span><span class="n">comm</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="n">neig_rank</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">                </span><span class="n">push!</span><span class="p">(</span><span class="n">reqs_snd</span><span class="p">,</span><span class="n">req</span><span class="p">)</span>
+<span class="w">                </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Irecv!</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">r</span><span class="o">:</span><span class="n">r</span><span class="p">),</span><span class="n">comm</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="n">neig_rank</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">                </span><span class="n">push!</span><span class="p">(</span><span class="n">reqs_rcv</span><span class="p">,</span><span class="n">req</span><span class="p">)</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">3</span><span class="o">:</span><span class="n">n_own</span>
+<span class="w">                </span><span class="n">u_new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">            </span><span class="n">MPI</span><span class="o">.</span><span class="n">Waitall</span><span class="p">(</span><span class="n">reqs_rcv</span><span class="p">)</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">n_own</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">                </span><span class="n">u_new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">            </span><span class="n">MPI</span><span class="o">.</span><span class="n">Waitall</span><span class="p">(</span><span class="n">reqs_snd</span><span class="p">)</span>
+<span class="w">            </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">u_new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u_new</span><span class="p">,</span><span class="w"> </span><span class="n">u</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="n">u</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">niters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">    </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load</span><span class="o">*</span><span class="n">nw</span>
+<span class="w">    </span><span class="n">jacobi_mpi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">niters</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
