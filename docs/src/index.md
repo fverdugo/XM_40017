@@ -13,7 +13,7 @@ Further information about the course is found in the study guide
 ([click here](https://studiegids.vu.nl/EN/courses/2023-2024/XM_40017#/)) and our Canvas page (for registered students). 
 
 !!! note
-    This page contains only part of the course material. The rest is available on Canvas. In particular, **the lecture notes in this public webpage do not fully cover all topics in the final exam**.
+    This page contains only a part of the course material. The rest is available on Canvas. In particular, **the lecture notes in this public webpage do not fully cover all topics in the final exam**.
 
 ## How to use this page
 
@@ -43,12 +43,12 @@ julia> notebook()
 
 ## Authors
 
-This material is created by [Francesc Verdugo](https://github.com/fverdugo/) with the help of Gelieza Kötterheinrich. Part of the notebooks are based on the course slides by [Henri Bal](https://www.vuhpdc.net/henri-bal/).
+This material is created by [Francesc Verdugo](https://github.com/fverdugo/) with the help of [Gelieza Kötterheinrich](https://www.linkedin.com/in/gelieza/). Part of the notebooks are based on the course slides by [Henri Bal](https://www.vuhpdc.net/henri-bal/).
 
 
 ## License
 
-All material in this page that is original to this course may be used under a [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
+All material on this page that is original to this course may be used under a [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
 
 
 ## Acknowledgment

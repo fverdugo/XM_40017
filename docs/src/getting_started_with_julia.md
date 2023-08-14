@@ -3,10 +3,10 @@
 
 ## Introduction
 
-The programming of this course will be done using the [Julia programming language](https://julialang.org). Thus, we start by explaining how to get up and running with Julia. After learning this page, you will be able to:
+The programming of this course will be done using the [Julia programming language](https://julialang.org). Thus, we start by explaining how to get up and running with Julia. After studying this page, you will be able to:
 
-- Use the Julia REPL;
-- Run serial and parallel code;
+- Use the Julia REPL,
+- Run serial and parallel code,
 - Install and manage Julia packages.
 
 ## Why Julia?
@@ -62,7 +62,7 @@ Try to run it in the REPL.
 
 ### Help mode
 
-Curious about what function `println` does? Enter into *help* mode to look into the documentation. This is done by typing a question mark (`?`) into the inut field:
+Curious about what the function `println` does? Enter into *help* mode to look into the documentation. This is done by typing a question mark (`?`) into the input field:
 
 ```julia
 julia> ?
@@ -107,15 +107,16 @@ Real-world Julia programs are not typed in the REPL in practice. They are writte
 julia> include("hello.jl")
 ```
 
-\warn{ Make sure that the file `"hello.jl"` is located in the current working directory of your Julia session. You can query the current directory with function `pwd()`. You can change to another directory with function `cd()` if needed.  Also, make sure that the file extension is `.jl`.}
+!!! warning
+    Make sure that the file `"hello.jl"` is located in the current working directory of your Julia session. You can query the current directory with function `pwd()`. You can change to another directory with function `cd()` if needed.  Also, make sure that the file extension is `.jl`.
 
-The recommended way of running Julia code is using the REPL as we did. But it is also possible to run code directly from the system command line. To this end, open a terminal and call Julia followed buy the path to the file containing the code you want to execute.
+The recommended way of running Julia code is using the REPL as we did. But it is also possible to run code directly from the system command line. To this end, open a terminal and call Julia followed by the path to the file containing the code you want to execute.
 
 ```
 $ julia hello.jl
 ```
 
-Previous line assumes that you have Julia properly installed in the system and that is usable from the terminal. In UNIX systems (Linux and Mac), the Julia binary needs to be in one of the directories listed in the `PATH` environment variable. To check that Julia is properly installed, you can use
+The previous line assumes that you have Julia properly installed in the system and that it's usable from the terminal. In UNIX systems (Linux and Mac), the Julia binary needs to be in one of the directories listed in the `PATH` environment variable. To check that Julia is properly installed, you can use
 
 ```
 $ julia --version
@@ -133,7 +134,7 @@ If this runs without error and you see a version number, you are good to go!
 ### Running parallel code
 
 
-Since we are in a parallel computing course, let's run a parallel "hello world" example in Julia. Open a Julia REPL and write
+Since we are in a parallel computing course, let's run a parallel "Hello world" example in Julia. Open a Julia REPL and write
 
 ```julia
 julia> using Distributed
@@ -142,12 +143,12 @@ julia> @everywhere println("Hello, world! I am proc $(myid()) from $(nprocs())")
 
 Here, we are using the `Distributed` package, which is part of the Julia standard library that provides distributed memory parallel support. The code prints the process id and the number of processes in the current Julia session.
 
-You will provably only see output from 1 proces. We need to add more processes to run the example in parallel. This is done with the `addprocs` function.
+You will probably only see output from 1 process. We need to add more processes to run the example in parallel. This is done with the `addprocs` function.
 
 ```julia
 julia> addprocs(3)
 ```
-We have added 3 new processes, plus the old one, we have 4 processes. Run the code again.
+We have added 3 new processes. Plus the old one, we have 4 processes. Run the code again.
 
 ```julia
 julia> @everywhere println("Hello, world! I am proc $(myid()) from $(nprocs())")
@@ -170,7 +171,7 @@ You should get output from 4 processes as before.
 
 ### Installing packages
 
-One of the most useful features of Julia is its package manager. It allows one to install Julia packages in a straightforward and platform independent way. To illustrate this, let us consider the following parallel "Hello world" example. This example uses the message passing interface (MPI). We will learn more about MPI later in the course.
+One of the most useful features of Julia is its package manager. It allows one to install Julia packages in a straightforward and platform independent way. To illustrate this, let us consider the following parallel "Hello world" example. This example uses the Message Passing Interface (MPI). We will learn more about MPI later in the course.
 
 
 Copy the following block of code into a new file named `"hello_mpi.jl"`
@@ -192,13 +193,13 @@ Now, run the file from the REPL
 julia> incude("hello_mpi.jl")
 ```
 
-It provably didn't work, right? Read the error message and note that the MPI package needs to be installed to run this code.
+It probably didn't work, right? Read the error message and note that the MPI package needs to be installed to run this code.
 
-To install a package, we need to enter *package* mode. Remember that we entered into help mode by typing `?`. Package mode is activated by typing `]`
+To install a package, we need to enter *package* mode. Remember that we entered into help mode by typing `?`. Package mode is activated by typing `]` : 
 ```julia
 julia> ]
 ```
-At this point, the promp should have changed to `(@v1.8) pkg>` indicating that we are in package mode. The text between parenthesis indicates which is the active *project*, i.e., where packages are going to be installed. In this case, we are working with the global project associated with our Julia installation (which is Julia 1.8 in this example, but it can be another version in your case).
+At this point, the prompt should have changed to `(@v1.8) pkg>` indicating that we are in package mode. The text between the parentheses indicates which is the active *project*, i.e., where packages are going to be installed. In this case, we are working with the global project associated with our Julia installation (which is Julia 1.8 in this example, but it can be another version in your case).
 
 To install the MPI package, type
 ```julia
@@ -207,7 +208,7 @@ To install the MPI package, type
 Congrats, you have installed MPI!
 
 !!! note
-    Many Julia package names end with `.jl`. This is just a way of signaling that a package is written in Julia. When using such packages, the `.jl` needs to be ommited. In this case, we have isntalled the `MPI.jl` package even though we have only typed `MPI` in the REPL.
+    Many Julia package names end with `.jl`. This is just a way of signaling that a package is written in Julia. When using such packages, the `.jl` needs to be omitted. In this case, we have isntalled the `MPI.jl` package even though we have only typed `MPI` in the REPL.
 
 !!! note
     The package you have installed it is the Julia interface to MPI, called  `MPI.jl`. Note that it is not a MPI library by itself. It is just a thin wrapper between MPI and Julia. To use this interface, you need an actual MPI library installed in your system such as OpenMPI or MPICH. Julia downloads and installs a MPI library for you, but it is also possible to use a MPI library already available in your system. This is useful, e.g., when running on HPC clusters. See the documentation of `MPI.jl` for further details.
@@ -218,7 +219,7 @@ To check that the package was installed properly, exit package mode by pressing 
 julia> incude("hello_mpi.jl")
 ```
 
-Now, it should work, but you provably get output from a single MPI rank only.
+Now, it should work, but you probably get output from a single MPI rank only.
 
 ### Running MPI code
 
@@ -226,7 +227,7 @@ To run MPI applications in parallel, you need a launcher like `mpiexec`. MPI cod
 ```
 $ mpiexec -np 4 julia hello_mpi.jl
 ```
-But it will provably don't work since the version of `mpiexec` needs to match with the MPI version we are using from Julia. You can find the path to the `mpiexec` binary you need to use with these commands
+But it will probably not work since the version of `mpiexec` needs to match with the MPI version we are using from Julia. You can find the path to the `mpiexec` binary you need to use with these commands
 
 ```julia
 julia> using MPI
@@ -257,7 +258,7 @@ A project is simply a folder in the hard disk. To use a particular folder as you
 ```julia
 (@v1.8) pkg> activate .
 ```
- Previous command will activate the current working directory. Note that the dot `.` is indeed the path to the current folder.
+ The previous command will activate the current working directory. Note that the dot `.` is indeed the path to the current folder.
 
 The prompt has changed to `(lessons) pkg>` indicating that we are in the project within the `lessons` folder. The particular folder name can be different in your case.
 
@@ -367,14 +368,14 @@ In some situations it is required to use package commands in Julia code, e.g., t
 julia> using Pkg
 julia> Pkg.status()
 ```
-is equivalent to call `status` in package mode.
+is equivalent to calling `status` in package mode.
 ```julia
 (@v1.8) pkg> status
 ```
 
 ## Conclusion
 
-We have learned the basics of how to work with Julia. If you want to further dig into the topics we have covered here, you can take a look and the following links
+We have learned the basics of how to work with Julia. If you want to further dig into the topics we have covered here, you can take a look at the following links:
 
 - [Julia Manual](https://docs.julialang.org/en/v1/manual/getting-started/)
 - [Package manager](https://pkgdocs.julialang.org/v1/getting-started/)
