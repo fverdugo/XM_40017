@@ -1,4 +1,3 @@
-
 # Getting started
 
 
@@ -379,6 +378,5 @@ We have learned the basics of how to work with Julia. If you want to further dig
 
 - [Julia Manual](https://docs.julialang.org/en/v1/manual/getting-started/)
 - [Package manager](https://pkgdocs.julialang.org/v1/getting-started/)
-
 
 
