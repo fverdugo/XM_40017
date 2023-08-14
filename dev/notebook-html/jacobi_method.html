@@ -7481,7 +7481,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Printf</span>
@@ -7496,6 +7496,8 @@ a.anchor-link {
 <span class="n">gauss_seidel_1_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="s">"c"</span><span class="p">)</span>
 <span class="n">jacobi_1_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"d"</span><span class="p">)</span>
 <span class="n">jacobi_2_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"b"</span><span class="p">)</span>
+<span class="n">jacobi_3_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"c"</span><span class="p">)</span>
+<span class="n">jacobi_4_check</span><span class="p">(</span><span class="n">anwswer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"d"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7506,9 +7508,9 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>jacobi_2_check (generic function with 1 method)</pre>
+<pre>jacobi_4_check (generic function with 1 method)</pre>
 </div>
 </div>
 </div>
@@ -7520,7 +7522,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="The-Jacobi-method-for-the-Laplace-equation">The Jacobi method for the Laplace equation<a class="anchor-link" href="#The-Jacobi-method-for-the-Laplace-equation">¶</a></h2><p>The <a href="https://en.wikipedia.org/wiki/Jacobi_method">Jacobi method</a> is a numerical tool to solve systems of linear algebraic equations. One of the main applications of the Jacobi method is to solve boundary value problems (BVPs). I.e., given the values at the boundary (of a grid), the Jacoby method will find the interior values that fulfill a certain equation.</p>
+<h2 id="The-Jacobi-method-for-the-Laplace-equation">The Jacobi method for the Laplace equation<a class="anchor-link" href="#The-Jacobi-method-for-the-Laplace-equation">¶</a></h2><p>The <a href="https://en.wikipedia.org/wiki/Jacobi_method">Jacobi method</a> is a numerical tool to solve systems of linear algebraic equations. One of the main applications of the method is to solve boundary value problems (BVPs). I.e., given the values at the boundary (of a grid), the Jacobi method will find the interior values that fulfill a certain equation.</p>
 </div>
 </div>
 </div>
@@ -7651,7 +7653,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Where-do-we-can-exploit-parallelism?">Where do we can exploit parallelism?<a class="anchor-link" href="#Where-do-we-can-exploit-parallelism?">¶</a></h3><p>Look at the two nested loops in the sequential implementation:</p>
+<h3 id="Where-can-we-exploit-parallelism?">Where can we exploit parallelism?<a class="anchor-link" href="#Where-can-we-exploit-parallelism?">¶</a></h3><p>Look at the two nested loops in the sequential implementation:</p>
 <div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">nsteps</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 <span class="w">        </span><span class="n">u_new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
@@ -7661,7 +7663,7 @@ a.anchor-link {
 </pre></div>
 <ul>
 <li>The outer loop cannot be parallelized. The value of <code>u</code> at step <code>t+1</code> depends on the value at the previous step <code>t</code>.</li>
-<li>The inner loop can be parallelized</li>
+<li>The inner loop can be parallelized.</li>
 </ul>
 </div>
 </div>
@@ -7749,30 +7751,17 @@ d) The inner, but not the outer</code></pre>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=4edad93f">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4edad93f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-julia"><pre><span></span><span class="n">answer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"x"</span><span class="w"> </span><span class="c"># replace x with a, b, c or d</span>
 <span class="n">gauss_seidel_1_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>It's not correct. Keep trying! 💪
-</pre>
 </div>
 </div>
 </div>
@@ -7868,30 +7857,17 @@ d) Communication: O(1), computation: O(N/P)</code></pre>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3a03fc4c">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3a03fc4c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-julia"><pre><span></span><span class="n">answer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"x"</span><span class="w"> </span><span class="c"># replace x with a, b, c or d</span>
 <span class="n">jacobi_1_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>It's not correct. Keep trying! 💪
-</pre>
 </div>
 </div>
 </div>
@@ -7904,7 +7880,7 @@ d) Communication: O(1), computation: O(N/P)</code></pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">¶</a></h2><p>We consider the implementation using MPI. The programming model of MPI is generally better suited for data-parallel algorithms like this one than the task-based model provided by Distributed.jl. In any case, one can also implement it using Distributed, but it requires some extra effort to setup remote channels right for the communication between neighbor processes.</p>
-<p>Take a look at the implementation below and try to understand it. Note that we have used MPIClustermanagers and Distributed just to run the MPI code on the notebook. When running it on a cluster MPIClustermanagers and Distributed are not needed.</p>
+<p>Take a look at the implementation below and try to understand it. Note that we have used MPIClustermanagers and Distributed just to run the MPI code on the notebook. When running it on a cluster, MPIClustermanagers and Distributed are not needed.</p>
 </div>
 </div>
 </div>
@@ -7930,7 +7906,7 @@ d) Communication: O(1), computation: O(N/P)</code></pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">MPIClusterManagers</span>
+<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">MPIClusterManagers</span><span class="w"> </span>
 <span class="k">using</span><span class="w"> </span><span class="n">Distributed</span>
 </pre></div>
 </div>
@@ -7955,6 +7931,22 @@ d) Communication: O(1), computation: O(N/P)</code></pre>
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a0923606">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="c"># Test cell, remove me</span>
+<span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
+<span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="o">:</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=68851107">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -7963,9 +7955,8 @@ d) Communication: O(1), computation: O(N/P)</code></pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span><span class="w"> </span><span class="k">begin</span>
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@mpi_do</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="k">begin</span>
 <span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
-<span class="w">    </span><span class="n">MPI</span><span class="o">.</span><span class="n">Initialized</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
 <span class="w">    </span><span class="n">comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_dup</span><span class="p">(</span><span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span><span class="p">)</span>
 <span class="w">    </span><span class="n">nw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_size</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
 <span class="w">    </span><span class="n">iw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_rank</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
@@ -7981,6 +7972,7 @@ d) Communication: O(1), computation: O(N/P)</code></pre>
 <span class="w">        </span><span class="n">u_new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">niters</span>
 <span class="w">            </span><span class="n">reqs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Request</span><span class="p">[]</span>
+<span class="w">            </span><span class="c"># Exchange cell values with neighbors</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">iw</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">                </span><span class="n">neig_rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">iw</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
 <span class="w">                </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Isend</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="mi">2</span><span class="o">:</span><span class="mi">2</span><span class="p">),</span><span class="n">comm</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="n">neig_rank</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -7990,8 +7982,8 @@ d) Communication: O(1), computation: O(N/P)</code></pre>
 <span class="w">            </span><span class="k">end</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">iw</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">nw</span>
 <span class="w">                </span><span class="n">neig_rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">iw</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
-<span class="w">                </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_own</span><span class="o">-</span><span class="mi">1</span>
-<span class="w">                </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_own</span>
+<span class="w">                </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_own</span><span class="o">+</span><span class="mi">1</span>
+<span class="w">                </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_own</span><span class="o">+</span><span class="mi">2</span>
 <span class="w">                </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Isend</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">s</span><span class="o">:</span><span class="n">s</span><span class="p">),</span><span class="n">comm</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="n">neig_rank</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="w">                </span><span class="n">push!</span><span class="p">(</span><span class="n">reqs</span><span class="p">,</span><span class="n">req</span><span class="p">)</span>
 <span class="w">                </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Irecv!</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">r</span><span class="o">:</span><span class="n">r</span><span class="p">),</span><span class="n">comm</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="n">neig_rank</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -8005,6 +7997,14 @@ d) Communication: O(1), computation: O(N/P)</code></pre>
 <span class="w">        </span><span class="k">end</span>
 <span class="w">        </span><span class="n">u</span>
 <span class="w">        </span><span class="nd">@show</span><span class="w"> </span><span class="n">u</span>
+<span class="w">        </span><span class="c"># Gather results in root process</span>
+<span class="w">        </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">        </span><span class="n">results</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">MPI</span><span class="o">.</span><span class="n">Gather!</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="mi">2</span><span class="o">:</span><span class="n">n_own</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">view</span><span class="p">(</span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">root</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">iw</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="nd">@show</span><span class="w"> </span><span class="n">results</span>
+<span class="w">        </span><span class="k">end</span><span class="w">            </span>
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="n">niters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
 <span class="w">    </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
@@ -8043,7 +8043,70 @@ d) 4</code></pre>
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-julia"><pre><span></span><span class="n">answer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"x"</span><span class="w"> </span><span class="c"># replace x with a, b, c or d</span>
 <span class="n">jacobi_2_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
-<span class="c"># TODO: think of more questions</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=075dd6d8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<div class="alert alert-block alert-success">
+<b>Question:</b>  After the end of the for-loop (line 43), ...
+</div>
+<pre><code>a) each worker holds the complete solution.
+b) the root process holds the solution. 
+c) the ghost cells contain redundant values. 
+d) all ghost cells contain the initial values -1 and 1. </code></pre>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c3b58002">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">answer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"x"</span><span class="w"> </span><span class="c"># replace x with a, b, c or d</span>
+<span class="n">jacobi_3_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4537661d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<div class="alert alert-block alert-success">
+<b>Question:</b>  In line 35 of the code, we wait for all receive and send requests. Is it possible to instead wait for just the receive requests?
+</div>
+<pre><code>a) No, because the send buffer might be overwritten if we don't wait for send requests.
+b) No, because MPI does not allow an asynchronous send without a Wait().
+c) Yes, because each send has a matching receive, so all requests are done when the receive requests return.  
+d) Yes, because there are no writes to the send buffer in this iteration.</code></pre>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e16ea5eb">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">answer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"x"</span><span class="w"> </span><span class="c"># replace x with a, b, c or d.</span>
+<span class="n">jacobi_4_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8341,9 +8404,8 @@ d) 4</code></pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span><span class="w"> </span><span class="k">begin</span>
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@mpi_do</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="k">begin</span>
 <span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
-<span class="w">    </span><span class="n">MPI</span><span class="o">.</span><span class="n">Initialized</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
 <span class="w">    </span><span class="n">comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_dup</span><span class="p">(</span><span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span><span class="p">)</span>
 <span class="w">    </span><span class="n">nw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_size</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
 <span class="w">    </span><span class="n">iw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_rank</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
@@ -8359,6 +8421,7 @@ d) 4</code></pre>
 <span class="w">        </span><span class="n">u_new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">niters</span>
 <span class="w">            </span><span class="n">reqs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Request</span><span class="p">[]</span>
+<span class="w">            </span><span class="c"># Exchange cell values with neighbors</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">iw</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">                </span><span class="n">neig_rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">iw</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
 <span class="w">                </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Isend</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="mi">2</span><span class="o">:</span><span class="mi">2</span><span class="p">),</span><span class="n">comm</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="n">neig_rank</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -8368,8 +8431,8 @@ d) 4</code></pre>
 <span class="w">            </span><span class="k">end</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">iw</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">nw</span>
 <span class="w">                </span><span class="n">neig_rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">iw</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
-<span class="w">                </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_own</span><span class="o">-</span><span class="mi">1</span>
-<span class="w">                </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_own</span>
+<span class="w">                </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_own</span><span class="o">+</span><span class="mi">1</span>
+<span class="w">                </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_own</span><span class="o">+</span><span class="mi">2</span>
 <span class="w">                </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Isend</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">s</span><span class="o">:</span><span class="n">s</span><span class="p">),</span><span class="n">comm</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="n">neig_rank</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="w">                </span><span class="n">push!</span><span class="p">(</span><span class="n">reqs</span><span class="p">,</span><span class="n">req</span><span class="p">)</span>
 <span class="w">                </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Irecv!</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">r</span><span class="o">:</span><span class="n">r</span><span class="p">),</span><span class="n">comm</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="n">neig_rank</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -8383,85 +8446,14 @@ d) 4</code></pre>
 <span class="w">        </span><span class="k">end</span>
 <span class="w">        </span><span class="n">u</span>
 <span class="w">        </span><span class="nd">@show</span><span class="w"> </span><span class="n">u</span>
-<span class="w">    </span><span class="k">end</span>
-<span class="w">    </span><span class="n">niters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
-<span class="w">    </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
-<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load</span><span class="o">*</span><span class="n">nw</span>
-<span class="w">    </span><span class="n">jacobi_mpi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">niters</span><span class="p">)</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f302cce2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="c">## TODO move the following solution to its appropiate place:</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4fa7fad3">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span><span class="w"> </span><span class="k">begin</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
-<span class="w">    </span><span class="n">MPI</span><span class="o">.</span><span class="n">Initialized</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
-<span class="w">    </span><span class="n">comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_dup</span><span class="p">(</span><span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span><span class="p">)</span>
-<span class="w">    </span><span class="n">nw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_size</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
-<span class="w">    </span><span class="n">iw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_rank</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">jacobi_mpi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">niters</span><span class="p">)</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">mod</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">nw</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">            </span><span class="n">println</span><span class="p">(</span><span class="s">"n must be a multiple of nw"</span><span class="p">)</span>
-<span class="w">            </span><span class="n">MPI</span><span class="o">.</span><span class="n">Abort</span><span class="p">(</span><span class="n">comm</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="w">        </span><span class="k">end</span>
-<span class="w">        </span><span class="n">n_own</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">div</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">nw</span><span class="p">)</span>
-<span class="w">        </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n_own</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
-<span class="w">        </span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
-<span class="w">        </span><span class="n">u</span><span class="p">[</span><span class="k">end</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">        </span><span class="n">u_new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">niters</span>
-<span class="w">            </span><span class="n">reqs_snd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Request</span><span class="p">[]</span>
-<span class="w">            </span><span class="n">reqs_rcv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Request</span><span class="p">[]</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">iw</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">                </span><span class="n">neig_rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">iw</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
-<span class="w">                </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Isend</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="mi">2</span><span class="o">:</span><span class="mi">2</span><span class="p">),</span><span class="n">comm</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="n">neig_rank</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="w">                </span><span class="n">push!</span><span class="p">(</span><span class="n">reqs_snd</span><span class="p">,</span><span class="n">req</span><span class="p">)</span>
-<span class="w">                </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Irecv!</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span><span class="p">),</span><span class="n">comm</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="n">neig_rank</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="w">                </span><span class="n">push!</span><span class="p">(</span><span class="n">reqs_rcv</span><span class="p">,</span><span class="n">req</span><span class="p">)</span>
-<span class="w">            </span><span class="k">end</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">iw</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">nw</span>
-<span class="w">                </span><span class="n">neig_rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">iw</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
-<span class="w">                </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_own</span><span class="o">-</span><span class="mi">1</span>
-<span class="w">                </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_own</span>
-<span class="w">                </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Isend</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">s</span><span class="o">:</span><span class="n">s</span><span class="p">),</span><span class="n">comm</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="n">neig_rank</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="w">                </span><span class="n">push!</span><span class="p">(</span><span class="n">reqs_snd</span><span class="p">,</span><span class="n">req</span><span class="p">)</span>
-<span class="w">                </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Irecv!</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">r</span><span class="o">:</span><span class="n">r</span><span class="p">),</span><span class="n">comm</span><span class="p">,</span><span class="n">source</span><span class="o">=</span><span class="n">neig_rank</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="w">                </span><span class="n">push!</span><span class="p">(</span><span class="n">reqs_rcv</span><span class="p">,</span><span class="n">req</span><span class="p">)</span>
-<span class="w">            </span><span class="k">end</span>
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">3</span><span class="o">:</span><span class="n">n_own</span>
-<span class="w">                </span><span class="n">u_new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-<span class="w">            </span><span class="k">end</span>
-<span class="w">            </span><span class="n">MPI</span><span class="o">.</span><span class="n">Waitall</span><span class="p">(</span><span class="n">reqs_rcv</span><span class="p">)</span>
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">n_own</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="w">                </span><span class="n">u_new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
-<span class="w">            </span><span class="k">end</span>
-<span class="w">            </span><span class="n">MPI</span><span class="o">.</span><span class="n">Waitall</span><span class="p">(</span><span class="n">reqs_snd</span><span class="p">)</span>
-<span class="w">            </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">u_new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u_new</span><span class="p">,</span><span class="w"> </span><span class="n">u</span>
-<span class="w">        </span><span class="k">end</span>
-<span class="w">        </span><span class="n">u</span>
+<span class="w">        </span><span class="c"># Gather results in root process</span>
+<span class="w">        </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">        </span><span class="n">results</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">MPI</span><span class="o">.</span><span class="n">Gather!</span><span class="p">(</span><span class="n">view</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="mi">2</span><span class="o">:</span><span class="n">n_own</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">view</span><span class="p">(</span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">root</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">iw</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="nd">@show</span><span class="w"> </span><span class="n">results</span>
+<span class="w">        </span><span class="k">end</span><span class="w">            </span>
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="n">niters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
 <span class="w">    </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
