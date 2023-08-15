@@ -1,5 +1,5 @@
 build/
 site/
-docs/src/notebook-output/
-docs/src/notebooks/
+src/notebook-output/
+src/notebooks/
 Manifest.toml
