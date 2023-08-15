@@ -7620,12 +7620,12 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=03f0dd8e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=03f0dd8e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-julia"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">tsp_dist_impl</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">,</span><span class="n">min_distance</span><span class="p">,</span><span class="n">max_hops</span><span class="p">,</span><span class="n">jobs_chnl</span><span class="p">,</span><span class="n">ftr_result</span><span class="p">)</span>
@@ -7654,7 +7654,7 @@ a.anchor-link {
 <span class="w">            </span><span class="k">end</span>
 <span class="w">        </span><span class="k">end</span><span class="w"> </span>
 <span class="w">    </span><span class="k">else</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">jobs_channel</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nb">nothing</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">jobs_chnl</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nb">nothing</span>
 <span class="w">            </span><span class="n">put!</span><span class="p">(</span><span class="n">jobs_chnl</span><span class="p">,(;</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">))</span>
 <span class="w">        </span><span class="k">end</span>
 <span class="w">    </span><span class="k">end</span>
@@ -7674,7 +7674,7 @@ a.anchor-link {
 <span class="w">    </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@async</span><span class="w"> </span><span class="k">begin</span>
 <span class="w">        </span><span class="n">tsp_dist_impl</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">,</span><span class="n">min_distance</span><span class="p">,</span><span class="n">max_hops</span><span class="p">,</span><span class="n">jobs_chnl</span><span class="p">,</span><span class="nb">nothing</span><span class="p">)</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span>
-<span class="w">            </span><span class="n">put!</span><span class="p">(</span><span class="n">job_chnl</span><span class="p">,</span><span class="nb">nothing</span><span class="p">)</span>
+<span class="w">            </span><span class="n">put!</span><span class="p">(</span><span class="n">jobs_chnl</span><span class="p">,</span><span class="nb">nothing</span><span class="p">)</span>
 <span class="w">        </span><span class="k">end</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="nd">@sync</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span>
@@ -7686,18 +7686,31 @@ a.anchor-link {
 <span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">nothing</span>
 <span class="w">                    </span><span class="k">break</span>
 <span class="w">                </span><span class="k">end</span>
-<span class="w">                </span><span class="n">hobs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="o">.</span><span class="n">hobs</span>
+<span class="w">                </span><span class="n">hops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="o">.</span><span class="n">hops</span>
 <span class="w">                </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="o">.</span><span class="n">path</span>
 <span class="w">                </span><span class="n">current_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="o">.</span><span class="n">current_distance</span>
-<span class="w">                </span><span class="n">tsp_dist_impl</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">,</span><span class="n">min_distance</span><span class="p">,</span><span class="n">max_hops</span><span class="p">,</span><span class="n">jobs_chnl</span><span class="p">,</span><span class="n">ftr_result</span><span class="p">)</span>
+<span class="w">                </span><span class="n">tsp_dist_impl</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">,</span><span class="n">min_distance</span><span class="p">,</span><span class="n">max_hops</span><span class="p">,</span><span class="n">jobs_channel</span><span class="p">,</span><span class="n">ftr_result</span><span class="p">)</span>
 <span class="w">            </span><span class="k">end</span>
 <span class="w">        </span><span class="k">end</span>
 <span class="w">    </span><span class="k">end</span><span class="w"> </span>
-<span class="w">    </span><span class="p">(;</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="n">min_distance</span><span class="p">)</span>
+<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetch</span><span class="p">(</span><span class="n">ftr_result</span><span class="p">)</span>
+<span class="w">    </span><span class="p">(;</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">min_distance_ref</span><span class="p">[])</span>
 <span class="k">end</span>
 <span class="n">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
 <span class="n">tsp_dist</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">city</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>(path = [1, 4, 5, 2, 3, 6], distance = 222)</pre>
 </div>
 </div>
 </div>
