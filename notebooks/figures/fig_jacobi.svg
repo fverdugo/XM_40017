@@ -21,6 +21,21 @@
   <defs
      id="defs2">
     <marker
+       style="overflow:visible"
+       id="marker8759"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path8757"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
        inkscape:stockid="Arrow2Lstart"
        orient="auto"
        refY="0.0"
@@ -1884,6 +1899,22 @@
          id="path2090-5-0-5"
          inkscape:connector-curvature="0" />
     </marker>
+    <marker
+       inkscape:isstock="true"
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker5293-0"
+       style="overflow:visible"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5291-6"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6)" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1892,9 +1923,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="3903.3815"
-     inkscape:cy="944.86619"
+     inkscape:zoom="1.979899"
+     inkscape:cx="-176.2183"
+     inkscape:cy="1109.0146"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -22137,7 +22168,7 @@
            height="170.21071"
            x="-950.04846"
            y="-128.19203" /></flowRegion><flowPara
-         id="flowPara11816"></flowPara></flowRoot>    <text
+         id="flowPara11816" /></flowRoot>    <text
        y="-117.30341"
        x="-39.056309"
        xml:space="preserve"
@@ -45358,5 +45389,363 @@
            height="71.290848"
            width="310.00623"
            id="rect23851-7" /></flowRegion><flowPara
-         id="flowPara23855-8">Data used</flowPara></flowRoot>  </g>
+         id="flowPara23855-8">Data used</flowPara></flowRoot>    <g
+       id="g9327"
+       inkscape:export-filename="/home/francesc/Downloads/fig22.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200">
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-329.85867"
+         x="210.62471"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect833-2-5-3"
+         style="fill:none;fill-opacity:0.21383099;stroke:#999999;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-329.85867"
+         x="294.91516"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect847-5-5-7-6"
+         style="fill:none;fill-opacity:0.21383099;stroke:#999999;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-315.91833"
+         x="210.62471"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect1359-2-7"
+         style="fill:none;fill-opacity:0.21383099;stroke:#999999;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-315.91833"
+         x="294.91516"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect1385-7-5"
+         style="fill:none;fill-opacity:0.21383099;stroke:#999999;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-329.85867"
+         x="215.73787"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect835-6-4-35"
+         style="fill:none;fill-opacity:0.21383099;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-329.85867"
+         x="220.851"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect837-1-4-62"
+         style="fill:none;fill-opacity:0.21383099;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-329.85867"
+         x="225.96416"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect839-8-0-9"
+         style="fill:#0000ff;fill-opacity:0.21176471;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-329.85867"
+         x="245.1002"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect841-7-5-1"
+         style="fill:#0000ff;fill-opacity:0.21176471;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-329.85867"
+         x="250.21336"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect843-9-6-2"
+         style="fill:#0000ff;fill-opacity:0.21176471;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-329.85867"
+         x="255.32649"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect845-2-0-7"
+         style="fill:#0000ff;fill-opacity:0.21383099;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-329.85867"
+         x="260.43967"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect847-0-0-0"
+         style="fill:#0000ff;fill-opacity:0.21383099;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-329.85867"
+         x="279.57574"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect841-3-2-4-9"
+         style="fill:#0000ff;fill-opacity:0.21383099;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-329.85867"
+         x="284.6889"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect843-6-3-0-3"
+         style="fill:none;fill-opacity:0.21383099;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-329.85867"
+         x="289.80206"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect845-7-7-3-6"
+         style="fill:none;fill-opacity:0.21383099;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-315.91833"
+         x="215.73787"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect1361-2-0"
+         style="fill:none;fill-opacity:0.21383099;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-315.91833"
+         x="220.851"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect1363-0-6"
+         style="fill:none;fill-opacity:0.21383099;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-315.91833"
+         x="225.96416"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect1365-8-2"
+         style="fill:none;fill-opacity:0.21383099;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-315.91833"
+         x="245.1002"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect1369-6-6"
+         style="fill:#0000ff;fill-opacity:0.21176471;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-315.91833"
+         x="250.21336"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect1371-9-1"
+         style="fill:#0000ff;fill-opacity:0.21176471;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-315.91833"
+         x="255.32649"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect1373-9-8"
+         style="fill:#0000ff;fill-opacity:0.21176471;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-315.91833"
+         x="260.43967"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect1375-2-7"
+         style="fill:#0000ff;fill-opacity:0.21383099;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-315.91833"
+         x="279.57574"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect1379-3-92"
+         style="fill:none;fill-opacity:0.21383099;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-315.91833"
+         x="284.6889"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect1381-5-0"
+         style="fill:none;fill-opacity:0.21383099;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-315.91833"
+         x="289.80206"
+         height="5.1131492"
+         width="5.1131492"
+         id="rect1383-4-2"
+         style="fill:none;fill-opacity:0.21383099;stroke:#000000;stroke-width:0.41446099;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.53135395px;line-height:1.25;font-family:Hack;-inkscape-font-specification:Hack;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect907-5-4);stroke-width:1.42719805"
+         id="text905-3-4-2"
+         xml:space="preserve"
+         x="190.24068"
+         y="-410.97189"><tspan
+           id="tspan870-9"
+           y="-324.70648"
+           x="203.33354"
+           style="stroke-width:1.42719805"><tspan
+             id="tspan868-3"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Hack;-inkscape-font-specification:Hack;stroke-width:1.42719805">u</tspan></tspan></text>
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.53135395px;line-height:1.25;font-family:Hack;-inkscape-font-specification:Hack;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect915-69-2);stroke-width:1.42719805"
+         id="text913-7-9-1"
+         xml:space="preserve"
+         x="180.21147"
+         y="-397.96359"><tspan
+           id="tspan875-9"
+           y="-311.69818"
+           x="193.30434"
+           style="stroke-width:1.42719805"><tspan
+             id="tspan873-47"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Hack;-inkscape-font-specification:Hack;stroke-width:1.42719805">u_new</tspan></tspan></text>
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_07.png"
+         y="-336.54681"
+         x="189.44133"
+         height="30.36175"
+         width="118.46274"
+         id="rect7688-9-8"
+         style="fill:none;fill-opacity:0.21383099;stroke:#999999;stroke-width:0.40000001;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none" />
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot21833-0-3-37-4"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:none"
+         transform="matrix(0.08563724,0,0,0.08563724,68.119744,-161.64086)"><flowRegion
+           id="flowRegion21829-0-0-0-5"
+           style="fill:#0000ff"><rect
+             id="rect21827-1-0-7-0"
+             width="425.27423"
+             height="138.3909"
+             x="2125.3608"
+             y="-1872.7255"
+             style="fill:#0000ff" /></flowRegion><flowPara
+           id="flowPara21831-3-0-1-3">CPU 2</flowPara></flowRoot>      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/francesc/Downloads/fig13.png"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.17499995px;line-height:1.25;font-family:Hack;-inkscape-font-specification:Hack;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect1044-2-1-7);stroke-width:1"
+         id="text1042-1-7-4-5-6-6"
+         xml:space="preserve"
+         x="186.76353"
+         y="-383.95038"><tspan
+           id="tspan811-0-3-1"
+           y="-332.75452"
+           x="250.78308"
+           style="stroke-width:1">local<tspan
+   id="tspan809-4-7-0"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Hack;-inkscape-font-specification:Hack;stroke-width:1" /></tspan></text>
+      <text
+         y="-384.56458"
+         x="223.26956"
+         xml:space="preserve"
+         id="text7344"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.17499995px;line-height:1.25;font-family:Hack;-inkscape-font-specification:Hack;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect1044-2-1-7);stroke-width:1"
+         inkscape:export-filename="/home/francesc/Downloads/fig13.png"
+         inkscape:export-xdpi="200"
+         inkscape:export-ydpi="200"><tspan
+           style="stroke-width:1"
+           x="287.28912"
+           y="-333.36871"
+           id="tspan7342">remote</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.1384535px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker5293-0)"
+         d="m 286.61376,-333.90381 c -2.05858,1.96638 -2.96653,0.4401 -4.44495,3.33862"
+         id="path5289-5"
+         sodipodi:nodetypes="cc"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_04.png"
+         inkscape:export-xdpi="200"
+         inkscape:export-ydpi="200"
+         inkscape:connector-curvature="0" />
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/francesc/Downloads/fig13.png"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.17499995px;line-height:1.25;font-family:Hack;-inkscape-font-specification:Hack;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect1044-2-1-7);stroke-width:1"
+         id="text8753"
+         xml:space="preserve"
+         x="148.43027"
+         y="-384.56458"><tspan
+           id="tspan8751"
+           y="-333.36871"
+           x="212.44983"
+           style="stroke-width:1">remote</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/fverdugo/fig_jacobi_04.png"
+         sodipodi:nodetypes="cc"
+         id="path8755"
+         d="m 224.56166,-333.90381 c 2.05858,1.96638 2.96653,0.4401 4.44495,3.33862"
+         style="fill:none;stroke:#000000;stroke-width:0.1384535px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker8759)" />
+    </g>
+  </g>
 </svg>
