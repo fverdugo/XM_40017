@@ -7477,7 +7477,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4b9d1d46">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=48fd29d9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7789,7 +7789,7 @@ d) The inner, but not the outer</code></pre>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6dfedc09">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8e156e29">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7802,7 +7802,7 @@ d) The inner, but not the outer</code></pre>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cc412ea0">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=513f1f7e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7985,7 +7985,7 @@ d) The inner, but not the outer</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="1D-block-partition">1D block partition<a class="anchor-link" href="#1D-block-partition">¶</a></h3>
+<h3 id="1D-block-partition">1D block partition<a class="anchor-link" href="#1D-block-partition">¶</a></h3><p>The following figure shows the portion of vector <code>u_new</code> is updated at each iteration by a particular process (CPU 3) left picture, and which entries of <code>u</code> are needed to update this data, right picture. We use analogous figures for the other partitions below.</p>
 </div>
 </div>
 </div>
@@ -8116,7 +8116,7 @@ d) The inner, but not the outer</code></pre>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6838b947">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f6b54b7b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8528,31 +8528,6 @@ d) Yes, because there are no writes to the send buffer in this iteration.</code>
 <span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load</span><span class="o">*</span><span class="n">nw</span>
 <span class="w">    </span><span class="n">jacobi_mpi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">niters</span><span class="p">)</span>
 <span class="k">end</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ebb650d0">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Exercise-2">Exercise 2<a class="anchor-link" href="#Exercise-2">¶</a></h3><p>Compute the complexity of the communication and computation of the three data partition strategies (1d block partition, 2d block partition, and 2d cyclic partition) when computing a single iteration of the Jacobi method in 2D. Assume that the grid is of size $N \times N$ and the number of processes $P$ is a perfect square number, i.e. $\sqrt{P}$ is an integer. Hint: For the complexity analysis, you can ignore the effect of the boundary conditions.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7b3d7cb3">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="c"># TODO</span>
 </pre></div>
 </div>
 </div>
