@@ -121,6 +121,7 @@ makedocs(;
         "Julia Basics" => "notebooks/julia_basics.md",
         "Tasks and channels" => "notebooks/julia_async.md",
         "Remote calls and remote channels" => "notebooks/julia_distributed.md",
+        "MPI" => "notebooks/mpi_tutorial.md",
         "Matrix Multiplication"=>"notebooks/matrix_matrix.md",
         "Jacobi" => "notebooks/jacobi_method.md",
         "Solutions" => "notebooks/solutions.md"
