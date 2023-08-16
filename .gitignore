@@ -2,5 +2,7 @@
 Manifest.toml
 .ipynb_checkpoints/
 .vscode/
+docs/src/notebooks/
+docs/src/notebook-html/
 *.code-workspace
 *.DS_Store
