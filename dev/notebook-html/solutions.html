@@ -7658,6 +7658,124 @@ a.anchor-link {
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2f343157">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Exercise:-Ring-communication---MPI">Exercise: Ring communication - MPI<a class="anchor-link" href="#Exercise:-Ring-communication---MPI">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a49be691">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Test</span>
+
+<span class="n">MPI</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
+<span class="n">comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+<span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_rank</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
+<span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_size</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
+
+<span class="n">dst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mod</span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+<span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mod</span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+
+<span class="n">send_buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span>
+<span class="n">recv_buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="k">if</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">root</span><span class="w"> </span>
+<span class="w">    </span><span class="c"># Proc 1: Send id async to destination, then wait for receive</span>
+<span class="w">    </span><span class="n">MPI</span><span class="o">.</span><span class="n">isend</span><span class="p">(</span><span class="n">send_buf</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="p">;</span><span class="w"> </span><span class="n">dest</span><span class="o">=</span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">recv_buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">comm</span><span class="p">;</span><span class="w"> </span><span class="n">source</span><span class="o">=</span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@show</span><span class="w"> </span><span class="n">recv_buf</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">factorial</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@test</span><span class="w"> </span><span class="n">recv_buf</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">factorial</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="c"># Other procs: receive sync and send async to next process</span>
+<span class="w">    </span><span class="n">recv_buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">comm</span><span class="p">;</span><span class="w"> </span><span class="n">source</span><span class="o">=</span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">send_buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">recv_buf</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">id</span>
+<span class="w">    </span><span class="n">MPI</span><span class="o">.</span><span class="n">isend</span><span class="p">(</span><span class="n">send_buf</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="p">;</span><span class="w"> </span><span class="n">dest</span><span class="o">=</span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">MPI</span><span class="o">.</span><span class="n">Finalize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6cbbf074">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Exercise:-Ring-communication---Distributed.jl">Exercise: Ring communication - Distributed.jl<a class="anchor-link" href="#Exercise:-Ring-communication---Distributed.jl">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=dc156523">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Distributed</span><span class="w"> </span>
+<span class="k">using</span><span class="w"> </span><span class="n">Test</span>
+
+<span class="n">np</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<span class="n">add_n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">nprocs</span><span class="p">()</span><span class="w"> </span>
+<span class="n">addprocs</span><span class="p">(</span><span class="n">add_n</span><span class="p">)</span>
+<span class="n">worker_ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span>
+<span class="nd">@assert</span><span class="w"> </span><span class="n">nprocs</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">nworkers</span><span class="p">()</span>
+
+<span class="c"># Initialize id channel</span>
+<span class="n">id_chnl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RemoteChannel</span><span class="p">(()</span><span class="o">-&gt;</span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">put!</span><span class="p">(</span><span class="n">id_chnl</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># Initialize data channel</span>
+<span class="n">job_chnl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RemoteChannel</span><span class="p">(()</span><span class="o">-&gt;</span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">put!</span><span class="p">(</span><span class="n">job_chnl</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nd">@sync</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span>
+<span class="w">    </span><span class="nd">@spawnat</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">findfirst</span><span class="p">(</span><span class="n">worker_ids</span><span class="w"> </span><span class="o">.==</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">dst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mod</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">np</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mod</span><span class="p">(</span><span class="n">pos</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">np</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span>
+<span class="w">            </span><span class="n">pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetch</span><span class="p">(</span><span class="n">id_chnl</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">pred</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">src</span>
+<span class="w">                </span><span class="n">take!</span><span class="p">(</span><span class="n">id_chnl</span><span class="p">)</span>
+<span class="w">                </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">take!</span><span class="p">(</span><span class="n">job_chnl</span><span class="p">)</span>
+<span class="w">                </span><span class="n">put!</span><span class="p">(</span><span class="n">job_chnl</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pos</span><span class="p">)</span><span class="w">  </span>
+<span class="w">                </span><span class="n">put!</span><span class="p">(</span><span class="n">id_chnl</span><span class="p">,</span><span class="w"> </span><span class="n">pos</span><span class="p">)</span><span class="w">  </span>
+<span class="w">                </span><span class="k">break</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">take!</span><span class="p">(</span><span class="n">job_chnl</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">res</span>
+<span class="nd">@test</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">factorial</span><span class="p">(</span><span class="n">np</span><span class="p">)</span>
+
+<span class="n">rmprocs</span><span class="p">(</span><span class="n">workers</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=47d88e7a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
