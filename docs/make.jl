@@ -124,6 +124,7 @@ makedocs(;
         "MPI" => "notebooks/mpi_tutorial.md",
         "Matrix Multiplication"=>"notebooks/matrix_matrix.md",
         "Jacobi" => "notebooks/jacobi_method.md",
+        "ASP" => "notebooks/asp.md",
         "Solutions" => "notebooks/solutions.md"
     ]],
 )
