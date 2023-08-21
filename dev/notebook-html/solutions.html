@@ -7776,6 +7776,209 @@ a.anchor-link {
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=19641daf">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="TSP-Exercise:-Measure-search-overhead">TSP Exercise: Measure search overhead<a class="anchor-link" href="#TSP-Exercise:-Measure-search-overhead">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f00557a0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="c">## TSP serial </span>
+<span class="k">function</span><span class="w"> </span><span class="n">tsp_serial</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">city</span><span class="p">)</span>
+<span class="w">    </span><span class="n">num_cities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">connections</span><span class="p">)</span>
+<span class="w">    </span><span class="n">path</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="n">num_cities</span><span class="p">)</span>
+<span class="w">    </span><span class="n">hops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="n">path</span><span class="p">[</span><span class="n">hops</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city</span>
+<span class="w">    </span><span class="n">min_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">num_cities</span><span class="p">)</span>
+<span class="w">    </span><span class="n">current_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">min_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">typemax</span><span class="p">(</span><span class="kt">Int</span><span class="p">)</span>
+<span class="w">    </span><span class="c"># Collect search time </span>
+<span class="w">    </span><span class="n">search_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">min_path</span><span class="p">,</span><span class="w"> </span><span class="n">min_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tsp_serial_impl</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">,</span><span class="w"> </span><span class="n">min_path</span><span class="p">,</span><span class="w"> </span><span class="n">min_distance</span><span class="p">)</span>
+<span class="w">    </span><span class="p">(;</span><span class="n">path</span><span class="o">=</span><span class="n">min_path</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="n">min_distance</span><span class="p">,</span><span class="w"> </span><span class="n">search_time</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=30784da2">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="c">## TSP distributed</span>
+<span class="nd">@everywhere</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">tsp_dist_impl</span><span class="p">(</span><span class="n">wait_time</span><span class="p">,</span><span class="w"> </span><span class="n">connections</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">,</span><span class="n">min_dist_chnl</span><span class="p">,</span><span class="w"> </span><span class="n">max_hops</span><span class="p">,</span><span class="n">jobs_chnl</span><span class="p">,</span><span class="n">ftr_result</span><span class="p">)</span>
+<span class="w">    </span><span class="n">num_cities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">connections</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">hops</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">num_cities</span>
+<span class="w">        </span><span class="n">min_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetch</span><span class="p">(</span><span class="n">min_dist_chnl</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">current_distance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">min_distance</span>
+<span class="w">            </span><span class="n">take!</span><span class="p">(</span><span class="n">min_dist_chnl</span><span class="p">)</span>
+<span class="w">            </span><span class="c"># Collect wait time to substract from overall search time </span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">ftr_result</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nb">nothing</span>
+<span class="w">                </span><span class="n">wait_time</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nd">@elapsed</span><span class="w"> </span><span class="nd">@spawnat</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">                    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetch</span><span class="p">(</span><span class="n">ftr_result</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">result</span><span class="o">.</span><span class="n">path</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="n">path</span>
+<span class="w">                    </span><span class="n">result</span><span class="o">.</span><span class="n">min_distance_ref</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_distance</span>
+<span class="w">                </span><span class="k">end</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">wait</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">            </span><span class="n">put!</span><span class="p">(</span><span class="n">min_dist_chnl</span><span class="p">,</span><span class="w"> </span><span class="n">current_distance</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">elseif</span><span class="w"> </span><span class="n">hops</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">max_hops</span>
+<span class="w">        </span><span class="n">current_city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">path</span><span class="p">[</span><span class="n">hops</span><span class="p">]</span>
+<span class="w">        </span><span class="n">next_hops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hops</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">next_city</span><span class="p">,</span><span class="n">distance_increment</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">connections</span><span class="p">[</span><span class="n">current_city</span><span class="p">]</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">visited</span><span class="p">(</span><span class="n">next_city</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">)</span>
+<span class="w">                </span><span class="n">path</span><span class="p">[</span><span class="n">next_hops</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_city</span>
+<span class="w">                </span><span class="n">next_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_distance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">distance_increment</span>
+<span class="w">                </span><span class="c"># Collect wait time because fetch may block</span>
+<span class="w">                </span><span class="n">wait_time</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">min_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetch</span><span class="p">(</span><span class="n">min_dist_chnl</span><span class="p">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">next_distance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">min_distance</span>
+<span class="w">                    </span><span class="n">tsp_dist_impl</span><span class="p">(</span><span class="n">wait_time</span><span class="p">,</span><span class="w"> </span><span class="n">connections</span><span class="p">,</span><span class="n">next_hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">next_distance</span><span class="p">,</span><span class="n">min_dist_chnl</span><span class="p">,</span><span class="n">max_hops</span><span class="p">,</span><span class="n">jobs_chnl</span><span class="p">,</span><span class="n">ftr_result</span><span class="p">)</span>
+<span class="w">                </span><span class="k">end</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">        </span><span class="k">end</span><span class="w"> </span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="c"># Collect communication time and add to wait time</span>
+<span class="w">        </span><span class="n">wait_time</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nd">@elapsed</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">jobs_chnl</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nb">nothing</span><span class="w"> </span>
+<span class="w">            </span><span class="n">path_copy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="w"> </span>
+<span class="w">            </span><span class="n">put!</span><span class="p">(</span><span class="n">jobs_chnl</span><span class="p">,(;</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="o">=</span><span class="n">path_copy</span><span class="p">,</span><span class="n">current_distance</span><span class="p">))</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="c"># Return wait time</span>
+<span class="w">    </span><span class="n">wait_time</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">tsp_dist</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="n">city</span><span class="p">)</span>
+<span class="w">    </span><span class="n">max_hops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="n">num_cities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">connections</span><span class="p">)</span>
+<span class="w">    </span><span class="n">path</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="n">num_cities</span><span class="p">)</span>
+<span class="w">    </span><span class="n">result_path</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">num_cities</span><span class="p">)</span>
+<span class="w">    </span><span class="n">wait_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">search_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">hops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="n">path</span><span class="p">[</span><span class="n">hops</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city</span>
+<span class="w">    </span><span class="n">current_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">min_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">typemax</span><span class="p">(</span><span class="kt">Int</span><span class="p">)</span>
+<span class="w">    </span><span class="n">jobs_chnl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RemoteChannel</span><span class="p">(()</span><span class="o">-&gt;</span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Any</span><span class="p">}(</span><span class="mi">10</span><span class="p">))</span>
+<span class="w">    </span><span class="n">min_dist_chnl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RemoteChannel</span><span class="p">(()</span><span class="o">-&gt;</span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="mi">1</span><span class="p">))</span>
+<span class="w">    </span><span class="n">put!</span><span class="p">(</span><span class="n">min_dist_chnl</span><span class="p">,</span><span class="w"> </span><span class="n">min_distance</span><span class="p">)</span>
+<span class="w">    </span><span class="n">ftr_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@spawnat</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(;</span><span class="n">path</span><span class="o">=</span><span class="n">result_path</span><span class="p">,</span><span class="n">min_distance_ref</span><span class="o">=</span><span class="kt">Ref</span><span class="p">(</span><span class="n">min_distance</span><span class="p">))</span>
+<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">        </span><span class="c"># Collect search time from master process</span>
+<span class="w">        </span><span class="n">search_time</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">wait_time</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">tsp_dist_impl</span><span class="p">(</span><span class="n">wait_time</span><span class="p">,</span><span class="n">connections</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">,</span><span class="n">min_dist_chnl</span><span class="p">,</span><span class="n">max_hops</span><span class="p">,</span><span class="n">jobs_chnl</span><span class="p">,</span><span class="nb">nothing</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span>
+<span class="w">            </span><span class="n">put!</span><span class="p">(</span><span class="n">jobs_chnl</span><span class="p">,</span><span class="nb">nothing</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="nd">@sync</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span>
+<span class="w">        </span><span class="nd">@spawnat</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">            </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">num_cities</span><span class="p">)</span>
+<span class="w">            </span><span class="n">max_hops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">typemax</span><span class="p">(</span><span class="kt">Int</span><span class="p">)</span>
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="nb">true</span>
+<span class="w">                </span><span class="n">job</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">take!</span><span class="p">(</span><span class="n">jobs_chnl</span><span class="p">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">nothing</span>
+<span class="w">                    </span><span class="k">break</span>
+<span class="w">                </span><span class="k">end</span>
+<span class="w">                </span><span class="n">hops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="o">.</span><span class="n">hops</span>
+<span class="w">                </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="o">.</span><span class="n">path</span><span class="w"> </span>
+<span class="w">                </span><span class="n">current_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job</span><span class="o">.</span><span class="n">current_distance</span>
+<span class="w">                </span><span class="n">min_distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetch</span><span class="p">(</span><span class="n">min_dist_chnl</span><span class="p">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">current_distance</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">min_distance</span>
+<span class="w">                    </span><span class="c"># Collect search time from worker processes </span>
+<span class="w">                    </span><span class="n">search_time</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">wait_time</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">tsp_dist_impl</span><span class="p">(</span><span class="n">wait_time</span><span class="p">,</span><span class="n">connections</span><span class="p">,</span><span class="n">hops</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">current_distance</span><span class="p">,</span><span class="n">min_dist_chnl</span><span class="p">,</span><span class="n">max_hops</span><span class="p">,</span><span class="nb">nothing</span><span class="p">,</span><span class="n">ftr_result</span><span class="p">)</span>
+<span class="w">                </span><span class="k">end</span>
+<span class="w">            </span><span class="k">end</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span><span class="w"> </span>
+<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetch</span><span class="p">(</span><span class="n">ftr_result</span><span class="p">)</span>
+<span class="w">    </span><span class="p">(;</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">min_distance_ref</span><span class="p">[],</span><span class="w"> </span><span class="n">search_time</span><span class="p">,</span><span class="w"> </span><span class="n">wait_time</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=694de934">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Distributed</span>
+<span class="k">using</span><span class="w"> </span><span class="n">RandomMatrix</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">generate_rand_connections</span><span class="p">(</span><span class="n">city_range</span><span class="p">,</span><span class="w"> </span><span class="n">distance_range</span><span class="p">)</span>
+<span class="w">    </span><span class="c"># generate random connections matrix </span>
+<span class="w">    </span><span class="n">n_cities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="n">city_range</span><span class="p">)</span>
+<span class="w">    </span><span class="n">matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randTriangular</span><span class="p">(</span><span class="n">distance_range</span><span class="p">,</span><span class="w"> </span><span class="n">n_cities</span><span class="p">;</span><span class="w"> </span><span class="n">Diag</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Array</span><span class="p">{</span><span class="kt">Array</span><span class="p">{</span><span class="kt">Tuple</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="kt">Int64</span><span class="p">},</span><span class="mi">1</span><span class="p">},</span><span class="mi">1</span><span class="p">}(</span><span class="nb">undef</span><span class="p">,</span><span class="w"> </span><span class="n">n_cities</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n_cities</span>
+<span class="w">        </span><span class="n">connections</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Array</span><span class="p">{</span><span class="kt">Tuple</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="kt">Int64</span><span class="p">},</span><span class="mi">1</span><span class="p">}(</span><span class="nb">undef</span><span class="p">,</span><span class="w"> </span><span class="n">n_cities</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n_cities</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">i</span><span class="o">:</span><span class="n">n_cities</span>
+<span class="w">            </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+<span class="w">            </span><span class="n">connections</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">distance</span><span class="p">)</span>
+<span class="w">            </span><span class="n">connections</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">distance</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">connections</span>
+<span class="k">end</span>
+
+<span class="c"># Run once so compile times are not measured</span>
+<span class="n">distance_range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">100</span>
+<span class="n">connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generate_rand_connections</span><span class="p">(</span><span class="mi">4</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">distance_range</span><span class="p">)</span>
+<span class="n">tsp_dist</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">tsp_serial</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># Measure runtimes of serial and parallel algorithm</span>
+<span class="n">n_it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span>
+<span class="n">city_ranges</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="o">:</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="o">:</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="o">:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">search_overhead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Float64</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">city_ranges</span><span class="p">),</span><span class="w"> </span><span class="n">n_it</span><span class="w"> </span><span class="p">)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">enumerate</span><span class="p">(</span><span class="n">city_ranges</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n_it</span>
+<span class="w">        </span><span class="n">connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generate_rand_connections</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">distance_range</span><span class="p">)</span>
+<span class="w">        </span><span class="nd">@show</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">k</span>
+<span class="w">        </span><span class="n">path_dist</span><span class="p">,</span><span class="w"> </span><span class="n">distance_dist</span><span class="p">,</span><span class="w"> </span><span class="n">search_time_dist</span><span class="p">,</span><span class="w"> </span><span class="n">wait_time_dist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tsp_dist</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="n">path_serial</span><span class="p">,</span><span class="w"> </span><span class="n">distance_serial</span><span class="p">,</span><span class="w"> </span><span class="n">search_time_serial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tsp_serial</span><span class="p">(</span><span class="n">connections</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="c"># Compute search overhead as difference between distributed program and serial program</span>
+<span class="w">        </span><span class="c"># (without time spent communicating or waiting)</span>
+<span class="w">        </span><span class="n">search_overhead</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">search_time_dist</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">wait_time_dist</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">search_time_serial</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">min_search_oh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">minimum</span><span class="p">(</span><span class="n">search_overhead</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">city_sizes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">city_sizes</span><span class="p">,</span><span class="w"> </span><span class="n">min_search_oh</span><span class="p">,</span><span class="w"> </span><span class="n">yaxis</span><span class="o">=</span><span class="ss">:log</span><span class="p">,</span><span class="w"> </span><span class="n">seriestype</span><span class="o">=</span><span class="ss">:scatter</span><span class="p">,</span><span class="n">legend</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">city_sizes</span><span class="p">,</span><span class="w"> </span><span class="n">min_search_oh</span><span class="p">,</span><span class="w"> </span><span class="n">yaxis</span><span class="o">=</span><span class="ss">:log</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+
+<span class="n">xlabel!</span><span class="p">(</span><span class="s">"Number of cities"</span><span class="p">)</span>
+<span class="n">ylabel!</span><span class="p">(</span><span class="s">"Search overhead (s)"</span><span class="p">)</span>
+<span class="n">title!</span><span class="p">(</span><span class="s">"Minimum search overhead for different problem sizes"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=47d88e7a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
