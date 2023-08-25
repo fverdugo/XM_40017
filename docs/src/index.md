@@ -10,10 +10,13 @@ Welcome to the interactive lecture notes of the [Programming Large-Scale Paralle
 This page contains part of the course material of the Programming Large-Scale Parallel Systems course at VU Amsterdam.
 We provide several lecture notes in jupyter notebook format, which will help you to learn how to design, analyze, and program parallel algorithms on multi-node computing systems.
 Further information about the course is found in the study guide
-([click here](https://studiegids.vu.nl/EN/courses/2023-2024/XM_40017#/)) and our Canvas page (for registered students). 
+([click here](https://studiegids.vu.nl/EN/courses/2023-2024/XM_40017#/)) and our Canvas page (for registered students).
 
 !!! note
-    This page contains only a part of the course material. The rest is available on Canvas. In particular, **the lecture notes in this public webpage do not fully cover all topics in the final exam**.
+    Material will be added incrementally to the website as the course advances.
+
+!!! warning
+    This page will eventually contain only a part of the course material. The rest will be available on Canvas. In particular, **the material in this public webpage does not fully cover all topics in the final exam**.
 
 ## How to use this page
 

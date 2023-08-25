@@ -99,6 +99,7 @@ repo_root = joinpath(@__DIR__,"..") |> normpath
 mkpath(joinpath(repo_root,"docs","src","notebooks"))
 notebook_files = glob("*.ipynb", joinpath(repo_root,"notebooks/"))
 for filepath in notebook_files
+    #continue
     convert_embedded_img_to_base64(filepath)
     filename_with_ext = splitpath(filepath)[end]    
     filename = splitext(filename_with_ext)[1]
@@ -117,16 +118,17 @@ makedocs(;
         prettyurls=get(ENV, "CI", "false") == "true",
         canonical="https://fverdugo.github.io/XM_40017",
         edit_link="main",),
-    pages=["Home" => "index.md","Getting started"=>"getting_started_with_julia.md", "Notebooks"=>[
-        "Julia Basics" => "notebooks/julia_basics.md",
-        "Tasks and channels" => "notebooks/julia_async.md",
-        "Remote calls and remote channels" => "notebooks/julia_distributed.md",
-        "MPI" => "notebooks/mpi_tutorial.md",
-        "Matrix Multiplication"=>"notebooks/matrix_matrix.md",
-        "Jacobi" => "notebooks/jacobi_method.md",
-        "ASP" => "notebooks/asp.md",
-        "Solutions" => "notebooks/solutions.md"
-    ]],
+    pages=["Home" => "index.md","Getting started"=>"getting_started_with_julia.md",
+           #"Notebooks"=>[
+           #              "Julia Basics" => "notebooks/julia_basics.md",
+           #              "Tasks and channels" => "notebooks/julia_async.md",
+           #              "Remote calls and remote channels" => "notebooks/julia_distributed.md",
+           #              "MPI" => "notebooks/mpi_tutorial.md",
+           #              "Matrix Multiplication"=>"notebooks/matrix_matrix.md",
+           #              "Jacobi" => "notebooks/jacobi_method.md",
+           #              "ASP" => "notebooks/asp.md",
+           #              "Solutions" => "notebooks/solutions.md" ],
+          ],
 )
 
 deploydocs(;
