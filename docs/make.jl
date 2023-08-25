@@ -15,10 +15,6 @@ EditURL = "https://github.com/fverdugo/XM_40017/blob/main/notebooks/SCRIPT_NAME.
             <li>
                 Download this notebook and run it locally on your machine [recommended]. Click <a href="https://www.francescverdugo.com/XM_40017/dev/SCRIPT_NAME.ipynb" download>here</a>.
             </li>
-            <li>
-                You can also run this notebook in the cloud using Binder. Click <a href="https://mybinder.org/v2/gh/fverdugo/XM_40017/gh-pages?filepath=dev/SCRIPT_NAME.ipynb">here</a>
-                .
-            </li>
         </ul>
     </div>
 </div>
