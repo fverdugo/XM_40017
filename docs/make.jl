@@ -119,15 +119,16 @@ makedocs(;
         canonical="https://fverdugo.github.io/XM_40017",
         edit_link="main",),
     pages=["Home" => "index.md","Getting started"=>"getting_started_with_julia.md",
-           #"Notebooks"=>[
-           #              "Julia Basics" => "notebooks/julia_basics.md",
-           #              "Tasks and channels" => "notebooks/julia_async.md",
-           #              "Remote calls and remote channels" => "notebooks/julia_distributed.md",
+           "Notebooks"=>[
+                         "Julia Basics" => "notebooks/julia_basics.md",
+                         "Tasks and channels" => "notebooks/julia_async.md",
+                         "Remote calls and remote channels" => "notebooks/julia_distributed.md",
            #              "MPI" => "notebooks/mpi_tutorial.md",
            #              "Matrix Multiplication"=>"notebooks/matrix_matrix.md",
            #              "Jacobi" => "notebooks/jacobi_method.md",
            #              "ASP" => "notebooks/asp.md",
-           #              "Solutions" => "notebooks/solutions.md" ],
+           #              "Solutions" => "notebooks/solutions.md",
+                         ],
           ],
 )
 
