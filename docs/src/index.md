@@ -20,12 +20,10 @@ Further information about the course is found in the study guide
 
 ## How to use this page
 
-You have two main ways of running the notebooks:
+You have two main ways of studying the notebooks:
 
-- Download the notebooks and run them locally on your computer (recommended)
-- Run the notebooks on the cloud via [mybinder.org](https://mybinder.org) (high startup time).
-
-You also have the static version of the notebooks displayed in this webpage for quick reference. At each notebook page you will find a green box with links to download the notebook or to open in on mybinder.
+- Download the notebooks and run them locally on your computer (recommended). At each notebook page you will find a green box with links to download the notebook.
+- You also have the static version of the notebooks displayed in this webpage for quick reference.
 
 ## How to run the notebooks locally
 
