@@ -13,10 +13,10 @@ EditURL = "https://github.com/fverdugo/XM_40017/blob/main/notebooks/SCRIPT_NAME.
     <div class="admonition-body">
         <ul>
             <li>
-                Download this notebook and run it locally on your machine [recommended]. Click <a href="https://www.francescverdugo.com/XM_40017/dev/notebooks/SCRIPT_NAME.ipynb" download>here</a>.
+                Download this notebook and run it locally on your machine [recommended]. Click <a href="https://www.francescverdugo.com/XM_40017/dev/SCRIPT_NAME.ipynb" download>here</a>.
             </li>
             <li>
-                You can also run this notebook in the cloud using Binder. Click <a href="https://mybinder.org/v2/gh/fverdugo/XM_40017/gh-pages?filepath=dev/notebooks/SCRIPT_NAME.ipynb">here</a>
+                You can also run this notebook in the cloud using Binder. Click <a href="https://mybinder.org/v2/gh/fverdugo/XM_40017/gh-pages?filepath=dev/SCRIPT_NAME.ipynb">here</a>
                 .
             </li>
         </ul>
@@ -25,16 +25,15 @@ EditURL = "https://github.com/fverdugo/XM_40017/blob/main/notebooks/SCRIPT_NAME.
 ```
 
 ```@raw html
-<iframe id="notebook" src="SCRIPT_NAME_src" style="width:100%;height:1000px;></iframe>
+<iframe id="notebook" src="../SCRIPT_NAME_src/" style="width:100%"></iframe>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var myIframe = document.getElementById("notebook");
+    iFrameResize({log:true}, myIframe);	
+});
+</script>
 ```
 """
-#<script>
-#  document.addEventListener('DOMContentLoaded', function(){
-#    var myIframe = document.getElementById("notebook");
-#    iFrameResize({log:true}, myIframe);	
-#});
-#</script>
-
 
 function convert_embedded_img_to_base64(notebook_path)
     doc = open(io->read(io, String), notebook_path)
@@ -49,7 +48,7 @@ function convert_embedded_img_to_base64(notebook_path)
         doc = replace(doc, "attachment:$filename.png" => "data:image/png;base64,$base64")
     end
     filename = splitpath(notebook_path)[end]  
-    open("docs/src/notebooks/$filename","w") do f
+    open("docs/src/$filename","w") do f
         write(f, doc)
     end
 end
@@ -58,7 +57,7 @@ end
 function create_md_nb_file( filename )
     global md_nb_template;
     content = replace(md_nb_template, "SCRIPT_NAME" => filename)
-    md_path = joinpath(@__DIR__, "src/notebooks", filename * ".md" ) 
+    md_path = joinpath(@__DIR__, "src", filename * ".md" ) 
     open(md_path, "w") do md_file
         write(md_file, content)
     end
@@ -66,7 +65,7 @@ function create_md_nb_file( filename )
 end
 
 # Convert to html using nbconvert
-function convert_notebook_to_html(notebook_path; output_name = "index", output_dir = "./docs/src/notebook-html", theme = "light")
+function convert_notebook_to_html(notebook_path; output_name,output_dir, theme = "light")
     command_jup = "jupyter"
     command_nbc = "nbconvert"
     output_format = "--to=html"
@@ -88,26 +87,25 @@ function modify_notebook_html( html_filepath )
         s"\1\n\t<script src='../assets/iframeResizer.contentWindow.min.js'></script>\n";
         count = 1
     )
-    #open( html_filepath, "w" ) do html_file
-    #    write( html_file, content )
-    #end
+    open( html_filepath, "w" ) do html_file
+        write( html_file, content )
+    end
     return nothing
 end
 
 
 # Loop over notebooks and generate html and markdown 
 repo_root = joinpath(@__DIR__,"..") |> normpath
-mkpath(joinpath(repo_root,"docs","src","notebooks"))
 notebook_files = glob("*.ipynb", joinpath(repo_root,"notebooks/"))
 for filepath in notebook_files
     #continue
     convert_embedded_img_to_base64(filepath)
     filename_with_ext = splitpath(filepath)[end]    
     filename = splitext(filename_with_ext)[1]
-    pth = mkpath(joinpath(repo_root,"docs","src","notebooks",filename*"_src"))
+    pth = mkpath(joinpath(repo_root,"docs","src",filename*"_src"))
     create_md_nb_file(filename)
-    convert_notebook_to_html("docs/src/notebooks/$filename_with_ext", output_dir=pth, output_name = "index")
-    modify_notebook_html("docs/src/notebooks/$(filename)_src/index.html")
+    convert_notebook_to_html("docs/src/$filename_with_ext", output_dir=pth, output_name = "index")
+    modify_notebook_html("docs/src/$(filename)_src/index.html")
 end
 
 makedocs(;
@@ -122,14 +120,14 @@ makedocs(;
         edit_link="main",),
     pages=["Home" => "index.md","Getting started"=>"getting_started_with_julia.md",
            "Notebooks"=>[
-                         "Julia Basics" => "notebooks/julia_basics.md",
-                         "Tasks and channels" => "notebooks/julia_async.md",
-                         "Remote calls and remote channels" => "notebooks/julia_distributed.md",
-           #              "MPI" => "notebooks/mpi_tutorial.md",
-                         "Matrix Multiplication"=>"notebooks/matrix_matrix.md",
-           #              "Jacobi" => "notebooks/jacobi_method.md",
-           #              "ASP" => "notebooks/asp.md",
-           #              "Solutions" => "notebooks/solutions.md",
+                         "Julia Basics" => "julia_basics.md",
+                         "Tasks and channels" => "julia_async.md",
+                         "Remote calls and remote channels" => "julia_distributed.md",
+           #              "MPI" => "mpi_tutorial.md",
+                         "Matrix Multiplication"=>"matrix_matrix.md",
+           #              "Jacobi" => "jacobi_method.md",
+           #              "ASP" => "asp.md",
+           #              "Solutions" => "solutions.md",
                          ],
           ],
 )
