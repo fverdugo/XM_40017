@@ -3,3 +3,6 @@ site/
 src/notebook-output/
 src/notebooks/
 Manifest.toml
+src/*.ipynb
+src/*/index.html
+src/*.md
