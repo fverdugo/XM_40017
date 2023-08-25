@@ -25,16 +25,16 @@ EditURL = "https://github.com/fverdugo/XM_40017/blob/main/notebooks/SCRIPT_NAME.
 ```
 
 ```@raw html
-<iframe id="notebook" src="SCRIPT_NAME" style="width:100%;height:1000px;></iframe>
+<iframe id="notebook" src="SCRIPT_NAME_src" style="width:100%;height:1000px;></iframe>
 ```
 """
-
 #<script>
 #  document.addEventListener('DOMContentLoaded', function(){
 #    var myIframe = document.getElementById("notebook");
 #    iFrameResize({log:true}, myIframe);	
 #});
 #</script>
+
 
 function convert_embedded_img_to_base64(notebook_path)
     doc = open(io->read(io, String), notebook_path)
@@ -104,10 +104,10 @@ for filepath in notebook_files
     convert_embedded_img_to_base64(filepath)
     filename_with_ext = splitpath(filepath)[end]    
     filename = splitext(filename_with_ext)[1]
-    pth = mkpath(joinpath(repo_root,"docs","src","notebooks",filename))
+    pth = mkpath(joinpath(repo_root,"docs","src","notebooks",filename*"_src"))
     create_md_nb_file(filename)
     convert_notebook_to_html("docs/src/notebooks/$filename_with_ext", output_dir=pth, output_name = "index")
-    modify_notebook_html("docs/src/notebooks/$(filename)/index.html")
+    modify_notebook_html("docs/src/notebooks/$(filename)_src/index.html")
 end
 
 makedocs(;
