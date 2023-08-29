@@ -7776,6 +7776,111 @@ a.anchor-link {
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=508125f9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="New-ring-example">New ring example<a class="anchor-link" href="#New-ring-example">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7af4cfd0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="n">workers</span><span class="p">()</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
+<span class="w">    </span><span class="n">MPI</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
+<span class="w">    </span><span class="n">comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_dup</span><span class="p">(</span><span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span><span class="p">)</span>
+<span class="w">    </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_rank</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
+<span class="w">    </span><span class="n">nranks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_size</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
+<span class="w">    </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Ref</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">)</span>
+<span class="w">        </span><span class="n">buffer</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">msg</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">"msg = </span><span class="si">$</span><span class="p">(</span><span class="n">buffer</span><span class="p">[])</span><span class="s">"</span><span class="p">)</span>
+<span class="w">        </span><span class="n">MPI</span><span class="o">.</span><span class="n">Send</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="n">comm</span><span class="p">;</span><span class="n">dest</span><span class="o">=</span><span class="n">rank</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">MPI</span><span class="o">.</span><span class="n">Recv!</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="n">comm</span><span class="p">;</span><span class="n">source</span><span class="o">=</span><span class="n">nranks</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">"msg = </span><span class="si">$</span><span class="p">(</span><span class="n">buffer</span><span class="p">[])</span><span class="s">"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">rank</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">nranks</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">rank</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">MPI</span><span class="o">.</span><span class="n">Recv!</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="n">comm</span><span class="p">;</span><span class="n">source</span><span class="o">=</span><span class="n">rank</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="n">buffer</span><span class="p">[]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">"msg = </span><span class="si">$</span><span class="p">(</span><span class="n">buffer</span><span class="p">[])</span><span class="s">"</span><span class="p">)</span>
+<span class="w">        </span><span class="n">MPI</span><span class="o">.</span><span class="n">Send</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="n">comm</span><span class="p">;</span><span class="n">dest</span><span class="p">,</span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=30ece423">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">ftrs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Vector</span><span class="p">{</span><span class="kt">Future</span><span class="p">}(</span><span class="nb">undef</span><span class="p">,</span><span class="n">nprocs</span><span class="p">())</span>
+<span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">nprocs</span><span class="p">()</span>
+<span class="w">    </span><span class="n">ftrs</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@spawnat</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="n">RemoteChannel</span><span class="p">(()</span><span class="o">-&gt;</span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}(</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">end</span>
+<span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">nprocs</span><span class="p">()</span>
+<span class="w">    </span><span class="nd">@spawnat</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">begin</span><span class="w">        </span>
+<span class="w">        </span><span class="n">chnl_snd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetch</span><span class="p">(</span><span class="n">ftrs</span><span class="p">[</span><span class="n">p</span><span class="p">])</span>
+<span class="w">        </span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">nprocs</span><span class="p">()</span>
+<span class="w">        </span><span class="n">chnl_rcv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetch</span><span class="p">(</span><span class="n">ftrs</span><span class="p">[</span><span class="n">source</span><span class="p">])</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">)</span>
+<span class="w">            </span><span class="nd">@show</span><span class="w"> </span><span class="n">msg</span>
+<span class="w">            </span><span class="n">put!</span><span class="p">(</span><span class="n">chnl_snd</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span>
+<span class="w">            </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">take!</span><span class="p">(</span><span class="n">chnl_rcv</span><span class="p">)</span>
+<span class="w">            </span><span class="nd">@show</span><span class="w"> </span><span class="n">msg</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">take!</span><span class="p">(</span><span class="n">chnl_rcv</span><span class="p">)</span>
+<span class="w">            </span><span class="n">msg</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="nd">@show</span><span class="w"> </span><span class="n">msg</span>
+<span class="w">            </span><span class="n">put!</span><span class="p">(</span><span class="n">chnl_snd</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=761ce452">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@everywhere</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">work</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="w">    </span><span class="n">msg</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"msg = </span><span class="si">$msg</span><span class="s">"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">myid</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">nprocs</span><span class="p">()</span>
+<span class="w">        </span><span class="nd">@spawnat</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">"msg = </span><span class="si">$msg</span><span class="s">"</span><span class="p">)</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myid</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="nd">@spawnat</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="n">work</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=19641daf">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
