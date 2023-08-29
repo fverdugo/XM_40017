@@ -119,7 +119,7 @@ makedocs(;
                          "Julia Basics" => "julia_basics.md",
                          "Tasks and channels" => "julia_async.md",
                          "Remote calls and remote channels" => "julia_distributed.md",
-           #              "MPI" => "mpi_tutorial.md",
+                         "MPI" => "mpi_tutorial.md",
                          "Matrix Multiplication"=>"matrix_matrix.md",
            #              "Jacobi" => "jacobi_method.md",
            #              "ASP" => "asp.md",
