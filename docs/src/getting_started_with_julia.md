@@ -190,7 +190,7 @@ As you can see from this example, one can access MPI from Julia in a clean way, 
 
 Now, run the file from the REPL
 ```julia
-julia> incude("hello_mpi.jl")
+julia> include("hello_mpi.jl")
 ```
 
 It probably didn't work, right? Read the error message and note that the MPI package needs to be installed to run this code.
@@ -216,7 +216,7 @@ Congrats, you have installed MPI!
 To check that the package was installed properly, exit package mode by pressing the backspace key several times, and run it again
 
 ```julia
-julia> incude("hello_mpi.jl")
+julia> include("hello_mpi.jl")
 ```
 
 Now, it should work, but you probably get output from a single MPI rank only.
