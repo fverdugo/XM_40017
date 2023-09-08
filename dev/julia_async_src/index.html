@@ -7512,7 +7512,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Tasks">Tasks<a class="anchor-link" href="#Tasks">¶</a></h2><h3 id="Creating--a-task">Creating  a task<a class="anchor-link" href="#Creating--a-task">¶</a></h3><p>A task is a piece of computation work that can be run asynchronously (i.e., that can be run in the background).  To create a task, we first need to create a function that represents the work to be done in the task. In next cell, we generate a task that generates and sums two matrices.</p>
+<h2 id="Tasks">Tasks<a class="anchor-link" href="#Tasks">¶</a></h2><h3 id="Creating--a-task">Creating  a task<a class="anchor-link" href="#Creating--a-task">¶</a></h3><p>Technically, a task in Julia is a <em>symmetric co-routine</em>. More informally, a task is a piece of computation work that can be started (scheduled) at some point in the future, and that can be interrupted and resumed.  To create a task, we first need to create a function that represents the work to be done in the task. In next cell, we generate a task that generates and sums two matrices.</p>
 </div>
 </div>
 </div>
@@ -7698,7 +7698,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Tasks-do-not-run-in-parallel">Tasks do not run in parallel<a class="anchor-link" href="#Tasks-do-not-run-in-parallel">¶</a></h3><p>It is also important to note that tasks do not run in parallel. We were able to run code while previous tasks was running because the task was idling most of the time.  If the task does actual work, the current process will be busy running this task and it is likely that we cannot run other code at the same time. Let's illustrate this with an example. The following code computes an approximation of $\pi$ using <a href="https://en.wikipedia.org/wiki/Leibniz_formula_for_pi">Leibniz formula</a>. The quality of the approximation increases with the value of <code>n</code>.</p>
+<h3 id="Tasks-do-not-run-in-parallel">Tasks do not run in parallel<a class="anchor-link" href="#Tasks-do-not-run-in-parallel">¶</a></h3><p>It is also important to note that tasks do not run in parallel. We were able to run code while previous tasks was running because the task was idling most of the time in the sleep function.  If the task does actual work, the current process will be busy running this task and preventing to run other tasks. Let's illustrate this with an example. The following code computes an approximation of $\pi$ using <a href="https://en.wikipedia.org/wiki/Leibniz_formula_for_pi">Leibniz formula</a>. The quality of the approximation increases with the value of <code>n</code>.</p>
 </div>
 </div>
 </div>
@@ -7807,6 +7807,137 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-julia"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a700fe69">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="yield"><code>yield</code><a class="anchor-link" href="#yield">¶</a></h3><p>If tasks do not run in parallel, what is the purpose of tasks? Tasks are handy since they can be interrupted and to switch control to other tasks. This is achieved via function <code>yield</code>. When we call yield, we provide the opportunity to switch to another task. The function below is a variation of function <code>compute_π</code> in which we yield every 1000 iterations. At the call to yield we allow other tasks to take over. Without this call to yield, once we start function <code>compute_π</code> we cannot start any other tasks until this function finishes.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=9260c065">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">compute_π_yield</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="n">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">isodd</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">mod</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">            </span><span class="n">yield</span><span class="p">()</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="mi">4</span><span class="o">*</span><span class="n">s</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=69fd4131">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>You can check this behavior experimentally with the two following cells. The next one creates and schedules a task that computes pi with the function <code>compute_π_yield</code>. Note that you can run the 2nd cell bellow while this task is running since we call to yield often inside  <code>compute_π_yield</code>.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a85f3f39">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">fun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">compute_π_yield</span><span class="p">(</span><span class="mi">3_000_000_000</span><span class="p">)</span>
+<span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Task</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span>
+<span class="n">schedule</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=24e23e88">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=66ca10d6">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Example:-Implementing-function-sleep">Example: Implementing function sleep<a class="anchor-link" href="#Example:-Implementing-function-sleep">¶</a></h3><p>Using yield, we can implement our own version of the sleep function as follows:</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=beed2b29">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">mysleep</span><span class="p">(</span><span class="n">secs</span><span class="p">)</span>
+<span class="w">    </span><span class="n">final_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">secs</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">final_time</span>
+<span class="w">        </span><span class="n">yield</span><span class="p">()</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="nb">nothing</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5c44f6c1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>You can check that it behaves as expected.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=73c13bfb">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">mysleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8241,7 +8372,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <div class="alert alert-block alert-success">
-<b>Question (Q1):</b>  How long will the compute time of next cell be? 
+<b>Question (NB2-Q1):</b>  How long will the compute time of next cell be? 
 </div>
 <pre><code>a) 10*t
 b) t
@@ -8274,7 +8405,7 @@ d) near 0*t </code></pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <div class="alert alert-block alert-success">
-<b>Question (Q2):</b>  How long will the compute time of next cell be? 
+<b>Question (NB2-Q2):</b>  How long will the compute time of next cell be? 
 </div>
 <pre><code>a) 10*t
 b) t
@@ -8307,7 +8438,7 @@ d) near 0*t </code></pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <div class="alert alert-block alert-success">
-<b>Question (Q3):</b>  How long will the compute time of next cell be? 
+<b>Question (NB2-Q3):</b>  How long will the compute time of next cell be? 
 </div>
 <pre><code>a) 10*t
 b) t
@@ -8340,7 +8471,7 @@ d) near 0*t </code></pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <div class="alert alert-block alert-success">
-<b>Question (Q4):</b>  How long will the compute time of the 2nd cell be? 
+<b>Question (NB2-Q4):</b>  How long will the compute time of the 2nd cell be? 
 </div>
 <pre><code>a) infinity
 b) 1 second
@@ -8390,7 +8521,7 @@ d) 3 seconds</code></pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <div class="alert alert-block alert-success">
-<b>Question (Q5):</b>  How long will the compute time of the 2nd cell be? 
+<b>Question (NB2-Q5):</b>  How long will the compute time of the 2nd cell be? 
 </div>
 <pre><code>a) infinity
 b) 1 second
