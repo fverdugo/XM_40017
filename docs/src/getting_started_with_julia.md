@@ -208,10 +208,10 @@ To install the MPI package, type
 Congrats, you have installed MPI!
 
 !!! note
-    Many Julia package names end with `.jl`. This is just a way of signaling that a package is written in Julia. When using such packages, the `.jl` needs to be omitted. In this case, we have isntalled the `MPI.jl` package even though we have only typed `MPI` in the REPL.
+    Many Julia package names end with `.jl`. This is just a way of signaling that a package is written in Julia. When using such packages, the `.jl` needs to be omitted. In this case, we have installed the `MPI.jl` package even though we have only typed `MPI` in the REPL.
 
 !!! note
-    The package you have installed it is the Julia interface to MPI, called  `MPI.jl`. Note that it is not a MPI library by itself. It is just a thin wrapper between MPI and Julia. To use this interface, you need an actual MPI library installed in your system such as OpenMPI or MPICH. Julia downloads and installs a MPI library for you, but it is also possible to use a MPI library already available in your system. This is useful, e.g., when running on HPC clusters. See the [documentation](https://juliaparallel.org/MPI.jl/stable/configuration/) of `MPI.jl` for further details.
+    The package you have installed is the Julia interface to MPI, called  `MPI.jl`. Note that it is not a MPI library by itself. It is just a thin wrapper between MPI and Julia. To use this interface, you need an actual MPI library installed in your system such as OpenMPI or MPICH. Julia downloads and installs a MPI library for you, but it is also possible to use a MPI library already available in your system. This is useful, e.g., when running on HPC clusters. See the [documentation](https://juliaparallel.org/MPI.jl/stable/configuration/) of `MPI.jl` for further details.
 
 To check that the package was installed properly, exit package mode by pressing the backspace key several times, and run it again
 
@@ -303,7 +303,7 @@ The information about a project is stored in two files `Project.toml` and `Manif
 - `Manifest.toml` contains direct and indirect dependencies along with the concrete version of each package.
 
 
-In other words, `Project.toml` contains the packages relevant for the user, whereas `Manifest.toml` is the detailed snapshot of all dependencies. The `Manifest.toml` can be used to reproduce the same envinonment in another machine.
+In other words, `Project.toml` contains the packages relevant for the user, whereas `Manifest.toml` is the detailed snapshot of all dependencies. The `Manifest.toml` can be used to reproduce the same environment in another machine.
 
 You can see the path to the current `Project.toml` file by using the `status` operator (or `st` in its short form) while in package mode
 
