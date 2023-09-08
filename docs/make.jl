@@ -123,8 +123,8 @@ makedocs(;
                          "Matrix-matrix multiplication"=>"matrix_matrix.md",
                          "Jacobi method" => "jacobi_method.md",
                          "All pairs of shortest paths" => "asp.md",
-           #              "Solutions" => "solutions.md",
                          ],
+          "Solutions" => "solutions_for_all_notebooks.md",
           ],
 )
 
