@@ -227,20 +227,7 @@ To run MPI applications in parallel, you need a launcher like `mpiexec`. MPI cod
 ```
 $ mpiexec -np 4 julia hello_mpi.jl
 ```
-But it will probably not work since the version of `mpiexec` needs to match with the MPI version we are using from Julia. You can find the path to the `mpiexec` binary you need to use with these commands
-
-```julia
-julia> using MPI
-julia> MPI.mpiexec_path
-```
-
-and then try again
-```
-$ /path/to/my/mpiexec -np 4 julia hello_mpi.jl
-```
-with your particular path.
-
-However, this is not very convenient. Don't worry if you could not make it work! A more elegant way to run MPI code is from the Julia REPL directly, by using these commands:
+But it will probably not work since the version of `mpiexec` needs to match with the MPI version we are using from Julia. Don't worry if you could not make it work! A more elegant way to run MPI code is from the Julia REPL directly, by using these commands:
 ```julia
 julia> using MPI
 julia> mpiexec(cmd->run(`$cmd -np 4 julia hello_mpi.jl`))
