@@ -7501,7 +7501,7 @@ a.anchor-link {
 <li>Tasks</li>
 <li>Channels</li>
 </ul>
-<p>Understanding these concepts is important to learn later distributed computing.</p>
+<p>Understanding these concepts is important to learn distributed computing later.</p>
 </div>
 </div>
 </div>
@@ -7687,7 +7687,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>How is this possible? Tasks run in the brackground and this particular task is sleeping for most of the time. Thus, it is possible to use the current Julia process for other operations while the tasks is sleeping.</p>
+<p>How is this possible? Tasks run in the background and this particular task is sleeping for most of the time. Thus, it is possible to use the current Julia process for other operations while the task is sleeping.</p>
 </div>
 </div>
 </div>
@@ -7914,7 +7914,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Useful-macro:-@async">Useful macro: <code>@async</code><a class="anchor-link" href="#Useful-macro:-@async">¶</a></h3><p>So far, we have created tasks using low-level functions, but there are more convenient ways of creating and scheduling tasks. For instance using the <code>@async</code> macro. This macro is used to run a piece of code asynchronously. Under the hood it puts the code in an anonymous function, creates a task, and schedules it. For instance, the next cell is equivalent to previous one.</p>
+<h3 id="Useful-macro:-@async">Useful macro: <code>@async</code><a class="anchor-link" href="#Useful-macro:-@async">¶</a></h3><p>So far, we have created tasks using low-level functions, but there are more convenient ways of creating and scheduling tasks. For instance using the <code>@async</code> macro. This macro is used to run a piece of code asynchronously. Under the hood it puts the code in an anonymous function, creates a task, and schedules it. For instance, the next cell is equivalent to the previous one.</p>
 </div>
 </div>
 </div>
@@ -7967,7 +7967,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Channels">Channels<a class="anchor-link" href="#Channels">¶</a></h2><h3 id="Sending-data-between-tasks">Sending data between tasks<a class="anchor-link" href="#Sending-data-between-tasks">¶</a></h3><p>Julia provides channels as a way to send data between tasks. A channel is like a FIFO queue in which tasks can put and take values from. In next example, we create a channel and a task that puts five values into the channel. Finally, the task closes the channel.</p>
+<h2 id="Channels">Channels<a class="anchor-link" href="#Channels">¶</a></h2><h3 id="Sending-data-between-tasks">Sending data between tasks<a class="anchor-link" href="#Sending-data-between-tasks">¶</a></h3><p>Julia provides channels as a way to send data between tasks. A channel is like a FIFO queue which tasks can put values into and take values from. In the next example, we create a channel and a task that puts five values into the channel. Finally, the task closes the channel.</p>
 </div>
 </div>
 </div>
@@ -8096,7 +8096,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Calls-to-put!-and-take!-are-blocking">Calls to <code>put!</code> and <code>take!</code> are blocking<a class="anchor-link" href="#Calls-to-put!-and-take!-are-blocking">¶</a></h3><p>Note that <code>put!</code> and <code>take!</code> are blocking operations. Calling <code>put!</code> blocks the tasks until another task calls <code>take!</code> and viceversa. Thus, we need at least 2 tasks for this to work. If we call <code>put!</code> and <code>take!</code> from the same task, it will result in a dead lock.  We have added a print statement to previous example. Run it again and note how <code>put!</code> blocks until we call <code>take!</code>.</p>
+<h3 id="Calls-to-put!-and-take!-are-blocking">Calls to <code>put!</code> and <code>take!</code> are blocking<a class="anchor-link" href="#Calls-to-put!-and-take!-are-blocking">¶</a></h3><p>Note that <code>put!</code> and <code>take!</code> are blocking operations. Calling <code>put!</code> blocks the tasks until another task calls <code>take!</code> and viceversa. Thus, we need at least 2 tasks for this to work. If we call <code>put!</code> and <code>take!</code> from the same task, it will result in a dead lock.  We have added a print statement to the previous example. Run it again and note how <code>put!</code> blocks until we call <code>take!</code>.</p>
 </div>
 </div>
 </div>
@@ -8155,7 +8155,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Buffered-channels">Buffered channels<a class="anchor-link" href="#Buffered-channels">¶</a></h3><p>We can be a bit more flexible and use a buffered channel. In this case, <code>put!</code> will block only if the channel is full and <code>take!</code> will block if the channel is empty. We repeat previous example, but with a buffered channel of size 2. Note that we can call <code>put!</code> until the channel is full. At this point, we need to wait to until we call <code>take!</code> which removes an item from the channel, making room for a new item.</p>
+<h3 id="Buffered-channels">Buffered channels<a class="anchor-link" href="#Buffered-channels">¶</a></h3><p>We can be a bit more flexible and use a buffered channel. In this case, <code>put!</code> will block only if the channel is full and <code>take!</code> will block if the channel is empty. We repeat the previous example, but with a buffered channel of size 2. Note that we can call <code>put!</code> until the channel is full. At this point, we need to wait to until we call <code>take!</code> which removes an item from the channel, making room for a new item.</p>
 </div>
 </div>
 </div>
