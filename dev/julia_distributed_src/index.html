@@ -8227,6 +8227,26 @@ bottlenecks. Being aware of the data we are moving when using functions such as 
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ff0da45d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="This-will-not-work!">This will not work!<a class="anchor-link" href="#This-will-not-work!">¶</a></h3><p>You really need remote channels to communicate different processes. Standard Channels would not work. For instance, the following code would block at the <code>take!</code>. Worker 4 will receive a different copy of the channel and will put values in it. The channel defined in the main process will remain empty and this will make the take! to block.</p>
+<div class="highlight"><pre><span></span><span class="n">chnl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Channel</span><span class="p">{</span><span class="kt">Int</span><span class="p">}()</span>
+<span class="nd">@spawnat</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span>
+<span class="w">        </span><span class="n">put!</span><span class="p">(</span><span class="n">chnl</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">close</span><span class="p">(</span><span class="n">chnl</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">take!</span><span class="p">(</span><span class="n">chnl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1b3f8dcc">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -8424,7 +8444,7 @@ bottlenecks. Being aware of the data we are moving when using functions such as 
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <div class="alert alert-block alert-success">
-<b>Question (Q1):</b>  How many integers are transferred between master and worker? Including both directions. 
+<b>Question (NB3-Q1):</b>  How many integers are transferred between master and worker? Including both directions. 
 </div>
 <div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">proc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
@@ -8460,7 +8480,7 @@ d) 65</code></pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <div class="alert alert-block alert-success">
-<b>Question (Q2):</b>  How many integers are transferred between master and worker? Including both directions. 
+<b>Question (NB3-Q2):</b>  How many integers are transferred between master and worker? Including both directions. 
 </div>
 <div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">proc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
@@ -8496,7 +8516,7 @@ d) 32</code></pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <div class="alert alert-block alert-success">
-<b>Question (Q3):</b>  Which value will be the value of `x` ? 
+<b>Question (NB3-Q3):</b>  Which value will be the value of `x` ? 
 </div>
 </div>
 </div>
@@ -8527,7 +8547,7 @@ d) 32</code></pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <div class="alert alert-block alert-success">
-<b>Question (Q4):</b>  Which value will be the value of `x` ? 
+<b>Question (NB3-Q4):</b>  Which value will be the value of `x` ? 
 </div>
 <p>Which value will be the value of <code>x</code> ?</p>
 </div>
