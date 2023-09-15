@@ -50,7 +50,6 @@ heatmap(x,y,(i,j)->mandel(i,j,max_iters))
 
 ## Asynchronous programming in Julia
 
-
 ### NB2-Q1
 
 Evaluating `compute_π(100_000_000)` takes about 0.25 seconds. Thus, the loop would take about 2.5 seconds since we are calling the function 10 times.
@@ -71,4 +70,94 @@ It will take about 3 seconds. The channel has buffer size 4, thus the call to `p
 
 The channel is not buffered and therefore the call to `put!` will block. The cell will run forever, since there is no other task that calls `take!` on this channel. 
 
+## Distributed computing in Julia
+
+### NB3-Q1
+
+We send the matrix (16 entries) and then we receive back the result (1 extra integer). Thus, the total number of transferred integers in 17.
+
+### NB3-Q2
+
+Even though we only use a single entry of the matrix in the remote worker, the entire matrix is captured and sent to the worker. Thus, we will transfer 17 integers like in Question 1.
+
+### NB3-Q3
+
+The value of `x` will still be zero since the worker receives a copy of the matrix and it modifies this copy, not the original one.
+
+### NB3-Q4
+
+In this case, the code `a[2]=2` is executed in the main process. Since the matrix is already in the main process, it is not needed to create and send a copy of it. Thus, the code modifies the original matrix and the value of `x` will be 2. 
+
+## Distributed computing with MPI
+
+### Exercise 1
+
+```julia
+using MPI
+MPI.Init()
+comm = MPI.Comm_dup(MPI.COMM_WORLD)
+rank = MPI.Comm_rank(comm)
+nranks = MPI.Comm_size(comm)
+buffer = Ref(0)
+if rank == 0
+    msg = 2
+    buffer[] = msg
+    println("msg = $(buffer[])")
+    MPI.Send(buffer,comm;dest=rank+1,tag=0)
+    MPI.Recv!(buffer,comm;source=nranks-1,tag=0)
+    println("msg = $(buffer[])")
+else
+    dest = if (rank != nranks-1)
+        rank+1
+    else
+        0
+    end
+    MPI.Recv!(buffer,comm;source=rank-1,tag=0)
+    buffer[] += 1
+    println("msg = $(buffer[])")
+    MPI.Send(buffer,comm;dest,tag=0)
+end
+```
+
+### Exercise 2
+
+```julia
+f = () -> Channel{Int}(1)
+chnls = [ RemoteChannel(f,w) for w in workers() ]
+@sync for (iw,w) in enumerate(workers())
+    @spawnat w begin
+        chnl_snd = chnls[iw]
+        if w == 2
+            chnl_rcv = chnls[end]
+            msg = 2
+            println("msg = $msg")
+            put!(chnl_snd,msg)
+            msg = take!(chnl_rcv)
+            println("msg = $msg")
+        else
+           chnl_rcv = chnls[iw-1]
+           msg = take!(chnl_rcv)
+           msg += 1
+           println("msg = $msg")
+           put!(chnl_snd,msg)
+        end
+    end
+end
+```
+
+This is another possible solution.
+
+```julia
+@everywhere function work(msg)
+    println("msg = $msg")
+    if myid() != nprocs()
+        next = myid() + 1
+        @fetchfrom next work(msg+1)
+    else
+        @fetchfrom 2 println("msg = $msg")
+    end
+end
+msg = 2
+@fetchfrom 2 work(msg)
+```
 
