@@ -7743,7 +7743,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Where-do-we-can-exploit-parallelism?">Where do we can exploit parallelism?<a class="anchor-link" href="#Where-do-we-can-exploit-parallelism?">¶</a></h3><p>Look at the three nested loops in the sequential implementation:</p>
+<h3 id="Where-can-we-exploit-parallelism?">Where can we exploit parallelism?<a class="anchor-link" href="#Where-can-we-exploit-parallelism?">¶</a></h3><p>Look at the three nested loops in the sequential implementation:</p>
 <div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">m</span>
 <span class="w">        </span><span class="n">Cij</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z</span>
@@ -7772,7 +7772,7 @@ a.anchor-link {
 <ul>
 <li>Algorithm 1: each worker computes a single entry of C</li>
 <li>Algorithm 2: each worker computes a single row of C</li>
-<li>Algorithm 3: each worker computes a block rows of C</li>
+<li>Algorithm 3: each worker computes N/P rows of C</li>
 </ul>
 </div>
 </div>
