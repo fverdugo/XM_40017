@@ -7568,7 +7568,32 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Installing-MPI-in-Julia">Installing MPI in Julia<a class="anchor-link" href="#Installing-MPI-in-Julia">¶</a></h3><p>MPI can be installed as any other Julia package using the package manager.</p>
+<h3 id="Installing-MPI-in-Julia">Installing MPI in Julia<a class="anchor-link" href="#Installing-MPI-in-Julia">¶</a></h3><p>The Jupyter Julia kernel installed by IJulia activates the folder where the notebook is located as the default environment, which causes the main process and the worker processes to not share the same environment. Therefore, we need to set the environment as the global environment.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=705c2439-c805-4818-be73-342182f7b7a0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="p">]</span><span class="w"> </span><span class="n">activate</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e99c7676-989e-4e91-b65e-ebca2d5626a4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>MPI can be installed as any other Julia package using the package manager.</p>
 </div>
 </div>
 </div>
