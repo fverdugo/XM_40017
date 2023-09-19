@@ -160,4 +160,57 @@ end
 msg = 2
 @fetchfrom 2 work(msg)
 ```
+## Matrix-matrix multiplication
+
+### Exercise 1
+
+```julia
+function matmul_dist_3!(C,A,B)
+    m = size(C,1)
+    n = size(C,2)
+    l = size(A,2)
+    @assert size(A,1) == m
+    @assert size(B,2) == n
+    @assert size(B,1) == l
+    @assert mod(m,nworkers()) == 0
+    nrows_w = div(m,nworkers())
+    @sync for (iw,w) in enumerate(workers())
+        lb = 1 + (iw-1)*nrows_w
+        ub = iw*nrows_w
+        A_w = A[lb:ub,:]
+        ftr = @spawnat w begin
+             C_w = similar(A_w)
+             matmul_seq!(C_w,A_w,B)
+             C_w
+        end
+        @async C[lb:ub,:] = fetch(ftr)
+    end
+    C
+end
+
+@everywhere function matmul_seq!(C,A,B)
+    m = size(C,1)
+    n = size(C,2)
+    l = size(A,2)
+    @assert size(A,1) == m
+    @assert size(B,2) == n
+    @assert size(B,1) == l
+    z = zero(eltype(C))
+    for j in 1:n
+        for i in 1:m
+            Cij = z
+            for k in 1:l
+                @inbounds Cij = Cij + A[i,k]*B[k,j]
+            end
+            C[i,j] = Cij
+        end
+    end
+    C
+end
+```
+
+### Exercise 2
+
+At each call to @spawnat we will communicate O(N) and compute O(N) in a worker process just like in algorithm 1. However, we will do this work N^2/P times on average at each worker. Thus, the total communication and computation on a worker will be O(N^3/P) for both communication and computation.  Thus, the communication over computation ratio will still be O(1) and thus the communication will dominate in practice, making the algorithm inefficient.
+
 
