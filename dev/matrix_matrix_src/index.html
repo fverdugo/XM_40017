@@ -7564,9 +7564,10 @@ a.anchor-link {
 <span class="w">        </span><span class="s">"It's not correct. Keep trying! 💪"</span>
 <span class="w">    </span><span class="k">end</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">println</span>
 <span class="k">end</span>
+<span class="n">alg_0_comp_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"d"</span><span class="p">)</span>
 <span class="n">alg_1_deps_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="s">"b"</span><span class="p">)</span>
-<span class="n">alg_1_comm_overhead_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"c"</span><span class="p">)</span>
-<span class="n">alg_1_comp_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"a"</span><span class="p">)</span>
+<span class="n">alg_1_comm_overhead_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"b"</span><span class="p">)</span>
+<span class="n">alg_1_comp_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"b"</span><span class="p">)</span>
 <span class="n">alg_2_complex_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"b"</span><span class="p">)</span>
 <span class="n">alg_2_deps_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="s">"d"</span><span class="p">)</span>
 <span class="n">alg_3_deps_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"c"</span><span class="p">)</span>
@@ -7583,7 +7584,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Problem-Statement">Problem Statement<a class="anchor-link" href="#Problem-Statement">¶</a></h2><p>Let us consider the (dense) matrix-matrix product <code>C=A*B</code>.</p>
+<h2 id="Problem-Statement">Problem Statement<a class="anchor-link" href="#Problem-Statement">¶</a></h2><p>Given $A$ and $B$ two $N$-by-$N$ matrices, compute the matrix-matrix product $C=AB$. Compute it in parallel and efficiently.</p>
 </div>
 </div>
 </div>
@@ -7666,7 +7667,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Serial-implementation">Serial implementation<a class="anchor-link" href="#Serial-implementation">¶</a></h2><p>We start by considering the (naive) sequential algorithm:</p>
+<h2 id="Serial-implementation">Serial implementation<a class="anchor-link" href="#Serial-implementation">¶</a></h2><p>We start by considering the (naive) sequential algorithm, which is based on the math definition of the matrix-matrix product $C_{ij} = \sum_k A_{ik} B_{kj}$</p>
 </div>
 </div>
 </div>
@@ -7703,6 +7704,37 @@ a.anchor-link {
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e3b86457">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Run next cell to test the implementation.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c5caf799">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Test</span>
+<span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+<span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+<span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">matmul_seq!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+<span class="nd">@test</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">A</span><span class="o">*</span><span class="n">B</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f967d2ea">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -7731,6 +7763,38 @@ a.anchor-link {
 <span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">matmul_seq!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
 <span class="nd">@btime</span><span class="w"> </span><span class="n">mul!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0ca2fbd4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<div class="alert alert-block alert-success">
+<b>Question:</b>  Which is the complexity (number of operations) of the serial algorithm? Assume that all matrices are $N$-by-$N$ matrices.    
+</div>
+<pre><code>a) O(1)
+b) O(N)
+c) O(N²)
+d) O(N³)</code></pre>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=078e974e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">answer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"x"</span><span class="w"> </span><span class="c"># replace x with a, b, c, or d </span>
+<span class="n">alg_0_comp_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8043,10 +8107,10 @@ $$</p>
 <div class="alert alert-block alert-success">
 <b>Question:</b>  How many scalars are communicated from and to a worker?  Assume that matrices A, B, and C are N by N matrices.
 </div>
-<pre><code>a) 3N
-b) 2N + 2
-c) 2N + 1
-d) N² + 1</code></pre>
+<pre><code>a) O(1)
+b) O(N)
+c) O(N²)
+d) O(N³)</code></pre>
 </div>
 </div>
 </div>
@@ -8075,9 +8139,10 @@ d) N² + 1</code></pre>
 <div class="alert alert-block alert-success">
 <b>Question:</b>  How many operations are done in a worker?    
 </div>
-<pre><code>a) O(N)
-b) O(N²)
-c) O(N³)</code></pre>
+<pre><code>a) O(1)
+b) O(N)
+c) O(N²)
+d) O(N³)</code></pre>
 </div>
 </div>
 </div>
@@ -8548,22 +8613,22 @@ d) O(N²/P) communication and O(N³/P) computation</code></pre>
 <tr>
 <td>1</td>
 <td>N²</td>
-<td>2N + 1</td>
-<td>N</td>
+<td>O(N)</td>
+<td>O(N)</td>
 <td>O(1)</td>
 </tr>
 <tr>
 <td>2</td>
 <td>N</td>
-<td>2N + N²</td>
-<td>N²</td>
+<td>O(N²)</td>
+<td>O(N²)</td>
 <td>O(1)</td>
 </tr>
 <tr>
 <td>3</td>
 <td>P</td>
-<td>N² + 2N²/P</td>
-<td>N³/P</td>
+<td>O(N²)</td>
+<td>O(N³/P)</td>
 <td>O(P/N)</td>
 </tr>
 </tbody>
