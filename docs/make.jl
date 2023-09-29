@@ -123,6 +123,8 @@ makedocs(;
                          "Matrix-matrix multiplication"=>"matrix_matrix.md",
                          "Jacobi method" => "jacobi_method.md",
                          "All pairs of shortest paths" => "asp.md",
+                         "Gaussian elimination" => "LEQ.md",
+                         "Traveling salesperson problem" => "tsp.md",
                          ],
           "Solutions" => "solutions_for_all_notebooks.md",
           ],
