@@ -8198,7 +8198,7 @@ d) the ghost cells of u contain the initial values -1 and 1 in all ranks</code><
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Latency-hiding">Latency hiding<a class="anchor-link" href="#Latency-hiding">¶</a></h3><p>Can our implementation above be improved? Note that we only need communications to update the values at the boundary of the portion owned by each process. The other values (the one in green in the figure below) can be updated without communications. This provides the opportunity of overlapping the computation of the interior values (green cells in the figure) with the communication of the ghost values. This technique is called latency hiding, since we are hiding communication latency by overlapping it with communication that we need to do anyway.</p>
+<h3 id="Latency-hiding">Latency hiding<a class="anchor-link" href="#Latency-hiding">¶</a></h3><p>Can our implementation above be improved? Note that we only need communications to update the values at the boundary of the portion owned by each process. The other values (the one in green in the figure below) can be updated without communications. This provides the opportunity of overlapping the computation of the interior values (green cells in the figure) with the communication of the ghost values. This technique is called latency hiding, since we are hiding communication latency by overlapping it with computation that we need to do anyway.</p>
 <p>The modification of the implementation above to include latency hiding is leaved as an exercise (see below).</p>
 </div>
 </div>
