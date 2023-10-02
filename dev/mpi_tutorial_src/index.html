@@ -8203,7 +8203,7 @@ a.anchor-link {
 <h2 id="Point-to-Point-communication">Point-to-Point communication<a class="anchor-link" href="#Point-to-Point-communication">¶</a></h2><p>MPI also provides point-to-point communication directives for arbitrary communication between processes. Point-to-point communications are two-sided: there is a sender and a receiver. Here, we will discuss these basic directives:</p>
 <ul>
 <li><code>MPI.Isend</code>, and <code>MPI.Irecv!</code> (<em>non-blocking directives</em>)</li>
-<li><code>MPI.Send</code>, and <code>MPI.Recv</code> (<em>blocking directives</em>)</li>
+<li><code>MPI.Send</code>, and <code>MPI.Recv!</code> (<em>blocking directives</em>)</li>
 </ul>
 <p>Non-blocking directives return immediately and return an <code>MPI.Request</code> object. This request object can be queried with functions like <code>MPI.Wait</code>. It is mandatory to wait on the request object before reading the receive buffer, or before writing again on the send buffer.</p>
 <p>For blocking directives, it is save to read/write from/to the receive/send buffer once the function has returned. By default, blocking directives might wait (or might not wait) for a matching send/receive.
