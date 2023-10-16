@@ -125,6 +125,7 @@ makedocs(;
                          "All pairs of shortest paths" => "asp.md",
                          "Gaussian elimination" => "LEQ.md",
                          "Traveling salesperson problem" => "tsp.md",
+                         "Partial differential equations" => "pdes.md",
                          ],
           "Solutions" => "solutions_for_all_notebooks.md",
           ],
