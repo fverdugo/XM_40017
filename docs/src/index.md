@@ -44,7 +44,7 @@ julia> notebook()
 
 ## Authors
 
-This material is created by [Francesc Verdugo](https://github.com/fverdugo/) with the help of [Gelieza Kötterheinrich](https://www.linkedin.com/in/gelieza/). Part of the notebooks are based on the course slides by [Henri Bal](https://www.vuhpdc.net/henri-bal/).
+This material is created by [Francesc Verdugo](https://github.com/fverdugo/) with the help of [Gelieza Kötterheinrich](https://www.linkedin.com/in/gelieza-k/). Part of the notebooks are based on the course slides by [Henri Bal](https://www.vuhpdc.net/henri-bal/).
 
 
 ## License
