@@ -129,7 +129,13 @@ If this runs without error and you see a version number, you are good to go!
     In this tutorial, when a code snipped starts with `$`, it should be run in the terminal. Otherwise, the code is to be run in the Julia REPL.
 
 !!! tip
-    Avoid calling Julia code from the terminal, use the Julia REPL instead! Each time you call Julia from the terminal, you start a fresh Julia session and Julia will need to compile your code from scratch. This can be time consuming for large projects. In contrast, if you execute code in the REPL, Julia will compile code incrementally, which is much faster. Running code in a cluster (like in DAS-5 for the Julia assignment) is among the few situations you need to run Julia code from the terminal.
+    Avoid calling Julia code from the terminal, use the Julia REPL instead!
+    Each time you call Julia from the terminal, you start a fresh Julia session and Julia will need to compile your code from scratch.
+    This can be time consuming for large projects.
+    In contrast, if you execute code in the REPL, Julia will compile code incrementally, which is much faster.
+    Running code in a cluster (like in DAS-5 for the Julia assignment) is among the few situations you need to run Julia code
+    from the terminal. Visit this link ([Julia workflow tips](https://docs.julialang.org/en/v1/manual/workflow-tips/))
+    from the official Julia documentation for further information about how to develop Julia code effectivelly.
 
 ### Running parallel code
 
@@ -199,11 +205,11 @@ To install a package, we need to enter *package* mode. Remember that we entered 
 ```julia
 julia> ]
 ```
-At this point, the prompt should have changed to `(@v1.8) pkg>` indicating that we are in package mode. The text between the parentheses indicates which is the active *project*, i.e., where packages are going to be installed. In this case, we are working with the global project associated with our Julia installation (which is Julia 1.8 in this example, but it can be another version in your case).
+At this point, the prompt should have changed to `(@v1.10) pkg>` indicating that we are in package mode. The text between the parentheses indicates which is the active *project*, i.e., where packages are going to be installed. In this case, we are working with the global project associated with our Julia installation (which is Julia 1.10 in this example, but it can be another version in your case).
 
 To install the MPI package, type
 ```julia
-(@v1.8) pkg> add MPI
+(@v1.10) pkg> add MPI
 ```
 Congrats, you have installed MPI!
 
@@ -230,7 +236,7 @@ $ mpiexec -np 4 julia hello_mpi.jl
 But it will probably not work since the version of `mpiexec` needs to match with the MPI version we are using from Julia. Don't worry if you could not make it work! A more elegant way to run MPI code is from the Julia REPL directly, by using these commands:
 ```julia
 julia> using MPI
-julia> mpiexec(cmd->run(`$cmd -np 4 julia hello_mpi.jl`))
+julia> run(`$(mpiexec()) -np 4 julia hello_mpi.jl`)
 ```
 
 Now, you should see output from 4 ranks.
@@ -241,9 +247,9 @@ Now, you should see output from 4 ranks.
 
 We have installed the `MPI` package globally and it will be available in all Julia sessions. However, in some situations, we want to work with different versions of the same package or to install packages in an isolated way to avoid potential conflicts with other packages. This can be done by using local projects.
 
-A project is simply a folder in the hard disk. To use a particular folder as your project, you need to *activate* it. This is done by entering package mode and using the `activate` command followed by the path to the folder you want to activate.
+A project is simply a folder in your file system. To use a particular folder as your project, you need to *activate* it. This is done by entering package mode and using the `activate` command followed by the path to the folder you want to activate.
 ```julia
-(@v1.8) pkg> activate .
+(@v1.10) pkg> activate .
 ```
  The previous command will activate the current working directory. Note that the dot `.` is indeed the path to the current folder.
 
@@ -253,7 +259,7 @@ The prompt has changed to `(lessons) pkg>` indicating that we are in the project
     You can activate a project directly when opening Julia from the terminal using the `--project` flag. The command `$ julia --project=.` will open Julia and activate a project in the current directory. You can also achieve the same effect by setting the environment variable  `JULIA_PROJECT` with the path of the folder you want to activate.
 
 !!! note
-    The active project folder and the current working directory are two independent concepts! For instance,  `(@v1.8) pkg> activate folderB` and then `julia> cd("folderA")`, will activate the project in `folderB` and change the current working directory to `folderA`.
+    The active project folder and the current working directory are two independent concepts! For instance,  `(@v1.10) pkg> activate folderB` and then `julia> cd("folderA")`, will activate the project in `folderB` and change the current working directory to `folderA`.
 
 At this point all package-related operations will be local to the new project. For instance, install the `DataFrames` package.
 
@@ -271,7 +277,7 @@ Now, we can return to the global project to check that `DataFrames` has not been
 ```julia
 (lessons) pkg> activate
 ```
-The prompt is again `(@v1.8) pkg>`
+The prompt is again `(@v1.10) pkg>`
 
 Now, try to use `DataFrames`.
 
@@ -295,13 +301,13 @@ In other words, `Project.toml` contains the packages relevant for the user, wher
 You can see the path to the current `Project.toml` file by using the `status` operator (or `st` in its short form) while in package mode
 
 ```julia
-(@v1.8) pkg> status
+(@v1.10) pkg> status
 ```
 
 The information about the `Manifest.toml` can be inspected by passing the `-m` flag.
 
 ```julia
-(@v1.8) pkg> status -m
+(@v1.10) pkg> status -m
 ```
 
 ### Installing packages from a project file
@@ -325,7 +331,7 @@ julia> mkdir("newproject")
 
 To install all the packages registered in this file you need to activate the folder containing your `Project.toml` file
 ```julia
-(@v1.8) pkg> activate newproject
+(@v1.10) pkg> activate newproject
 ```
 and then *instantiating* it
 ```julia
@@ -339,12 +345,12 @@ The instantiate command will download and install all listed packages and their 
 You can get help about a particular package operator by writing `help` in front of it
 
 ```julia
-(@v1.8) pkg> help activate
+(@v1.10) pkg> help activate
 ```
 
 You can get an overview of all package commands by typing `help` alone
 ```julia
-(@v1.8) pkg> help
+(@v1.10) pkg> help
 ```
 
 ### Package operations in Julia code
@@ -357,7 +363,7 @@ julia> Pkg.status()
 ```
 is equivalent to calling `status` in package mode.
 ```julia
-(@v1.8) pkg> status
+(@v1.10) pkg> status
 ```
 
 ## Conclusion
