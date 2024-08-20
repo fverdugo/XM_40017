@@ -81,36 +81,6 @@ msg = 2
 @fetchfrom 2 work(msg)
 ```
 
-## MPI (Point-to-point)
-
-### Exercise 1
-
-```julia
-using MPI
-MPI.Init()
-comm = MPI.Comm_dup(MPI.COMM_WORLD)
-rank = MPI.Comm_rank(comm)
-nranks = MPI.Comm_size(comm)
-buffer = Ref(0)
-if rank == 0
-    msg = 2
-    buffer[] = msg
-    println("msg = $(buffer[])")
-    MPI.Send(buffer,comm;dest=rank+1,tag=0)
-    MPI.Recv!(buffer,comm;source=nranks-1,tag=0)
-    println("msg = $(buffer[])")
-else
-    dest = if (rank != nranks-1)
-        rank+1
-    else
-        0
-    end
-    MPI.Recv!(buffer,comm;source=rank-1,tag=0)
-    buffer[] += 1
-    println("msg = $(buffer[])")
-    MPI.Send(buffer,comm;dest,tag=0)
-end
-```
 
 ## Matrix-matrix multiplication
 
@@ -158,6 +128,37 @@ end
         end
     end
     C
+end
+```
+
+## MPI (Point-to-point)
+
+### Exercise 2
+
+```julia
+using MPI
+MPI.Init()
+comm = MPI.COMM_WORLD
+rank = MPI.Comm_rank(comm)
+nranks = MPI.Comm_size(comm)
+buffer = Ref(0)
+if rank == 0
+    msg = 2
+    buffer[] = msg
+    println("msg = $(buffer[])")
+    MPI.Send(buffer,comm;dest=rank+1,tag=0)
+    MPI.Recv!(buffer,comm;source=nranks-1,tag=0)
+    println("msg = $(buffer[])")
+else
+    dest = if (rank != nranks-1)
+        rank+1
+    else
+        0
+    end
+    MPI.Recv!(buffer,comm;source=rank-1,tag=0)
+    buffer[] += 1
+    println("msg = $(buffer[])")
+    MPI.Send(buffer,comm;dest,tag=0)
 end
 ```
 
