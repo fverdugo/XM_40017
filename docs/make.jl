@@ -13,7 +13,7 @@ EditURL = "https://github.com/fverdugo/XM_40017/blob/main/notebooks/SCRIPT_NAME.
     <div class="admonition-body">
         <ul>
             <li>
-                Download this notebook and run it locally on your machine [recommended]. Click <a href="https://www.francescverdugo.com/XM_40017/dev/SCRIPT_NAME.ipynb" download>here</a>.
+                Download this notebook and run it locally on your machine [highly recommended]. Click <a href="https://www.francescverdugo.com/XM_40017/dev/SCRIPT_NAME.ipynb" download>here</a>.
             </li>
         </ul>
     </div>
@@ -121,6 +121,7 @@ makedocs(;
                          "Distributed computing in Julia" => "julia_distributed.md",
                          #"Distributed computing with MPI" => "mpi_tutorial.md",
                          "Matrix-matrix multiplication"=>"matrix_matrix.md",
+                         "MPI (point-to-point)" => "julia_mpi.md",
                          #"Jacobi method" => "jacobi_method.md",
                          #"All pairs of shortest paths" => "asp.md",
                          #"Gaussian elimination" => "LEQ.md",
