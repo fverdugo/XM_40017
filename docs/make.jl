@@ -122,7 +122,7 @@ makedocs(;
                          #"Distributed computing with MPI" => "mpi_tutorial.md",
                          "Matrix-matrix multiplication"=>"matrix_matrix.md",
                          "MPI (point-to-point)" => "julia_mpi.md",
-                         #"Jacobi method" => "jacobi_method.md",
+                         "Jacobi method" => "jacobi_method.md",
                          #"All pairs of shortest paths" => "asp.md",
                          #"Gaussian elimination" => "LEQ.md",
                          #"Traveling salesperson problem" => "tsp.md",
