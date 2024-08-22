@@ -8111,7 +8111,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <div class="alert alert-block alert-info">
-<b>Note:</b> Function `mpiexec` provided by `MPI.jl` is a convenient way of accessing the `mpiexec` program that matches the MPI installation used my Julia.
+<b>Note:</b> Function `mpiexec` provided by `MPI.jl` is a convenient way of accessing the `mpiexec` program that matches the MPI installation used by Julia.
 </div>
 </div>
 </div>
@@ -8607,7 +8607,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Blocking-operations">Blocking operations<a class="anchor-link" href="#Blocking-operations">¶</a></h2><p><code>MPI_Recv</code> and <code>MPI_Probe</code> are <em>blocking</em> operations. This means that they will wait for a matching send.</p>
-<p><code>MPI_Send</code> is also often called a blocking send, but this is very misleading. <code>MPI_Send</code> might or not wait for a matching <code>MPI_Recv</code>. Look into the following example (which in fact is an incorrect MPI program).</p>
+<p><code>MPI_Send</code> is also often called a blocking send, but this is very misleading. <code>MPI_Send</code> might or not wait for a matching <code>MPI_Recv</code>. Assuming that <code>MPI_Send</code> will block waiting for a matching receive is erroneous. I.e., we cannot assume that <code>MPI_Send</code> has synchronization side effects with the receiver process. However, assuming that <code>MPI_Send</code> will not block is also erroneous. Look into the following example (which in fact is an incorrect MPI program). In contrast, <code>MPI_Send</code> guarantees that the send buffer can be reused when function returns (complete operation).</p>
 </div>
 </div>
 </div>
@@ -8690,7 +8690,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Fixing-cyclic-dependencies">Fixing cyclic dependencies<a class="anchor-link" href="#Fixing-cyclic-dependencies">¶</a></h2><p>Returning to the incorrect program seen before. Remember that on my laptop it worked for <code>n=1</code>, but it failed for <code>n=10000</code>.  For <code>n=1</code> the MPI implementation provably decided that the best trade-off was to buffer the small message and return from the <code>MPI_Send</code> as soon as possible. For the large message (<code>n=10000</code>) it provably decided to wait for a matching receive in ordeer to avoid copying data. In this case, both ranks were  blocked on the call to <code>MPI_Send</code> and the receives were never posted leading to a dead lock.</p>
+<h2 id="Fixing-cyclic-dependencies">Fixing cyclic dependencies<a class="anchor-link" href="#Fixing-cyclic-dependencies">¶</a></h2><p>Returning to the incorrect program seen before. Remember that on my laptop it worked for <code>n=1</code>, but it failed for <code>n=10000</code>.  For <code>n=1</code> the MPI implementation provably decided that the best trade-off was to buffer the small message and return from the <code>MPI_Send</code> as soon as possible. For the large message (<code>n=10000</code>) it provably decided to wait for a matching receive in order to avoid copying data. In this case, both ranks were  blocked on the call to <code>MPI_Send</code> and the receives were never posted leading to a dead lock.</p>
 <p>We can fix these cyclic dependences by smartly ordering the sends and the receives:</p>
 </div>
 </div>
@@ -8803,10 +8803,11 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Standard-mode">Standard mode<a class="anchor-link" href="#Standard-mode">¶</a></h3><ul>
-<li>Function <code>MPI_Send</code></li>
+<li>Function <code>MPI_Send</code>.</li>
 <li>Programmer cannot make any assumptions whether the message is buffered or not. This is up to the system.</li>
-<li>Assuming buffering might lead to incorrect programs (as the example above).</li>
-<li>Assuming that a matching receive started is also incorrect.</li>
+<li>Assuming that <code>MPI_Send</code> does not block because it copies the message into a buffer is erroneous (as the example above).</li>
+<li>Assuming that <code>MPI_Send</code> will block waiting for a matching receive is also incorrect.</li>
+<li>Assuming that a matching receive started when <code>MPI_Send</code>returns is also incorrect (no synchronization guarantee).</li>
 </ul>
 </div>
 </div>
@@ -8818,8 +8819,8 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Buffered">Buffered<a class="anchor-link" href="#Buffered">¶</a></h3><ul>
-<li>Function <code>MPI_Bsend</code></li>
+<h3 id="Buffered-mode">Buffered mode<a class="anchor-link" href="#Buffered-mode">¶</a></h3><ul>
+<li>Function <code>MPI_Bsend</code>.</li>
 <li>Programmer provides additional internal buffer space with function <code>MPI_Buffer_attach</code>.</li>
 <li><code>MPI_Bsend</code> completes when message is copied into a local buffer.</li>
 <li>Erroneous if buffer space is insufficient.</li>
@@ -8835,11 +8836,11 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Synchronous">Synchronous<a class="anchor-link" href="#Synchronous">¶</a></h3><ul>
-<li>Function <code>MPI_Ssend</code></li>
-<li>It waits for a matching receive and it is guaranteed that the receive started.</li>
-<li>No extra data copy</li>
-<li>Easy to get deadlocks</li>
+<h3 id="Synchronous-mode">Synchronous mode<a class="anchor-link" href="#Synchronous-mode">¶</a></h3><ul>
+<li>Function <code>MPI_Ssend</code>.</li>
+<li>It waits for a matching receive and it is guaranteed that the receive started (synchronization guarantee).</li>
+<li>No extra data copy.</li>
+<li>Easy to get deadlocks.</li>
 <li>It can be started whether or not a matching receive was posted.</li>
 </ul>
 </div>
@@ -8852,8 +8853,8 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Ready">Ready<a class="anchor-link" href="#Ready">¶</a></h3><ul>
-<li>Function <code>MPI_Rsend</code></li>
+<h3 id="Ready-mode">Ready mode<a class="anchor-link" href="#Ready-mode">¶</a></h3><ul>
+<li>Function <code>MPI_Rsend</code>.</li>
 <li>It may be started only if the matching receive is already posted. This allows the underlying implementation to skip some operations, such as a <a href="https://en.wikipedia.org/wiki/Handshake_(computing">handshake</a>).</li>
 <li>Erroneous if there is no matching receive yet.</li>
 <li>Otherwise, the same as the synchronous <code>MPI_Ssend</code>.</li>
@@ -8901,7 +8902,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Incomplete-operations">Incomplete operations<a class="anchor-link" href="#Incomplete-operations">¶</a></h2><p>Functions <code>MPI_Isend</code> and <code>MPI_Irecv</code> are <em>incomplete</em> operations, hence the <code>I</code> in <code>MPI_Isend</code> and <code>MPI_Irecv</code>. This means that, when these functions return, there is no guarantee that the underlying operation has finished. Function <code>MPI_Wait</code> should be used to wait for completion of the send and/or receive.</p>
+<h2 id="Incomplete-operations">Incomplete operations<a class="anchor-link" href="#Incomplete-operations">¶</a></h2><p>Functions <code>MPI_Isend</code> and <code>MPI_Irecv</code> are <em>incomplete</em> operations, hence the <code>I</code> in <code>MPI_Isend</code> and <code>MPI_Irecv</code>.  This means that, when these functions return, there is no guarantee that the underlying operation has finished. Function <code>MPI_Wait</code> should be used to wait for completion of the send and/or receive.</p>
 <p>In particular:</p>
 <ul>
 <li>One needs to wait for completion before reseting the send buffer</li>
@@ -9021,14 +9022,15 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="MPI_Iprobe">MPI_Iprobe<a class="anchor-link" href="#MPI_Iprobe">¶</a></h2><p>Remember that we used <code>MPI_Probe</code> to query for the size of an incoming message. However, if we use <code>MPI_Probe</code> we miss the opportunity to do local work before a matching send started, i.e. we cannot do latency hiding.</p>
-<p>This can be fixed using an <code>MPI_Iprobe</code>, i.e., an incomplete probe. It allows us to check for incoming messages without blocking.</p>
+<p>This can be fixed using an <code>MPI_Iprobe</code>, i.e., an incomplete probe (aka a non-blocking probe). It allows us to check for incoming messages without blocking.</p>
 <p>In Julia:</p>
 <div class="highlight"><pre><span></span><span class="n">ismsg</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Iprobe</span><span class="p">(</span><span class="n">comm</span><span class="p">,</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Status</span><span class="p">;</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="p">)</span>
 </pre></div>
 <p>In C:</p>
-<div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">MPI_Iprobe</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_Comm</span><span class="w"> </span><span class="n">comm</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">flag</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">MPI_Iprobe</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_Comm</span><span class="w"> </span><span class="n">comm</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">ismsg</span><span class="p">,</span>
 <span class="w">    </span><span class="n">MPI_Status</span><span class="w"> </span><span class="o">*</span><span class="n">status</span><span class="p">)</span>
 </pre></div>
+<p>Function <code>MPI_Iprobe</code> returns immediately without waiting for a matching send. The value of <code>ismsg</code> tells if a send was posted or not. If there was a send, the <code>status</code> object can be used to get information about the incoming message as we saw before.</p>
 </div>
 </div>
 </div>
@@ -9141,7 +9143,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Summary">Summary<a class="anchor-link" href="#Summary">¶</a></h2><p>We have seen different ways of sending and receiving messages with MPI, each one with its pros and cons. You as user should decide which is the best option for a given problem. We also learned how to get information about an incoming messages with <code>MPI_Status</code>, <code>MPI_Probe</code>, and <code>MPI_Iprobe</code>. In addition, we saw how easy is to write incorrect programs if you do not follow the semantics of the MPI operations properly.</p>
+<h2 id="Summary">Summary<a class="anchor-link" href="#Summary">¶</a></h2><p>We have seen different ways of sending and receiving messages with MPI, each one with its pros and cons. You as user should decide which is the best option for a given problem. We also learned how to get information about an incoming messages with <code>MPI_Status</code>, <code>MPI_Probe</code>, and <code>MPI_Iprobe</code>. In addition, we saw how easy is to write incorrect programs with if you do not follow the semantics of the MPI operations properly.</p>
 </div>
 </div>
 </div>
