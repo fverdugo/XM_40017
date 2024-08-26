@@ -7545,7 +7545,8 @@ a.anchor-link {
 <ul>
 <li>Parallelize a simple algorithm</li>
 <li>Study the performance of different parallelization strategies</li>
-<li>Implement them using Julia</li>
+<li>Learn the importance of "grain size" in a parallel algorithm</li>
+<li>Implement and measure the performance of parallel algorithms</li>
 </ul>
 </div>
 </div>
@@ -7577,12 +7578,12 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=2f8ba040">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2f8ba040">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-julia"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Distributed</span>
@@ -7606,7 +7607,21 @@ a.anchor-link {
 <span class="n">alg_2_deps_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="s">"d"</span><span class="p">)</span>
 <span class="n">alg_3_deps_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"c"</span><span class="p">)</span>
 <span class="n">alg_3_complex_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"b"</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="s">"🥳 Well done! "</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>🥳 Well done! 
+</pre>
 </div>
 </div>
 </div>
@@ -7618,7 +7633,8 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Problem-Statement">Problem Statement<a class="anchor-link" href="#Problem-Statement">¶</a></h2><p>Given $A$ and $B$ two $N$-by-$N$ matrices, compute the matrix-matrix product $C=AB$. Compute it in parallel and efficiently.</p>
+<h2 id="Problem-Statement">Problem Statement<a class="anchor-link" href="#Problem-Statement">¶</a></h2><p>We consider matrix-matrix multiplication as our first algorithm to parallelize. The problem we want so solve is defined as follows.</p>
+<p>Given $A$ and $B$ two $N$-by-$N$ matrices, compute the matrix-matrix product $C=AB$. Compute it in parallel and efficiently.</p>
 </div>
 </div>
 </div>
@@ -7646,7 +7662,7 @@ a.anchor-link {
 <ul>
 <li>compute the product in parallel using more than one process (distributed implementation)</li>
 <li>study the performance of different parallelization alternatives</li>
-<li>implement the algorithms using Julia</li>
+<li>implement the algorithms using Julia's task-based programming model</li>
 </ul>
 </div>
 </div>
@@ -7660,7 +7676,7 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Assumptions">Assumptions<a class="anchor-link" href="#Assumptions">¶</a></h3><ul>
 <li>All matrices <code>A</code>,<code>B</code>, and <code>C</code> are initially stored in the master process</li>
-<li>The result will be overwritten in <code>C</code></li>
+<li>The result will be overwritten in <code>C</code> (in the master process)</li>
 </ul>
 </div>
 </div>
@@ -7690,6 +7706,7 @@ a.anchor-link {
 <li>Identify the parts of the sequential algorithm that can be parallelized</li>
 <li>Consider different parallelization strategies</li>
 <li>Discuss the (theoretical) performance of these implementations</li>
+<li>Measure the actual performance of these implementations</li>
 </ul>
 </div>
 </div>
@@ -7778,7 +7795,7 @@ a.anchor-link {
 <div class="alert alert-block alert-info">
 <b>Note:</b> The matrix-matrix multiplication naively implemented with 3 nested loops as above is known to be very inefficient (memory bound). Libraries such as BLAS provide much more efficient implementations, which are the ones used in practice (e.g., by the `*` operator in Julia). We consider our hand-written implementation as a simple way of expressing the algorithm we are interested in.
 </div>
-<p>Run the following cell to compare the performance of our hand-written function with respect to the built in function <code>mul!</code>.</p>
+<p>Just to satisfy your curiosity, run the following cell to compare the performance of our hand-written function with respect to the built in function <code>mul!</code>.</p>
 </div>
 </div>
 </div>
@@ -7841,7 +7858,9 @@ d) O(N³)</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Where-can-we-exploit-parallelism?">Where can we exploit parallelism?<a class="anchor-link" href="#Where-can-we-exploit-parallelism?">¶</a></h3><p>Look at the three nested loops in the sequential implementation:</p>
+<h2 id="Where-can-we-exploit-parallelism?">Where can we exploit parallelism?<a class="anchor-link" href="#Where-can-we-exploit-parallelism?">¶</a></h2><p>The matrix-matrix multiplication is an example of <a href="https://en.wikipedia.org/wiki/Embarrassingly_parallel">embarrassingly parallel algorithm</a>. An embarrassingly parallel (also known as trivially parallel) algorithm is an algorithm that can be split in parallel tasks with no (or very few) dependences between them. Such algorithms are typically easy to parallelize.</p>
+<p>Which parts of an algorithm are completely independent and thus trivially parallel? To answer this question, it is useful to inspect the for loops, which are potential sources parallelism. If the iterations are independent of each other, then they are trivial to parallelize. An easy check to find out if the iterations are dependent or not is to change their order (for instance changing <code>for j in 1:n</code> by <code>for j in n:-1:1</code>, i.e. doing the loop in reverse). If the result changes, then the iterations are not independent.</p>
+<p>Look at the three nested loops in the sequential implementation of the matrix-matrix product:</p>
 <div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">m</span>
 <span class="w">        </span><span class="n">Cij</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z</span>
@@ -7852,9 +7871,10 @@ d) O(N³)</code></pre>
 <span class="w">    </span><span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
+<p>Note that:</p>
 <ul>
-<li>Loops over <code>i</code> and <code>j</code> are trivially parallelizable.</li>
-<li>The loop over <code>k</code> can be parallelized but it requires a reduction.</li>
+<li>Loops over <code>i</code> and <code>j</code> are trivially parallel.</li>
+<li>The loop over <code>k</code> is not trivially parallel. The accumulation into the reduction variable <code>Cij</code> introduces extra dependences. In addition, remember that the addition of floating point numbers is not strictly associative due to rounding errors. Thus, the result of this loop may change with the loop order when using floating point numbers. In any case, this loop can also be parallelized, but it requires a parallel <em>fold</em> or a parallel <em>reduction</em>.</li>
 </ul>
 </div>
 </div>
@@ -7866,7 +7886,7 @@ d) O(N³)</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Parallel-algorithms">Parallel algorithms<a class="anchor-link" href="#Parallel-algorithms">¶</a></h3><p>All the entries of matrix C can be potentially computed in parallel, but <em>is it the most efficient solution to solve all these entries in parallel in a distributed system?</em> To find this we will consider different parallelization strategies:</p>
+<h3 id="Parallel-algorithms">Parallel algorithms<a class="anchor-link" href="#Parallel-algorithms">¶</a></h3><p>Parallelizing the loops over <code>i</code> and <code>j</code> means that all the entries of matrix C can be potentially computed in parallel. However, <em>which it the most efficient solution to solve all these entries in parallel in a distributed system?</em> To find this we will consider different parallelization strategies:</p>
 <ul>
 <li>Algorithm 1: each worker computes a single entry of C</li>
 <li>Algorithm 2: each worker computes a single row of C</li>
@@ -7906,7 +7926,7 @@ d) O(N³)</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Data-dependencies">Data dependencies<a class="anchor-link" href="#Data-dependencies">¶</a></h3><p>Moving data through the network is expensive and reducing data movement is one of the key points in a distributed algorithm. To this end, we determine which is the minimum data needed by a worker to perform its computations.</p>
+<h3 id="Data-dependencies">Data dependencies<a class="anchor-link" href="#Data-dependencies">¶</a></h3><p>Moving data through the network is expensive and reducing data movement is one of the key points in a distributed algorithm. To this end, we need to determine which is the minimum data needed by a worker to perform its computations. These are called the <em>data dependencies</em>. This will give us later information about the performance of the parallel algorithm.</p>
 <p>In algorithm 1, each worker computes only an entry of the result matrix C.</p>
 </div>
 </div>
@@ -7965,7 +7985,7 @@ d) row A[i,:] and the whole matrix B</code></pre>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">¶</a></h3><p>Taking into account the data dependencies, the parallel algorithm 1 can be efficiently implemented following these steps from the worker perspective:</p>
 <ol>
-<li>The worker receives the corresponding row A[i,:] and column B[:,j] from the master process</li>
+<li>The worker receives the data dependencies, i.e., the corresponding row A[i,:] and column B[:,j] from the master process</li>
 <li>The worker computes the dot product of A[i,:] and B[:,j]</li>
 <li>The worker sends back the result of C[i,j] to the master process</li>
 </ol>
@@ -8074,15 +8094,15 @@ d) row A[i,:] and the whole matrix B</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Performance">Performance<a class="anchor-link" href="#Performance">¶</a></h3><p>Let us study the performance of this algorithm. To this end, we will analyze if algorithm 1 is able to achieve the optimal parallel <em>speedup</em>. The parallel speedup on $P$ processes is defined as</p>
+<h3 id="Performance">Performance<a class="anchor-link" href="#Performance">¶</a></h3><p>We have a first parallel algorithm, but how efficient is this algorithm? Let us study its performance. To this end we need to consider a performance baseline as reference. In this case, we will use the so-called optimal parallel <em>speedup</em>. The parallel speedup on $P$ processes is defined as</p>
 <p>$$
 S_P = \frac{T_1}{T_P},
 $$</p>
-<p>where $T_1$ denotes the runtime of the sequential algorithm on one node and $T_P$ denotes the runtime of the parallel algorithm on $P$ processes. If we run an optimal parallel algorithm with $P$ processes we expect it to run $p$ times faster than the sequential implementation. I.e., the <em>optimal</em> speedup of a parallel algorithm on $p$ processes is equal to $P$:</p>
+<p>where $T_1$ denotes the runtime of the sequential algorithm and $T_P$ denotes the runtime of the parallel algorithm on $P$ processes. If we run an optimal parallel algorithm with $P$ processes we expect it to run $p$ times faster than the sequential implementation. I.e., the <em>optimal</em> speedup of a parallel algorithm on $p$ processes is equal to $P$:</p>
 <p>$$
 S^{*}_p = P.
 $$</p>
-<p>The ratio of the actual speedup over the optimal one is called the parallel efficiency</p>
+<p>The ratio of the actual speedup over the optimal one is called the parallel efficiency (the closer to one the better).</p>
 <p>$$
 E_p = \frac{S_p}{S^{*}_p} = \frac{T_1/T_P}{P}.
 $$</p>
@@ -8396,7 +8416,7 @@ d) row A[i,:] and the whole matrix B</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Experimental-speedup">Experimental speedup<a class="anchor-link" href="#Experimental-speedup">¶</a></h3>
+<h3 id="Experimental-speedup">Experimental speedup<a class="anchor-link" href="#Experimental-speedup">¶</a></h3><p>Measure the speedup with the following cell. Is this time better?</p>
 </div>
 </div>
 </div>
@@ -8671,6 +8691,8 @@ d) O(N²/P) communication and O(N³/P) computation</code></pre>
 <li>Matrix-matrix multiplication is trivially parallelizable (all entries in the result matrix can be computed in parallel, at least in theory)</li>
 <li>However, we cannot exploit all the potential parallelism in a distributed system due to communication overhead</li>
 <li>We need a sufficiently large grain size to obtain a near optimal speedup</li>
+<li>We measured the theoretical parallel performance by computing the complexity of communication over computation</li>
+<li>We measured the actual performance using the parallel speedup and parallel efficiency</li>
 </ul>
 </div>
 </div>

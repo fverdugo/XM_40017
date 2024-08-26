@@ -8291,6 +8291,9 @@ a.anchor-link {
 <li><code>dest</code> rank of the receiver.</li>
 <li><code>tag</code>. Might be used to distinguish between different kinds of messages from the same sender to the same receiver (similar to the "subject" in an email).</li>
 </ul>
+<div class="alert alert-block alert-info">
+<b>Note:</b> Note that the C interface provides additional arguments `MPI_Datatype` (type of data to send/receive) and `count` (number of items to send/receive). In Julia, send and receive buffers are usually arrays or references, from which the data type and the count can be inferred. This is true for many other MPI functions.
+</div>
 </div>
 </div>
 </div>
