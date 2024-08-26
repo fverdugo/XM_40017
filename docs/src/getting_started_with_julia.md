@@ -124,6 +124,11 @@ $ julia --version
 
 If this runs without error and you see a version number, you are good to go!
 
+You can also run julia code from the terminal using the `-e` flag:
+
+```
+$ julia -e 'println("Hello, world!")'
+```
 
 !!! note
     In this tutorial, when a code snipped starts with `$`, it should be run in the terminal. Otherwise, the code is to be run in the Julia REPL.
@@ -366,9 +371,62 @@ is equivalent to calling `status` in package mode.
 (@v1.10) pkg> status
 ```
 
+### Creating you own package
+
+In many situations is useful to create your own package, for instance, when working with a large code base, when you want to reduce compilation latency using [`Revise.jl`](https://github.com/timholy/Revise.jl),
+or if you want to eventually [register your package](https://github.com/JuliaRegistries/Registrator.jl) and share it with others.
+
+The simplest way of generating a package (called `MyPackage`) is as follows. Open Julia go to package mode and type
+
+```julia
+(@v1.10) pkg> generate MyPackage
+```
+
+This will crate a minimal package consisting of a new folder `MyPackage` with two files:
+
+* `MyPackage/Project.toml`: Project file defining the direct dependencies of your package.
+* `MyPackage/src/MyPackage.jl`: Main source file of your package. You can split your code in several files if needed, and include them in the package main file using function `include`.
+
+!!! tip
+    This approach only generates a very minimal package. To create a more sophisticated package skeleton (including unit testing, code coverage, readme file, licence, etc.) use
+    [`PkgTemplates.jl`](https://github.com/JuliaCI/PkgTemplates.jl) or [`BestieTemplate.jl`](https://github.com/abelsiqueira/BestieTemplate.jl). The later one is developed in Amsterdam at the
+    [Netherlands eScience Center](https://www.esciencecenter.nl/).
+
+You can add dependencies to the package by activating the `MyPackage` folder in package mode and adding new dependencies as always:
+
+```julia
+(@v1.10) pkg> activate MyPackage
+(MyPackage) pkg> add MPI
+```
+
+This will add MPI to your package dependencies.
+
+### Using your own package
+
+To use your package you first need to add it to a package environment of your choice. This is done with `develop path/to/the/package/folder` in package mode. For instance:
+
+```julia
+(@v1.10) pkg> develop MyPackage
+```
+
+!!! note
+    You do not need to "develop" your package if you activated the package folder `MyPackage`.
+
+Now, we can go back to standard Julia mode and use it as any other package:
+
+```julia
+using MyPackage
+MyPackage.greet()
+```
+
+Here, we just called the example function defined in `MyPackage/src/MyPackage.jl`.
+
+
 ## Conclusion
 
-We have learned the basics of how to work with Julia. If you want to further dig into the topics we have covered here, you can take a look at the following links:
+We have learned the basics of how to work with Julia, including how to run serial and parallel code, and how to manage, create, and use Julia packages.
+This knowledge will allow you to follow the course effectively!
+If you want to further dig into the topics we have covered here, you can take a look at the following links:
 
 - [Julia Manual](https://docs.julialang.org/en/v1/manual/getting-started/)
 - [Package manager](https://pkgdocs.julialang.org/v1/getting-started/)
