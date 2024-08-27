@@ -373,10 +373,10 @@ is equivalent to calling `status` in package mode.
 
 ### Creating you own package
 
-In many situations is useful to create your own package, for instance, when working with a large code base, when you want to reduce compilation latency using [`Revise.jl`](https://github.com/timholy/Revise.jl),
+In many situations, it is useful to create your own package, for instance, when working with a large code base, when you want to reduce compilation latency using [`Revise.jl`](https://github.com/timholy/Revise.jl),
 or if you want to eventually [register your package](https://github.com/JuliaRegistries/Registrator.jl) and share it with others.
 
-The simplest way of generating a package (called `MyPackage`) is as follows. Open Julia go to package mode and type
+The simplest way of generating a package (called `MyPackage`) is as follows. Open Julia, go to package mode, and type
 
 ```julia
 (@v1.10) pkg> generate MyPackage
@@ -403,7 +403,7 @@ This will add MPI to your package dependencies.
 
 ### Using your own package
 
-To use your package you first need to add it to a package environment of your choice. This is done with `develop path/to/the/package/folder` in package mode. For instance:
+To use your package you first need to add it to a package environment of your choice. This is done by changing to package mode and typing `develop ` followed by the path to the folder containing the package. For instance:
 
 ```julia
 (@v1.10) pkg> develop MyPackage
