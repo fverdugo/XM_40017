@@ -123,6 +123,7 @@ makedocs(;
                          "Matrix-matrix multiplication"=>"matrix_matrix.md",
                          "MPI (point-to-point)" => "julia_mpi.md",
                          "Jacobi method" => "jacobi_method.md",
+                         "MPI (collectives)" => "mpi_collectives.md",
                          #"All pairs of shortest paths" => "asp.md",
                          #"Gaussian elimination" => "LEQ.md",
                          #"Traveling salesperson problem" => "tsp.md",
