@@ -9171,50 +9171,48 @@ a.anchor-link {
 <h3 id="Exercise-1">Exercise 1<a class="anchor-link" href="#Exercise-1">¶</a></h3><p>Implement the parallel matrix-matrix multiplication (Algorithm 3) in previous notebook using MPI instead of <code>Distributed</code>. Use this function signature:</p>
 <div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">matmul_mpi_3!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
 </pre></div>
-<p>Assume that the input matrices <code>A</code> and <code>B</code> are given only on rank 0, the other ranks get dummy matrices with zero rows and zero columns to save memory. You need to communicate the required parts to other ranks. For simplicity you can assume that <code>A</code> and <code>B</code> are square matrices and that the number of rows is a multiple of the number of processes (on rank 0). The result <code>C</code> should be overwritten only on rank 0. You can use the following cell to implement and check your result.</p>
+<p>Assume that the input matrices <code>A</code> and <code>B</code> are given only on rank 0, the other ranks get dummy matrices with zero rows and zero columns to save memory. You need to communicate the required parts to other ranks. For simplicity you can assume that <code>A</code> and <code>B</code> are square matrices and that the number of rows is a multiple of the number of processes (on rank 0). The result <code>C</code> should be overwritten only on rank 0. You can use the following cell to implement and check your result. Copy the code below to a file called <code>ex1.jl</code>. Modify the file (e.g. with vscode).  Run it from the Julia REPL using the <code>run</code> function as explained in the <a href="https://www.francescverdugo.com/XM_40017/dev/getting_started_with_julia/#Running-MPI-code">Getting Started tutorial</a>.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=265c4593">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4fa53366">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">quote</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
-<span class="w">    </span><span class="n">MPI</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">matmul_mpi_3!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
-<span class="w">        </span><span class="c"># Implement here</span>
-<span class="w">    </span><span class="k">end</span>
-<span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">testit</span><span class="p">(</span><span class="n">load</span><span class="p">)</span>
-<span class="w">        </span><span class="n">comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
-<span class="w">        </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_rank</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">            </span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_size</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
-<span class="w">            </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load</span><span class="o">*</span><span class="n">P</span>
-<span class="w">        </span><span class="k">else</span>
-<span class="w">            </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">        </span><span class="k">end</span>
-<span class="w">        </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
-<span class="w">        </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
-<span class="w">        </span><span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="w">        </span><span class="n">matmul_mpi_3!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="n">C</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">A</span><span class="o">*</span><span class="n">B</span><span class="p">)</span>
-<span class="w">                </span><span class="n">println</span><span class="p">(</span><span class="s">"Check not passed"</span><span class="p">)</span>
-<span class="w">            </span><span class="k">else</span>
-<span class="w">                </span><span class="n">println</span><span class="p">(</span><span class="s">"Check passed!"</span><span class="p">)</span>
-<span class="w">            </span><span class="k">end</span>
-<span class="w">        </span><span class="k">end</span>
-<span class="w">    </span><span class="k">end</span>
-<span class="w">    </span><span class="n">testit</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<div class="highlight"><pre><span></span><span class="c"># ex1.jl (begin)</span>
+<span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
+<span class="n">MPI</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
+<span class="k">function</span><span class="w"> </span><span class="n">matmul_mpi_3!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+<span class="w">    </span><span class="c"># Implement here</span>
 <span class="k">end</span>
-<span class="n">run</span><span class="p">(</span><span class="sb">`</span><span class="si">$</span><span class="p">(</span><span class="n">mpiexec</span><span class="p">())</span><span class="sb"> -np 4 julia --project=. -e </span><span class="si">$code</span><span class="sb">`</span><span class="p">);</span>
+<span class="k">function</span><span class="w"> </span><span class="n">testit</span><span class="p">(</span><span class="n">load</span><span class="p">)</span>
+<span class="w">    </span><span class="n">comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+<span class="w">    </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_rank</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_size</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
+<span class="w">        </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load</span><span class="o">*</span><span class="n">P</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="w">    </span><span class="n">matmul_mpi_3!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="n">C</span><span class="w"> </span><span class="o">≈</span><span class="w"> </span><span class="n">A</span><span class="o">*</span><span class="n">B</span><span class="p">)</span>
+<span class="w">            </span><span class="n">println</span><span class="p">(</span><span class="s">"Test failed 😢"</span><span class="p">)</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="n">println</span><span class="p">(</span><span class="s">"Test passed 🥳"</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+<span class="n">testit</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="c"># ex1.jl (end)</span>
 </pre></div>
-</div>
 </div>
 </div>
 </div>
@@ -9226,7 +9224,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Exercise-2">Exercise 2<a class="anchor-link" href="#Exercise-2">¶</a></h3><p>Implement this "simple" algorithm (the telephone game):</p>
-<p>Rank 0 generates a message (an integer). Rank 0 sends the message to rank 1. Rank 1 receives the message, increments the message by 1, and sends the result to rank 2. Rank 2 receives the message, increments the message by 1, and sends the result to rank 3. Etc. The last rank sends back the message to rank 0 closing the ring. See the next figure. Implement the communications using MPI. Do not use <code>Distributed</code>.</p>
+<p>Rank 0 generates a message (an integer). Rank 0 sends the message to rank 1. Rank 1 receives the message, increments the message by 1, and sends the result to rank 2. Rank 2 receives the message, increments the message by 1, and sends the result to rank 3. Etc. The last rank sends back the message to rank 0 closing the ring. See the next figure. Implement the communications using MPI. Do not use <code>Distributed</code>. Use a text editor and the Julia REPL. Do not try to implement the code in a notebook.</p>
 </div>
 </div>
 </div>
