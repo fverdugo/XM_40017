@@ -7593,6 +7593,7 @@ a.anchor-link {
 <li>MPI is not a Julia implementation of the MPI standard</li>
 <li>It is just a wrapper to the C interface of MPI.</li>
 <li>You need a C MPI installation in your system (MPI.jl downloads one for you when needed).</li>
+<li>On a cluster (e.g. DAS-5), you want you use the MPI installation already available in the system.</li>
 </ul>
 <h3 id="Why-MPI.jl?">Why MPI.jl?<a class="anchor-link" href="#Why-MPI.jl?">¶</a></h3><p>MPI.jl provides a convenient Julia API to access MPI. For instance, this is how you get the id (rank) of the current process.</p>
 <div class="highlight"><pre><span></span><span class="n">comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
@@ -7727,7 +7728,7 @@ a.anchor-link {
 <span class="nd">@assert</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">2</span>
 <span class="n">MPI</span><span class="o">.</span><span class="n">Finalize</span><span class="p">()</span>
 </pre></div>
-<p>In some process <code>rand(1:10)</code> might be 2 and the program will stop without reaching <code>MPI.Finalize()</code> leading to an incorrect program.</p>
+<p>This is incorrect. In some process <code>rand(1:10)</code> might be 2 and the program will stop without reaching <code>MPI.Finalize()</code> leading to an incorrect program.</p>
 </div>
 </div>
 </div>
@@ -7925,7 +7926,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Note that this note notebook is running on a single process. So using MPI will only make sense later when we add more processes.</p>
+<p>Note that this note notebook is running on a single process. So using MPI will only make actual sense later when we add more processes.</p>
 </div>
 </div>
 </div>
@@ -8231,12 +8232,12 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Point-to-point-communication">Point-to-point communication<a class="anchor-link" href="#Point-to-point-communication">¶</a></h2><p>Now we are up and running, and ready to start learning MPI communication primitives. In this notebook we will cover so-called point-to-point communication directives. In a later notebook we will also learn about collective primitives.</p>
+<h2 id="Point-to-point-communication">Point-to-point communication<a class="anchor-link" href="#Point-to-point-communication">¶</a></h2><p>Now we are up and running, and ready to start learning MPI communication primitives. In this notebook we will cover so-called point-to-point communication. In a later notebook we will also learn about collective primitives.</p>
 <p>MPI  provides point-to-point communication directives for arbitrary communication between processes. Point-to-point communications are two-sided: there is a sender and a receiver. Here, we will discuss different types of directives:</p>
 <ul>
-<li><code>MPI_Send</code>, and <code>MPI_Recv</code> (<em>blocking directives</em>)</li>
-<li><code>MPI_Isend</code>, and <code>MPI_Irecv</code> (<em>non-blocking directives</em>)</li>
-<li><code>MPI_Bsend</code>, <code>MPI_Ssend</code>, and <code>MPI_Rsend</code> (<em>advanced communication modes</em>)</li>
+<li><code>MPI_Send</code>, and <code>MPI_Recv</code>: <em>complete (blocking) directives</em></li>
+<li><code>MPI_Isend</code>, and <code>MPI_Irecv</code>: <em>incomplete (non-blocking) directives</em></li>
+<li><code>MPI_Bsend</code>, <code>MPI_Ssend</code>, and <code>MPI_Rsend</code>: <em>advanced communication modes</em></li>
 </ul>
 </div>
 </div>
@@ -8248,7 +8249,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>In all cases, these functions are used to send a message from a ranks and receive it in another rank. See next picture.</p>
+<p>In all cases, these functions are used to send a message from a rank and receive it in another rank. See next picture.</p>
 </div>
 </div>
 </div>
@@ -8610,7 +8611,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Blocking-operations">Blocking operations<a class="anchor-link" href="#Blocking-operations">¶</a></h2><p><code>MPI_Recv</code> and <code>MPI_Probe</code> are <em>blocking</em> operations. This means that they will wait for a matching send.</p>
-<p><code>MPI_Send</code> is also often called a blocking send, but this is very misleading. <code>MPI_Send</code> might or not wait for a matching <code>MPI_Recv</code>. Assuming that <code>MPI_Send</code> will block waiting for a matching receive is erroneous. I.e., we cannot assume that <code>MPI_Send</code> has synchronization side effects with the receiver process. However, assuming that <code>MPI_Send</code> will not block is also erroneous. Look into the following example (which in fact is an incorrect MPI program). In contrast, <code>MPI_Send</code> guarantees that the send buffer can be reused when function returns (complete operation).</p>
+<p><code>MPI_Send</code> is  <em>informally</em> called a blocking send, but this is not accurate. <code>MPI_Send</code> might or not wait for a matching <code>MPI_Recv</code>. Assuming that <code>MPI_Send</code> will block waiting for a matching receive is erroneous. I.e., we cannot assume that <code>MPI_Send</code> has synchronization side effects with the receiver process. However, assuming that <code>MPI_Send</code> will not block is also erroneous. Look into the following example (which in fact is an incorrect MPI program). <code>MPI_Send</code> only guarantees that the send buffer can be reused when function returns (complete operation).</p>
 </div>
 </div>
 </div>
@@ -8682,7 +8683,7 @@ a.anchor-link {
 <li>One might want to minimize synchronization time. This is often achieved by copying the outgoing message in an internal buffer and returning from the <code>MPI_Send</code> as soon as possible, without waiting for a matching <code>MPI_Recv</code>.</li>
 <li>One might want to avoid data copies (e.g. for large messages). In this case, one needs to wait for a matching receive and return from the <code>MPI_Send</code> when the data has been sent.</li>
 </ol>
-<p>Thus, there is a trade-off between memory copied (buffering) and synchronization (wait) time. One cannot minimize both at the same time.</p>
+<p>Thus, there is a trade-off between memory copied (buffering) and synchronization (wait) time. One cannot minimize both at the same time unfortunately.</p>
 </div>
 </div>
 </div>
@@ -9171,7 +9172,7 @@ a.anchor-link {
 <h3 id="Exercise-1">Exercise 1<a class="anchor-link" href="#Exercise-1">¶</a></h3><p>Implement the parallel matrix-matrix multiplication (Algorithm 3) in previous notebook using MPI instead of <code>Distributed</code>. Use this function signature:</p>
 <div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">matmul_mpi_3!</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
 </pre></div>
-<p>Assume that the input matrices <code>A</code> and <code>B</code> are given only on rank 0, the other ranks get dummy matrices with zero rows and zero columns to save memory. You need to communicate the required parts to other ranks. For simplicity you can assume that <code>A</code> and <code>B</code> are square matrices and that the number of rows is a multiple of the number of processes (on rank 0). The result <code>C</code> should be overwritten only on rank 0. You can use the following cell to implement and check your result. Copy the code below to a file called <code>ex1.jl</code>. Modify the file (e.g. with vscode).  Run it from the Julia REPL using the <code>run</code> function as explained in the <a href="https://www.francescverdugo.com/XM_40017/dev/getting_started_with_julia/#Running-MPI-code">Getting Started tutorial</a>.</p>
+<p>Assume that the input matrices <code>A</code> and <code>B</code> are given only on rank 0, the other ranks get dummy empty matrices to save memory. You need to communicate the required parts to other ranks. For simplicity you can assume that <code>A</code> and <code>B</code> are square matrices and that the number of rows is a multiple of the number of processes (on rank 0). The result <code>C</code> should be overwritten only on rank 0. You can use the following cell to implement and check your result. Copy the code below to a file called <code>ex1.jl</code>. Modify the file (e.g. with vscode).  Run it from the Julia REPL using the <code>run</code> function as explained in the <a href="https://www.francescverdugo.com/XM_40017/dev/getting_started_with_julia/#Running-MPI-code">Getting Started tutorial</a>. Don't try to implement complex MPI code in a Jupyter notebook.</p>
 </div>
 </div>
 </div>

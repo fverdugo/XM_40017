@@ -7586,7 +7586,38 @@ a.anchor-link {
 <span class="n">jacobi_3_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"c"</span><span class="p">)</span>
 <span class="n">lh_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="w"> </span><span class="s">"c"</span><span class="p">)</span>
 <span class="n">sndrcv_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="s">"b"</span><span class="p">)</span>
-<span class="k">function</span><span class="w"> </span><span class="n">sndrcv_fix_answer</span><span class="p">()</span>
+<span class="k">function</span><span class="w"> </span><span class="n">partition_1d_answer</span><span class="p">(</span><span class="n">bool</span><span class="p">)</span>
+<span class="w">    </span><span class="n">bool</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">return</span>
+<span class="w">    </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"""</span>
+<span class="s">- We update N^2/P items per iteration</span>
+<span class="s">- We need data from 2 neighbors (2 messages per iteration)</span>
+<span class="s">- We communicate N items per message</span>
+<span class="s">- Communication/computation ratio is 2N/(N^2/P) = 2P/N =O(P/N)</span>
+<span class="s">    """</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="k">function</span><span class="w"> </span><span class="n">partition_2d_answer</span><span class="p">(</span><span class="n">bool</span><span class="p">)</span>
+<span class="w">        </span><span class="n">bool</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">return</span>
+<span class="w">    </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"""</span>
+<span class="s">- We update N^2/P items per iteration</span>
+<span class="s">- We need data from 4 neighbors (4 messages per iteration)</span>
+<span class="s">- We communicate N/sqrt(P) items per message</span>
+<span class="s">- Communication/computation ratio is (4N/sqrt(P)/(N^2/P)= 4sqrt(P)/N =O(sqrt(P)/N)</span>
+<span class="s">    """</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="k">function</span><span class="w"> </span><span class="n">partition_cyclic_answer</span><span class="p">(</span><span class="n">bool</span><span class="p">)</span>
+<span class="w">        </span><span class="n">bool</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">return</span>
+<span class="w">    </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"""</span>
+<span class="s">- We update N^2/P items</span>
+<span class="s">- We need data from 4 neighbors (4 messages per iteration)</span>
+<span class="s">- We communicate N^2/P items per message (the full data owned by the neighbor)</span>
+<span class="s">- Communication/computation ratio is O(1)</span>
+<span class="s">    """</span>
+<span class="n">println</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="k">function</span><span class="w"> </span><span class="n">sndrcv_fix_answer</span><span class="p">(</span><span class="n">bool</span><span class="p">)</span>
+<span class="w">        </span><span class="n">bool</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">return</span>
 <span class="w">    </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"""</span>
 <span class="s">    One needs to carefully order the sends and the receives to avoid cyclic dependencies</span>
 <span class="s">    that might result in deadlocks. The actual implementation is left as an exercise.   </span>
@@ -7594,7 +7625,8 @@ a.anchor-link {
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 <span class="k">end</span>
 <span class="n">jacobitest_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="s">"a"</span><span class="p">)</span>
-<span class="k">function</span><span class="w"> </span><span class="n">jacobitest_why</span><span class="p">()</span>
+<span class="k">function</span><span class="w"> </span><span class="n">jacobitest_why</span><span class="p">(</span><span class="n">bool</span><span class="p">)</span>
+<span class="w">        </span><span class="n">bool</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">return</span>
 <span class="w">    </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"""</span>
 <span class="s">    The test will pass. The parallel implementation does exactly the same operations</span>
 <span class="s">    in exactly the same order than the sequential one. Thus, the result should be</span>
@@ -7604,7 +7636,8 @@ a.anchor-link {
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 <span class="k">end</span>
 <span class="n">gauss_seidel_2_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">answer_checker</span><span class="p">(</span><span class="n">answer</span><span class="p">,</span><span class="s">"d"</span><span class="p">)</span>
-<span class="k">function</span><span class="w"> </span><span class="n">gauss_seidel_2_why</span><span class="p">()</span>
+<span class="k">function</span><span class="w"> </span><span class="n">gauss_seidel_2_why</span><span class="p">(</span><span class="n">bool</span><span class="p">)</span>
+<span class="w">        </span><span class="n">bool</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">return</span>
 <span class="w">    </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"""</span>
 <span class="s">    All "red" cells can be updated in parallel as they only depend on the values of "black" cells.</span>
 <span class="s">    In order workds, we can update the "red" cells in any order whithout changing the result. They only</span>
@@ -7652,7 +7685,7 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>When solving a <a href="https://en.wikipedia.org/wiki/Laplace%27s_equation">Laplace equation</a> in 1D, the Jacobi method leads to the following iterative scheme: The entry $i$ of vector $u$ at iteration $t+1$ is computed as:</p>
 <p>$u^{t+1}_i = \dfrac{u^t_{i-1}+u^t_{i+1}}{2}$</p>
-<p>This iterative is yet simple but shares fundamental challenges with many other algorithms used in scientific computing. This is why we are studying it here.</p>
+<p>This algorithm is yet simple but shares fundamental challenges with many other algorithms used in scientific computing. This is why we are studying it here.</p>
 </div>
 </div>
 </div>
@@ -7664,6 +7697,9 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Serial-implementation">Serial implementation<a class="anchor-link" href="#Serial-implementation">¶</a></h3><p>The following code implements the iterative scheme above for boundary conditions -1 and 1 on a grid with $n$ interior points.</p>
+<div class="alert alert-block alert-info">
+<b>Note:</b> `u, u_new = u_new, u` is equivalent to `tmp = u; u = u_new; u_new = tmp`. I.e. we swap the arrays `u` and `u_new` are referring to. 
+</div>
 </div>
 </div>
 </div>
@@ -7750,7 +7786,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>In our version of the Jacobi method, we return after a given number of iterations. Other stopping criteria are possible. For instance, iterate until the maximum difference between u and u_new is below a tolerance:</p>
+<p>In our version of the Jacobi method, we return after a given number of iterations. Other stopping criteria are possible. For instance, iterate until the maximum difference between u and u_new (in absolute value) is below a tolerance.</p>
 </div>
 </div>
 </div>
@@ -7810,7 +7846,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>However, we are not going to parallelize this more complex in this notebook (left as an exercise).</p>
+<p>However, we are not going to parallelize this more complex in this notebook (left as an exercise). The simpler one is already challenging enough to start with.</p>
 </div>
 </div>
 </div>
@@ -7856,7 +7892,7 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Parallelization-strategy">Parallelization strategy<a class="anchor-link" href="#Parallelization-strategy">¶</a></h3><p>Remember that a sufficiently large grain size is needed to achieve performance in a distributed algorithm. For Jacobi, one could update each entry of vector <code>u_new</code> in a different process, but this would not be efficient. Instead, we use a parallelization strategy with a larger grain size that is analogous to the algorithm 3 we studied for the matrix-matrix multiplication:</p>
 <ul>
-<li>Each worker updates a consecutive section of the array <code>u_new</code></li>
+<li>Data partition: each worker updates a consecutive section of the array <code>u_new</code></li>
 </ul>
 <p>The following figure displays the data distribution over 3 processes.</p>
 </div>
@@ -7894,7 +7930,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Note that an entry in the interior of the locally stored vector can be updated using local data  only. For this one, communication is not needed.</p>
+<p>Note that an entry in the interior of the locally stored vector can be updated using local data  only. For updating this one, communication is not needed.</p>
 </div>
 </div>
 </div>
@@ -7966,7 +8002,8 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Communication-overhead">Communication overhead<a class="anchor-link" href="#Communication-overhead">¶</a></h3><ul>
+<h3 id="Communication-overhead">Communication overhead<a class="anchor-link" href="#Communication-overhead">¶</a></h3><p>Now that we understand which are the data dependencies, we can do the theoretical performance analysis.</p>
+<ul>
 <li>We update $N/P$ entries in each process at each iteration, where $N$ is the total length of the vector and $P$ the number of processes</li>
 <li>Thus, computation complexity is $O(N/P)$</li>
 <li>We need to get remote entries from 2 neighbors (2 messages per iteration)</li>
@@ -7984,7 +8021,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Ghost-(aka-halo)-cells">Ghost (aka halo) cells<a class="anchor-link" href="#Ghost-(aka-halo)-cells">¶</a></h3><p>A usual way of implementing the Jacobi method and related algorithms is using so-called ghost cells. Ghost cells represent the missing data dependencies in the data owned by each process. After importing the appropriate values from the neighbor processes one can perform the usual sequential Jacobi update locally in the processes.</p>
+<h3 id="Ghost-(aka-halo)-cells">Ghost (aka halo) cells<a class="anchor-link" href="#Ghost-(aka-halo)-cells">¶</a></h3><p>This parallel strategy is efficient according to the theoretical analysis. But how to implement it? A usual way of implementing the Jacobi method and related algorithms is using so-called ghost cells. Ghost cells represent the missing data dependencies in the data owned by each process. After importing the appropriate values from the neighbor processes one can perform the usual sequential Jacobi update locally in the processes. Cells with gray edges are ghost (or boundary) cells in the following figure. Note that we added one ghost cell at the front and end of the local array.</p>
 </div>
 </div>
 </div>
@@ -8030,6 +8067,17 @@ a.anchor-link {
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0a40846c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We are going to implement this algorithm with MPI later in this notebook.</p>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=75f735a2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -8037,7 +8085,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Extension-to-2D">Extension to 2D<a class="anchor-link" href="#Extension-to-2D">¶</a></h2><p>The Jacobi method studied so far was for a one dimensional Laplace equation. In real-world applications however, one solve equations in multiple dimensions. Typically 2D and 3D. The 2D and 3D cases are conceptually equivalent, but we will discuss the 2D case here for simplicity.</p>
-<p>Now the goal is to find the interior points of a 2D grid given the values at the boundary.</p>
+<p>Now, the goal is to find the interior points of a 2D grid given the values at the boundary.</p>
 </div>
 </div>
 </div>
@@ -8199,10 +8247,13 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Parallelization-strategies">Parallelization strategies<a class="anchor-link" href="#Parallelization-strategies">¶</a></h3><p>In 2d one has more flexibility in order to distribute the data over the processes. We consider these three alternatives:</p>
 <ul>
-<li>1D block partition (each worker handles a subset of consecutive rows and all columns)</li>
+<li>1D block row partition (each worker handles a subset of consecutive rows and all columns)</li>
 <li>2D block partition (each worker handles a subset of consecutive rows and columns)</li>
 <li>2D cyclic partition (each workers handles a subset of alternating rows ans columns)</li>
 </ul>
+<div class="alert alert-block alert-info">
+<b>Note:</b> Other options are 1D block column partition and 1D cyclic (row or column) partition. They are not analyzed in this notebook since they are closely related to the other strategies. In Julia, in fact, it is often preferable to work with 1D block column partitions than with 1D block row partitions since matrices are stored in column major order.
+</div>
 <p>The three partition types are depicted in the following figure for 4 processes.</p>
 </div>
 </div>
@@ -8256,18 +8307,30 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4f1e0942">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1bc21623">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<ul>
-<li>We update $N^2/P$ items per iteration</li>
-<li>We need data from 2 neighbors (2 messages per iteration)</li>
-<li>We communicate $N$ items per message</li>
-<li>Communication/computation ratio is $2N/(N^2/P) = 2P/N =O(P/N)$</li>
-</ul>
+<div class="alert alert-block alert-success">
+<b>Question:</b>  Compute the complexity of the communication over computation ratio for this data partition.
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=d01f8ce8">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">uncover</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="c"># Change to true to see the answer</span>
+<span class="n">partition_1d_answer</span><span class="p">(</span><span class="n">uncover</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -8296,18 +8359,30 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=abb6520c">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=09bd28ca">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<ul>
-<li>We update $N^2/P$ items per iteration</li>
-<li>We need data from 4 neighbors (4 messages per iteration)</li>
-<li>We communicate $N/\sqrt{P}$ items per message</li>
-<li>Communication/computation ratio is $ (4N/\sqrt{P})/(N^2/P)= 4\sqrt{P}/N =O(\sqrt{P}/N)$</li>
-</ul>
+<div class="alert alert-block alert-success">
+<b>Question:</b>  Compute the complexity of the communication over computation ratio for this data partition.
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=e94a1ea6">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">uncover</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<span class="n">partition_2d_answer</span><span class="p">(</span><span class="n">uncover</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -8336,18 +8411,30 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9cd32923">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b373e9ce">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<ul>
-<li>We update $N^2/P$ items</li>
-<li>We need data from 4 neighbors (4 messages per iteration)</li>
-<li>We communicate $N^2/P$ items per message (the full data owned by the neighbor)</li>
-<li>Communication/computation ratio is $O(1)$</li>
-</ul>
+<div class="alert alert-block alert-success">
+<b>Question:</b>  Compute the complexity of the communication over computation ratio for this data partition.
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=10fab825">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-julia"><pre><span></span><span class="n">uncover</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<span class="n">partition_cyclic_answer</span><span class="p">(</span><span class="n">uncover</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -8545,7 +8632,7 @@ d) The inner, but not the outer</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Backwards-Gauss-Seidel">Backwards Gauss-Seidel<a class="anchor-link" href="#Backwards-Gauss-Seidel">¶</a></h3><p>In addition, the the result of the Gauss-Seidel method depends on the order of the steps in the loop over <code>i</code>. This is another symptom that tells you that this loop is hard to parallelize. For instance, if you do the iterations over <code>i</code> by reversing the loop order, you get another method called <em>backward</em> Gauss-Seidel.</p>
+<h3 id="Backwards-Gauss-Seidel">Backwards Gauss-Seidel<a class="anchor-link" href="#Backwards-Gauss-Seidel">¶</a></h3><p>In addition, the the result of the Gauss-Seidel method depends on the order of the steps in the loop over <code>i</code>. This is another symptom that tells you that this loop is hard (or impossible) to parallelize. For instance, if you do the iterations over <code>i</code> by reversing the loop order, you get another method called <em>backward</em> Gauss-Seidel.</p>
 </div>
 </div>
 </div>
@@ -8580,7 +8667,7 @@ d) The inner, but not the outer</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Both Jacobi and <em>forward</em> and <em>backward</em> Gauss-Seidel converge to the same result, but they lead to slightly different values during the iterations. Check it with the following cells. First, run it with one <code>niters=1</code> and then with <code>niters=100</code>.</p>
+<p>Both Jacobi and <em>forward</em> and <em>backward</em> Gauss-Seidel converge to the same result, but they lead to slightly different values during the iterations. Check it with the following cells. First, run the methods with <code>niters=1</code> and then with <code>niters=100</code>.</p>
 </div>
 </div>
 </div>
@@ -8635,7 +8722,7 @@ d) The inner, but not the outer</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Red-black-Gauss-Seidel">Red-black Gauss-Seidel<a class="anchor-link" href="#Red-black-Gauss-Seidel">¶</a></h3><p>There is another version called <em>red-black</em> Gauss-Seidel. This uses a very clever order for the steps in the loop over <code>i</code>. It does this loop in two phases. First, one updates the entries with even index, and then the entries with odd index.</p>
+<h3 id="Red-black-Gauss-Seidel">Red-black Gauss-Seidel<a class="anchor-link" href="#Red-black-Gauss-Seidel">¶</a></h3><p>There is yet another version called <em>red-black</em> Gauss-Seidel. This uses a very clever order for the steps in the loop over <code>i</code>. It does this loop in two phases. First, one updates the entries with even index, and then the entries with odd index.</p>
 </div>
 </div>
 </div>
@@ -8769,9 +8856,21 @@ d) Loop over i only</code></pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">gauss_seidel_2_why</span><span class="p">()</span>
+<div class="highlight hl-julia"><pre><span></span><span class="n">uncover</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<span class="n">gauss_seidel_2_why</span><span class="p">(</span><span class="n">uncover</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=41e90d60">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Changing-an-algorithm-to-make-it-parallel">Changing an algorithm to make it parallel<a class="anchor-link" href="#Changing-an-algorithm-to-make-it-parallel">¶</a></h3><p>Note that the original method (the forward Gauss-Seidel) cannot be parallelized, we needed to modify the method slightly with the red-black ordering in order to create a method that can be parallelized. However the method we parallelized is not equivalent to the original one. This happens in practice in many other applications. An algorithm might be impossible to parallelize and one needs to modify it to exploit parallelism. However, one needs to be careful when modifying the algorithm to not destroy the algorithmic properties of the original one. In this case, we succeeded. The red-black Gauss-Seidel converges as fast (if not faster) than the original forward Gauss-Seidel. However, this is not true in general. There is often a trade-off between the algorithmic properties and how parallelizable is the algorithm.</p>
 </div>
 </div>
 </div>
@@ -8782,7 +8881,7 @@ d) Loop over i only</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="MPI-implementation">MPI implementation<a class="anchor-link" href="#MPI-implementation">¶</a></h2><p>We consider the implementation of the Jacobi method using MPI. We will consider the 1D version for simplicity.</p>
+<h2 id="MPI-implementation">MPI implementation<a class="anchor-link" href="#MPI-implementation">¶</a></h2><p>In the last part of this notebook, we consider the implementation of the Jacobi method using MPI. We will consider the 1D version for simplicity.</p>
 <div class="alert alert-block alert-info">
 <b>Note:</b> The programming model of MPI is generally better suited for data-parallel algorithms like this one than the task-based model provided by Distributed.jl. In any case, one can also implement it using Distributed.jl, but it requires some extra effort to setup the remote channels right for the communication between neighbor processes. 
 </div>
@@ -8844,7 +8943,7 @@ d) Loop over i only</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Initialization">Initialization<a class="anchor-link" href="#Initialization">¶</a></h3><p>Let us start with function <code>init</code>. This is its implementation:</p>
+<h3 id="Initialization">Initialization<a class="anchor-link" href="#Initialization">¶</a></h3><p>Let us start with function <code>init</code>.</p>
 </div>
 </div>
 </div>
@@ -8888,7 +8987,7 @@ d) Loop over i only</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>This function crates and initializes the vector <code>u</code> and the auxiliary vector <code>u_new</code> and fills in the boundary values. Note that we are not creating the full arrays like in the sequential case. We are only creating the parts to be managed by the current rank. To this end, we start by computing the number of entries to be updated in this rank, i.e., variable <code>load</code>. We have assumed that <code>n</code> is a multiple of the number of ranks for simplicity. If this is not the case, we stop the computation with <code>MPI.Abort</code>. Note that we are allocating two extra elements in <code>u</code> (and <code>u_new</code>) for the ghost cells or boundary conditions. The following figure displays the arrays created for <code>n==9</code> and <code>nranks==3</code> (thus <code>load == 3</code>). Note that the first and last elements of the arrays are displayed with gray edges denoting that they are the extra elements allocated for ghost cells or boundary conditions.</p>
+<p>This function crates and initializes the vector <code>u</code> and the auxiliary vector <code>u_new</code> and fills in the boundary values. Note that we are not creating the full arrays like in the sequential case. We are only creating the parts to be managed by the current rank. To this end, we start by computing the number of entries to be updated in this rank, i.e., variable <code>load</code>. We have assumed that <code>n</code> is a multiple of the number of ranks for simplicity. If this is not the case, we stop the computation with <code>MPI.Abort</code>. Note that we are allocating two extra elements in <code>u</code> (and <code>u_new</code>) for the ghost cells and boundary conditions. The following figure displays the arrays created for <code>n==9</code> and <code>nranks==3</code> (thus <code>load == 3</code>). Note that the first and last elements of the arrays are displayed with gray edges denoting that they are the extra elements allocated for ghost cells or boundary conditions.</p>
 </div>
 </div>
 </div>
@@ -9065,7 +9164,8 @@ d) This implementation does not work when distributing over just a single MPI ra
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">sndrcv_fix_answer</span><span class="p">()</span>
+<div class="highlight hl-julia"><pre><span></span><span class="n">uncover</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span>
+<span class="n">sndrcv_fix_answer</span><span class="p">(</span><span class="n">uncover</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -9078,7 +9178,7 @@ d) This implementation does not work when distributing over just a single MPI ra
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Local-computation">Local computation<a class="anchor-link" href="#Local-computation">¶</a></h3><p>Once the ghost values have the right values, we can perform the Jacobi update locally at each process. This is done in function <code>local_update!</code>. Note that here we only update the data <em>owned</em> by the current MPI rank, i.e. we do not modify the ghost values. There is no need to modify the ghost values since they will updated by another rank, i.e. the rank that own the value. In the code this is reflected in the loop over <code>i</code>. We do not visit the first nor the last entry in <code>u_new</code>.</p>
+<h3 id="Local-computation">Local computation<a class="anchor-link" href="#Local-computation">¶</a></h3><p>Once the ghost cells have the right values, we can perform the Jacobi update locally at each process. This is done in function <code>local_update!</code>. Note that here we only update the data <em>owned</em> by the current MPI rank, i.e. we do not modify the ghost values. There is no need to modify the ghost values since they will updated by another rank. In the code, this is reflected in the loop over <code>i</code>. We do not visit the first nor the last entry in <code>u_new</code>.</p>
 </div>
 </div>
 </div>
@@ -9110,7 +9210,7 @@ d) This implementation does not work when distributing over just a single MPI ra
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Running-the-code">Running the code<a class="anchor-link" href="#Running-the-code">¶</a></h3><p>Not let us put all pieces together and run the code. If not done yet, install MPI.</p>
+<h3 id="Running-the-code">Running the code<a class="anchor-link" href="#Running-the-code">¶</a></h3><p>Let us put all pieces together and run the code. If not done yet, install MPI.</p>
 </div>
 </div>
 </div>
@@ -9135,7 +9235,7 @@ d) This implementation does not work when distributing over just a single MPI ra
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The following cells includes all previous code snippets into a final one. Note that we are eventually calling function <code>jacobi_mpi</code> and showing the result vector <code>u</code>. Run the following code for 1 MPI rank, then for 2 and 3 MPI ranks. Look into the values of <code>u</code>. Does it make sense?</p>
+<p>The following cells includes all previous code snippets into a final one. We are eventually calling function <code>jacobi_mpi</code> and showing the result vector <code>u</code>. Run the following code for 1 MPI rank, then for 2 and 3 MPI ranks. Look into the values of <code>u</code>. Does it make sense?</p>
 </div>
 </div>
 </div>
@@ -9174,7 +9274,7 @@ d) This implementation does not work when distributing over just a single MPI ra
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Checking-the-result">Checking the result<a class="anchor-link" href="#Checking-the-result">¶</a></h3><p>Checking the result visually is not enough in general. To check the parallel implementation we want to compare the result against the sequential implementation. The way we do the computations (either in parallel or sequential) should not affect the result. However, how can we compare the sequential and the parallel result? The parallel version gives a distributed vector. We cannot compare this one directly with the result of the sequential function. A possible solution is to gather all the pieces of the parallel result in a single rank and compare there against the parallel implementation.</p>
+<h3 id="Checking-the-result">Checking the result<a class="anchor-link" href="#Checking-the-result">¶</a></h3><p>Checking the result visually is not enough in general. To check the parallel implementation we want to compare it against the sequential implementation. However, how can we compare the sequential and the parallel result? The parallel version gives a distributed vector. We cannot compare this one directly with the result of the sequential function. A possible solution is to gather all the pieces of the parallel result in a single rank and compare there against the parallel implementation.</p>
 <p>The following function gather the distributed vector in rank 0.</p>
 </div>
 </div>
@@ -9346,81 +9446,13 @@ d) This implementation does not work when distributing over just a single MPI ra
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=73cd4d73">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Note that we have used function <code>isapprox</code> to compare the results. This function checks if two values are the same within machine precision. Using <code>==</code> is generally discouraged when working with floating point numbers as they can be affected by rounding-off errors.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d73c838c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<div class="alert alert-block alert-success">
-<b>Question:</b>  What happens if we use `u_root == u_seq` to compare the parallel and the sequential result?
-</div>
-<pre><code>a) The test will still pass.
-b) The test will fail due to rounding-off errors.
-c) The test might pass or fail depending on `n`.
-d) The test might pass or fail depending on the number of MPI ranks.</code></pre>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cd2427f1">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">answer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"x"</span><span class="w"> </span><span class="c"># replace x with a, b, c or d</span>
-<span class="n">jacobitest_check</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=790e7064">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Run cell below for an explanation of the correct answer.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=72ed2aa1">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">jacobitest_why</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c9aa2901">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Latency-hiding">Latency hiding<a class="anchor-link" href="#Latency-hiding">¶</a></h2><p>Can our implementation above be improved? Note that we only need communications to update the values at the boundary of the portion owned by each process. The other values (the one in green in the figure below) can be updated without communications. This provides the opportunity of overlapping the computation of the interior values (green cells in the figure) with the communication of the ghost values. This technique is called latency hiding, since we are hiding communication latency by overlapping it with computation that we need to do anyway. The actual implementation is left as an exercise (see Exercise 1).</p>
+<h2 id="Latency-hiding">Latency hiding<a class="anchor-link" href="#Latency-hiding">¶</a></h2><p>We have now a correct parallel implementation. But. can our implementation above be improved? Note that we only need communications to update the values at the boundary of the portion owned by each process. The other values (the one in green in the figure below) can be updated without communications. This provides the opportunity of overlapping the computation of the interior values (green cells in the figure) with the communication of the ghost values. This technique is called latency hiding, since we are hiding communication latency by overlapping it with computation that we need to do anyway. The actual implementation is left as an exercise (see Exercise 1).</p>
 </div>
 </div>
 </div>

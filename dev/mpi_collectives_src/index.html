@@ -7614,7 +7614,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="MPI_Barrier">MPI_Barrier<a class="anchor-link" href="#MPI_Barrier">¶</a></h2><p>This function is used to synchronizes a group of processes. All processes block until all have reached the barrier. It is often invoked at the end of for loops to make sure all processes have finished the current loop iteration to move to the next one. We will see an example later in another notebook when studying the traveling sales person problem (TSP).</p>
+<h2 id="MPI_Barrier">MPI_Barrier<a class="anchor-link" href="#MPI_Barrier">¶</a></h2><p>This function is used to synchronizes a group of processes. All processes block until all have reached the barrier. It is often invoked at the end of for loops to make sure all processes have finished the current loop iteration to move to the next one. We will see a practical example later in another notebook when studying the traveling sales person problem (TSP).</p>
 <p>In Julia:</p>
 <div class="highlight"><pre><span></span><span class="n">MPI</span><span class="o">.</span><span class="n">Barrier</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
 </pre></div>
@@ -7631,7 +7631,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Example">Example<a class="anchor-link" href="#Example">¶</a></h3><p>In this example the ranks sleep for a random amount of time and then they call barrier. It is guaranteed that the message "Done!" will be printed after all processes printed "I woke up" since we used a barrier. Try also to comment out the call to <code>MPI.Barrier</code>. You will see that the message can be printed in any order in this case.</p>
+<h3 id="Example">Example<a class="anchor-link" href="#Example">¶</a></h3><p>In this example the ranks sleep for a random amount of time and then they call barrier. It is guaranteed that the message "Done!" will be printed after all processes printed "I woke up" since we used a barrier. Try also to comment out the call to <code>MPI.Barrier</code>. You will see that the message can be printed in any order.</p>
 </div>
 </div>
 </div>
@@ -7666,7 +7666,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="MPI_Reduce">MPI_Reduce<a class="anchor-link" href="#MPI_Reduce">¶</a></h2><p>This function combines values provided by different processors according to a given reduction operation. The result is received in a single process (called the root process).</p>
+<h2 id="MPI_Reduce">MPI_Reduce<a class="anchor-link" href="#MPI_Reduce">¶</a></h2><p>This function combines values provided by different processors according to a given reduction operation. The result is received in a single process (called the root process).  The root process can be any process and it is rank 0 by default in Julia.</p>
 <p>In Julia:</p>
 <div class="highlight"><pre><span></span><span class="n">MPI</span><span class="o">.</span><span class="n">Reduce!</span><span class="p">(</span><span class="n">sendbuf</span><span class="p">,</span><span class="w"> </span><span class="n">recvbuf</span><span class="p">,</span><span class="w"> </span><span class="n">op</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="p">;</span><span class="w"> </span><span class="n">root</span><span class="p">)</span>
 </pre></div>
@@ -7832,7 +7832,10 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="MPI_Gather">MPI_Gather<a class="anchor-link" href="#MPI_Gather">¶</a></h2><p>Each rank sends a message to the root rank (the root rank also sends a message to itself). The root rank receives all these values in a buffer (e.g. a vector). This function assumes that the amount of data sent from each rank is the same. The root process can be any process and it is rank 0 by default in Julia.</p>
+<h2 id="MPI_Gather">MPI_Gather<a class="anchor-link" href="#MPI_Gather">¶</a></h2><p>Each rank sends a message to the root rank (the root rank also sends a message to itself). The root rank receives all these values in a buffer (e.g. a vector).</p>
+<div class="alert alert-block alert-info">
+<b>Note:</b>  This function assumes that the amount of data sent from each rank is the same. See `MPI_Gatherv` below for more general cases.
+</div>
 <p>In Julia:</p>
 <div class="highlight"><pre><span></span><span class="n">MPI</span><span class="o">.</span><span class="n">Gather!</span><span class="p">(</span><span class="n">sendbuf</span><span class="p">,</span><span class="w"> </span><span class="n">recvbuf</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="p">;</span><span class="w"> </span><span class="n">root</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
@@ -8033,7 +8036,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Example">Example<a class="anchor-link" href="#Example">¶</a></h3><p>Each process sends a random amount of integers to rank 0.</p>
+<h3 id="Example">Example<a class="anchor-link" href="#Example">¶</a></h3><p>Each process sends a random amount of integers to rank 0. The root process will not know the amount of data to be gathered from each rank in advance. We need an auxiliary gather to inform about the message size.</p>
 </div>
 </div>
 </div>
@@ -8447,6 +8450,28 @@ a.anchor-link {
 <li>Finally, we discussed MPI communicators. They provide two key features: isolated communication context and creating groups of processes. They are useful, for instance, to combine different libraries using MPI in the same application, and to use collective operations in a subset of the processes.</li>
 </ul>
 <p>After learning this material and the previous MPI notebook, you have a solid basis to start implementing sophisticated parallel algorithms using MPI.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=843b40cd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Exercises">Exercises<a class="anchor-link" href="#Exercises">¶</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5c2045d9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Exercise-1">Exercise 1<a class="anchor-link" href="#Exercise-1">¶</a></h3><p>Implement the parallel matrix-matrix multiplication (Algorithm 3) using MPI collectives instead of point-to-point communication. I.e., this is the same exercise as in previous notebook, but using different functions for communication.</p>
 </div>
 </div>
 </div>
