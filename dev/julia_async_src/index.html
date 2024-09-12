@@ -7857,7 +7857,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">fun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">4_000_000_000</span><span class="p">)</span>
+<div class="highlight hl-julia"><pre><span></span><span class="n">fun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nd">@show</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">4_000_000_000</span><span class="p">)</span>
 <span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Task</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -7956,7 +7956,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">fun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">compute_π_yield</span><span class="p">(</span><span class="mi">3_000_000_000</span><span class="p">)</span>
+<div class="highlight hl-julia"><pre><span></span><span class="n">fun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nd">@show</span><span class="w"> </span><span class="n">compute_π_yield</span><span class="p">(</span><span class="mi">3_000_000_000</span><span class="p">)</span>
 <span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Task</span><span class="p">(</span><span class="n">fun</span><span class="p">)</span>
 <span class="n">schedule</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
@@ -8431,6 +8431,22 @@ a.anchor-link {
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8a1ef849">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>In summary:</p>
+<ul>
+<li><code>put!</code> will wait for a <code>take!</code> if there is not space left in the channel's buffer.</li>
+<li><code>take!</code> will wait for a <code>put!</code> if there is no data to be consumed in the channel.</li>
+<li>Both <code>put!</code> and <code>take!</code> will raise an error if the channel is closed.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9ddd66ca">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -8449,7 +8465,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@elapsed</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">100_000_000</span><span class="p">)</span>
+<div class="highlight hl-julia"><pre><span></span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@elapsed</span><span class="w"> </span><span class="nd">@show</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">140_000_000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8481,7 +8497,7 @@ d) near 0*t </code></pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
-<span class="w">    </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">100_000_000</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@show</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">140_000_000</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -8528,7 +8544,7 @@ d) near 0*t </code></pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
-<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">100_000_000</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="nd">@show</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">140_000_000</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -8575,7 +8591,7 @@ d) near 0*t </code></pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="nd">@sync</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
-<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">100_000_000</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="nd">@show</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">140_000_000</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -8733,6 +8749,23 @@ d) 3 seconds</code></pre>
 <div class="alert alert-block alert-info">
 <b>Note:</b> If for some reason a cell keeps running forever, we can stop it with Kernel &gt; Interrupt or Kernel &gt; Restart (see tabs above).
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dfab0c90">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Summary">Summary<a class="anchor-link" href="#Summary">¶</a></h2><p>In order to start "thinking in parallel" you first need to be familiar with concepts of asynchronous programming, in particular tasks. In this notebook, we have seen the basics of working with tasks. Some key points to remember:</p>
+<ul>
+<li>How to create, schedule, and fetch from a task.</li>
+<li>Tasks run asynchronously, but not in parallel. You can have a single core CPU and still be able to work with several tasks.</li>
+<li>Channels are used to communicate data between tasks.</li>
+<li>Adding data (<code>put!</code>) or taking data (<code>take!</code>) from a channel might wait depending on the channel state. Be careful to avoid dead locks.</li>
+</ul>
 </div>
 </div>
 </div>
