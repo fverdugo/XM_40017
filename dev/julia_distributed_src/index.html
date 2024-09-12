@@ -8387,7 +8387,7 @@ bottlenecks. Being aware of the data we are moving when using functions such as 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Remote-channels-are-not-iterable">Remote channels are not iterable<a class="anchor-link" href="#Remote-channels-are-not-iterable">¶</a></h3><p>One main difference with respect to conventional channels is that remote channels cannot be iterated. Let's repeat the example above.</p>
+<h3 id="Remote-channels-are-also-iterable">Remote channels are also iterable<a class="anchor-link" href="#Remote-channels-are-also-iterable">¶</a></h3><p>As with conventional channels, remote channels can be iterated. Let's repeat the example above.</p>
 </div>
 </div>
 </div>
@@ -8432,7 +8432,7 @@ bottlenecks. Being aware of the data we are moving when using functions such as 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Now, try to iterate over the channel in a for loop. It will result in an error since channels are not iterable.</p>
+<p>Now, try to iterate over the channel in a for loop.</p>
 </div>
 </div>
 </div>
@@ -8459,7 +8459,7 @@ bottlenecks. Being aware of the data we are moving when using functions such as 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>If we want to take values form a remote channel and stop automatically when the channel is closed, we can combine a while loop and a try-catch statement. This works since <code>take!</code> raises an error if the channel is closed, which will execute the <code>catch</code> block and breaks the loop.</p>
+<p>As an alternative method (or if you are using an older version of Julia): if we want to take values form a remote channel and stop automatically when the channel is closed, we can combine a while loop and a try-catch statement. This works since <code>take!</code> raises an error if the channel is closed, which will execute the <code>catch</code> block and breaks the loop.</p>
 </div>
 </div>
 </div>
