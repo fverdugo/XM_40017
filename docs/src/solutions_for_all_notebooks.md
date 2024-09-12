@@ -241,8 +241,7 @@ function matmul_mpi_3!(C,A,B)
     MPI.Bcast!(myB,comm;root)
     L = div(N,P)
     # Tricky part
-    # Scatter and gather work "row major"
-    # while Julia works "col major"
+    # Julia works "col major"
     myAt = zeros(N,L)
     At = collect(transpose(A))
     MPI.Scatter!(At,myAt,comm;root)
