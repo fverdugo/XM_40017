@@ -259,7 +259,7 @@ It is more natural to work with column partitions in Julia if possible since mat
 in "col major" format. Note that we do not need all the auxiliary transposes anymore.
 
 ```julia
-function matmul_mpi_3_col!(C,A,B)
+function matmul_mpi_3!(C,A,B)
     comm = MPI.COMM_WORLD
     rank = MPI.Comm_rank(comm)
     P = MPI.Comm_size(comm)
