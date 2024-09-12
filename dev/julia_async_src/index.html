@@ -7568,7 +7568,7 @@ a.anchor-link {
 <span class="k">end</span>
 <span class="k">function</span><span class="w"> </span><span class="n">why_q2</span><span class="p">()</span>
 <span class="w">    </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"""</span>
-<span class="s">    The time in doing the loop will be almost zero since the loop just schedules 10 tasks, which should be very fast.</span>
+<span class="s">    The time in doing the loop will be O(1) since the loop just schedules 10 tasks, which should be a (small) constant time independent of n.</span>
 <span class="s">    """</span>
 <span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 <span class="k">end</span>
@@ -8465,7 +8465,8 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@elapsed</span><span class="w"> </span><span class="nd">@show</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">140_000_000</span><span class="p">)</span>
+<div class="highlight hl-julia"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">140_000_000</span>
+<span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@elapsed</span><span class="w"> </span><span class="nd">@show</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8484,7 +8485,7 @@ a.anchor-link {
 <pre><code>a) 10*t
 b) t
 c) 0.1*t
-d) near 0*t </code></pre>
+d) O(1), i.e. time independent from n </code></pre>
 </div>
 </div>
 </div>
@@ -8496,8 +8497,9 @@ d) near 0*t </code></pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
-<span class="w">    </span><span class="nd">@show</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">140_000_000</span><span class="p">)</span>
+<div class="highlight hl-julia"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">140_000_000</span>
+<span class="nd">@time</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<span class="w">    </span><span class="nd">@show</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -8531,7 +8533,7 @@ d) near 0*t </code></pre>
 <pre><code>a) 10*t
 b) t
 c) 0.1*t
-d) near 0*t </code></pre>
+d) O(1) </code></pre>
 </div>
 </div>
 </div>
@@ -8543,8 +8545,9 @@ d) near 0*t </code></pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
-<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="nd">@show</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">140_000_000</span><span class="p">)</span>
+<div class="highlight hl-julia"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">140_000_000</span>
+<span class="nd">@time</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="nd">@show</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -8578,7 +8581,7 @@ d) near 0*t </code></pre>
 <pre><code>a) 10*t
 b) t
 c) 0.1*t
-d) near 0*t </code></pre>
+d) O(1) </code></pre>
 </div>
 </div>
 </div>
@@ -8590,8 +8593,9 @@ d) near 0*t </code></pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-julia"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="nd">@sync</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
-<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="nd">@show</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="mi">140_000_000</span><span class="p">)</span>
+<div class="highlight hl-julia"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">140_000_000</span>
+<span class="nd">@time</span><span class="w"> </span><span class="nd">@sync</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span>
+<span class="w">    </span><span class="nd">@async</span><span class="w"> </span><span class="nd">@show</span><span class="w"> </span><span class="n">compute_π</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -8624,7 +8628,7 @@ d) near 0*t </code></pre>
 </div>
 <pre><code>a) infinity
 b) 1 second
-c) near 0 seconds
+c) less than 1 seconds
 d) 3 seconds</code></pre>
 </div>
 </div>
@@ -8688,7 +8692,7 @@ d) 3 seconds</code></pre>
 </div>
 <pre><code>a) infinity
 b) 1 second
-c) near 0 seconds
+c) less than 1 seconds
 d) 3 seconds</code></pre>
 </div>
 </div>
