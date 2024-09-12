@@ -133,6 +133,60 @@ end
 
 ## MPI (Point-to-point)
 
+### Exercise 1
+
+```julia
+function matmul_mpi_3!(C,A,B)
+    comm = MPI.COMM_WORLD
+    rank = MPI.Comm_rank(comm)
+    P = MPI.Comm_size(comm)
+    if  rank == 0
+        N = size(A,1)
+        myB = B
+        for dest in 1:(P-1)
+            MPI.Send(B,comm;dest)
+        end
+    else
+        source = 0
+        status = MPI.Probe(comm,MPI.Status;source)
+        count = MPI.Get_count(status,eltype(B))
+        N = Int(sqrt(count))
+        myB = zeros(N,N)
+        MPI.Recv!(myB,comm;source)
+    end
+    L = div(N,P)
+    myA = zeros(L,N)
+    if  rank == 0
+        lb = L*rank+1
+        ub = L*(rank+1)
+        myA[:,:] = view(A,lb:ub,:)
+        for dest in 1:(P-1)
+            lb = L*dest+1
+            ub = L*(dest+1)
+            MPI.Send(view(A,lb:ub,:),comm;dest)
+        end
+    else
+        source = 0
+        MPI.Recv!(myA,comm;source)
+    end
+    myC = myA*myB
+    if rank == 0
+        lb = L*rank+1
+        ub = L*(rank+1)
+        C[lb:ub,:] = myC
+        for source in 1:(P-1)
+            lb = L*source+1
+            ub = L*(source+1)
+            MPI.Recv!(view(C,lb:ub,:),comm;source)
+        end
+    else
+        dest = 0
+        MPI.Send(myC,comm;dest)
+    end
+    C
+end
+```
+
 ### Exercise 2
 
 ```julia
@@ -159,6 +213,76 @@ else
     buffer[] += 1
     println("msg = $(buffer[])")
     MPI.Send(buffer,comm;dest,tag=0)
+end
+```
+## MPI (collectives)
+
+### Exercise 1
+
+```julia
+function matmul_mpi_3!(C,A,B)
+    comm = MPI.COMM_WORLD
+    rank = MPI.Comm_rank(comm)
+    P = MPI.Comm_size(comm)
+    root = 0
+    if  rank == root
+        N = size(A,1)
+        Nref = Ref(N)
+    else
+        Nref = Ref(0)
+    end
+    MPI.Bcast!(Nref,comm;root)
+    N = Nref[]
+    if  rank == root
+        myB = B
+    else
+        myB = zeros(N,N)
+    end
+    MPI.Bcast!(myB,comm;root)
+    L = div(N,P)
+    # Tricky part
+    # Julia works "col major"
+    myAt = zeros(N,L)
+    At = collect(transpose(A))
+    MPI.Scatter!(At,myAt,comm;root)
+    myCt = transpose(myB)*myAt
+    Ct = similar(C)
+    MPI.Gather!(myCt,Ct,comm;root)
+    C .= transpose(Ct)
+    C
+end
+```
+
+This other solution uses a column partition instead of a row partition.
+It is more natural to work with column partitions in Julia if possible since matrices are
+in "col major" format. Note that we do not need all the auxiliary transposes anymore.
+
+```julia
+function matmul_mpi_3!(C,A,B)
+    comm = MPI.COMM_WORLD
+    rank = MPI.Comm_rank(comm)
+    P = MPI.Comm_size(comm)
+    root = 0
+    if  rank == root
+        N = size(A,1)
+        Nref = Ref(N)
+    else
+        Nref = Ref(0)
+    end
+    MPI.Bcast!(Nref,comm;root)
+    N = Nref[]
+    if  rank == root
+        myA = A
+    else
+        myA = zeros(N,N)
+    end
+    MPI.Bcast!(myA,comm;root)
+    L = div(N,P)
+    myB = zeros(N,L)
+    MPI.Scatter!(B,myB,comm;root)
+    myC = myA*myB
+    MPI.Gather!(myC,C,comm;root)
+    C
 end
 ```
 
