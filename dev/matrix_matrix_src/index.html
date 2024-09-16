@@ -7883,7 +7883,7 @@ d) O(N³)</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Parallel-algorithms">Parallel algorithms<a class="anchor-link" href="#Parallel-algorithms">¶</a></h3><p>The loops over <code>i</code> and <code>j</code> are trivially parallel implies that all the entries of matrix C can be potentially computed in parallel. However, <em>which it the most efficient solution to solve all these entries in parallel in a distributed system?</em> To find this we will consider different parallelization strategies:</p>
+<h3 id="Parallel-algorithms">Parallel algorithms<a class="anchor-link" href="#Parallel-algorithms">¶</a></h3><p>The loops over <code>i</code> and <code>j</code> are trivially parallel, implying that all the entries of matrix C can be potentially computed in parallel. However, <em>which is the most efficient solution to solve all these entries in parallel in a distributed system?</em> To find this we will consider different parallelization strategies:</p>
 <ul>
 <li>Algorithm 1: each worker computes a single entry of C</li>
 <li>Algorithm 2: each worker computes a single row of C</li>
