@@ -7777,7 +7777,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ae6b88eb">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7511de1b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8080,7 +8080,8 @@ a.anchor-link {
 <span class="s">comm = MPI.COMM_WORLD</span>
 <span class="s">nranks = MPI.Comm_size(comm)</span>
 <span class="s">rank = MPI.Comm_rank(comm)</span>
-<span class="s">println("Hello, I am process $rank of $nranks processes!")</span>
+<span class="s">host = MPI.Get_processor_name()</span>
+<span class="s">println("Hello from $host, I am process $rank of $nranks processes!")</span>
 <span class="s">MPI.Finalize()</span>
 <span class="s">"""</span>
 <span class="n">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempname</span><span class="p">()</span><span class="o">*</span><span class="s">".jl"</span>
@@ -8155,7 +8156,8 @@ a.anchor-link {
 <span class="w">    </span><span class="n">comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
 <span class="w">    </span><span class="n">nranks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_size</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
 <span class="w">    </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_rank</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
-<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"Hello, I am process </span><span class="si">$rank</span><span class="s"> of </span><span class="si">$nranks</span><span class="s"> processes!"</span><span class="p">)</span>
+<span class="w">    </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Get_processor_name</span><span class="p">()</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">"Hello from </span><span class="si">$host</span><span class="s">, I am process </span><span class="si">$rank</span><span class="s"> of </span><span class="si">$nranks</span><span class="s"> processes!"</span><span class="p">)</span>
 <span class="w">    </span><span class="n">MPI</span><span class="o">.</span><span class="n">Finalize</span><span class="p">()</span>
 <span class="k">end</span>
 <span class="n">run</span><span class="p">(</span><span class="sb">`</span><span class="si">$</span><span class="p">(</span><span class="n">mpiexec</span><span class="p">())</span><span class="sb"> -np 4 julia --project=. -e </span><span class="si">$code</span><span class="sb">`</span><span class="p">);</span>
