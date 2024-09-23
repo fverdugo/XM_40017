@@ -212,67 +212,98 @@ end</code></pre><p>This other solution uses a column partition instead of a row 
     MPI.Gather!(myC,C,comm;root)
     C
 end</code></pre><h2 id="Jacobi-method"><a class="docs-heading-anchor" href="#Jacobi-method">Jacobi method</a><a id="Jacobi-method-1"></a><a class="docs-heading-anchor-permalink" href="#Jacobi-method" title="Permalink"></a></h2><h3 id="Exercise-1-6"><a class="docs-heading-anchor" href="#Exercise-1-6">Exercise 1</a><a class="docs-heading-anchor-permalink" href="#Exercise-1-6" title="Permalink"></a></h3><pre><code class="language-julia hljs">function jacobi_mpi(n,niters)
-    comm = MPI.COMM_WORLD
-    nranks = MPI.Comm_size(comm)
+    u, u_new = init(n,comm)
+    load = length(u)-2
     rank = MPI.Comm_rank(comm)
-    if mod(n,nranks) != 0
-        println(&quot;n must be a multiple of nranks&quot;)
-        MPI.Abort(comm,1)
-    end
-    load = div(n,nranks)
-    u = zeros(load+2)
-    u[1] = -1
-    u[end] = 1
-    u_new = copy(u)
+    nranks = MPI.Comm_size(comm)
+    nreqs = 2*((rank != 0) + (rank != (nranks-1)))
+    reqs = MPI.MultiRequest(nreqs)
     for t in 1:niters
-        reqs = MPI.Request[]
+        ireq = 0
         if rank != 0
             neig_rank = rank-1
-            req = MPI.Isend(view(u,2:2),comm,dest=neig_rank,tag=0)
-            push!(reqs,req)
-            req = MPI.Irecv!(view(u,1:1),comm,source=neig_rank,tag=0)
-            push!(reqs,req)
+            u_snd = view(u,2:2)
+            u_rcv = view(u,1:1)
+            dest = neig_rank
+            source = neig_rank
+            ireq += 1
+            MPI.Isend(u_snd,comm,reqs[ireq];dest)
+            ireq += 1
+            MPI.Irecv!(u_rcv,comm,reqs[ireq];source)
         end
         if rank != (nranks-1)
             neig_rank = rank+1
-            s = load+1
-            r = load+2
-            req = MPI.Isend(view(u,s:s),comm,dest=neig_rank,tag=0)
-            push!(reqs,req)
-            req = MPI.Irecv!(view(u,r:r),comm,source=neig_rank,tag=0)
-            push!(reqs,req)
+            u_snd = view(u,(load+1):(load+1))
+            u_rcv = view(u,(load+2):(load+2))
+            dest = neig_rank
+            source = neig_rank
+            ireq += 1
+            MPI.Isend(u_snd,comm,reqs[ireq];dest)
+            ireq += 1
+            MPI.Irecv!(u_rcv,comm,reqs[ireq];source)
         end
+        # Upload interior cells
         for i in 3:load
             u_new[i] = 0.5*(u[i-1]+u[i+1])
         end
+        # Wait for the communications to finish
         MPI.Waitall(reqs)
+        # Update boundaries
         for i in (2,load+1)
             u_new[i] = 0.5*(u[i-1]+u[i+1])
         end
         u, u_new = u_new, u
-
     end
-    # Gather the results
-    if rank !=0
-        lb = 2
-        ub = load+1
-        MPI.Send(view(u,lb:ub),comm,dest=0)
-        u_all = zeros(0) # This will nevel be used
-    else
-        u_all = zeros(n+2)
-        # Set boundary
-        u_all[1] = -1
-        u_all[end] = 1
-        # Set data for rank 0
-        lb = 2
-        ub = load+1
-        u_all[lb:ub] = view(u,lb:ub)
-        # Set data for other ranks
-        for other_rank in 1:(nranks-1)
-            lb += load
-            ub += load
-            MPI.Recv!(view(u_all,lb:ub),comm;source=other_rank)
+    return u
+end</code></pre><h3 id="Exercise-2-3"><a class="docs-heading-anchor" href="#Exercise-2-3">Exercise 2</a><a class="docs-heading-anchor-permalink" href="#Exercise-2-3" title="Permalink"></a></h3><pre><code class="language-julia hljs">function jacobi_mpi(n,niters,tol,comm) # new tol arg
+    u, u_new = init(n,comm)
+    load = length(u)-2
+    rank = MPI.Comm_rank(comm)
+    nranks = MPI.Comm_size(comm)
+    nreqs = 2*((rank != 0) + (rank != (nranks-1)))
+    reqs = MPI.MultiRequest(nreqs)
+    for t in 1:niters
+        ireq = 0
+        if rank != 0
+            neig_rank = rank-1
+            u_snd = view(u,2:2)
+            u_rcv = view(u,1:1)
+            dest = neig_rank
+            source = neig_rank
+            ireq += 1
+            MPI.Isend(u_snd,comm,reqs[ireq];dest)
+            ireq += 1
+            MPI.Irecv!(u_rcv,comm,reqs[ireq];source)
         end
+        if rank != (nranks-1)
+            neig_rank = rank+1
+            u_snd = view(u,(load+1):(load+1))
+            u_rcv = view(u,(load+2):(load+2))
+            dest = neig_rank
+            source = neig_rank
+            ireq += 1
+            MPI.Isend(u_snd,comm,reqs[ireq];dest)
+            ireq += 1
+            MPI.Irecv!(u_rcv,comm,reqs[ireq];source)
+        end
+        MPI.Waitall(reqs)
+        # Compute the max diff in the current
+        # rank while doing the local update
+        mydiff = 0.0
+        for i in 2:load+1
+            u_new[i] = 0.5*(u[i-1]+u[i+1])
+            diff_i = abs(u_new[i] - u[i])
+            mydiff = max(mydiff,diff_i)
+        end
+        # Now we need to find the global diff
+        diff_ref = Ref(mydiff)
+        MPI.Allreduce!(diff_ref,max,comm)
+        diff = diff_ref[]
+        # If global diff below tol, stop!
+        if diff &lt; tol
+            return u_new
+        end
+        u, u_new = u_new, u
     end
-    return u_all
-end</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../tsp/">« Traveling salesperson problem</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.7.0 on <span class="colophon-date" title="Monday 23 September 2024 12:01">Monday 23 September 2024</span>. Using Julia version 1.10.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+    return u
+end</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../tsp/">« Traveling salesperson problem</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.7.0 on <span class="colophon-date" title="Monday 23 September 2024 14:37">Monday 23 September 2024</span>. Using Julia version 1.10.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
