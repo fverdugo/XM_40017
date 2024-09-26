@@ -7573,7 +7573,7 @@ a.anchor-link {
 <span class="k">function</span><span class="w"> </span><span class="n">q1_answer</span><span class="p">(</span><span class="n">bool</span><span class="p">)</span>
 <span class="w">    </span><span class="n">bool</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">return</span>
 <span class="w">    </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"""</span>
-<span class="s">    The we can change the loop order over i and j without changing the result. Rememebr:</span>
+<span class="s">    The we can change the loop order over i and j without changing the result. Rememeber:</span>
 <span class="s">    </span>
 <span class="s">    C[i,j] = min(C[i,j],C[i,k]+C[k,j])</span>
 <span class="s">    </span>
@@ -8424,7 +8424,7 @@ send the pieces to all other ranks. This is done in the function below. We start
 <span class="w">        </span><span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_size</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
 <span class="w">        </span><span class="n">lb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">L</span><span class="o">*</span><span class="n">rank</span><span class="o">+</span><span class="mi">1</span>
 <span class="w">        </span><span class="n">ub</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">L</span><span class="o">*</span><span class="p">(</span><span class="n">rank</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="w">        </span><span class="n">C_k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+<span class="w">        </span><span class="n">C_k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">similar</span><span class="p">(</span><span class="n">myC</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">N</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lb</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="o">&lt;=</span><span class="n">ub</span><span class="p">)</span>
 <span class="w">                </span><span class="c"># Send row k to other workers if I have it</span>
