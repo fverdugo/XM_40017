@@ -7603,7 +7603,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Tasks">Tasks<a class="anchor-link" href="#Tasks">¶</a></h2><h3 id="Creating--a-task">Creating  a task<a class="anchor-link" href="#Creating--a-task">¶</a></h3><p>Technically, a task in Julia is a <em>symmetric</em> <a href="https://en.wikipedia.org/wiki/Coroutine"><em>co-routine</em></a>. More informally, a task is a piece of computational work that can be started (scheduled) at some point in the future, and that can be interrupted and resumed.  To create a task, we first need to create a function that represents the work to be done in the task. In next cell, we generate a task that generates and sums two matrices.</p>
+<h2 id="Tasks">Tasks<a class="anchor-link" href="#Tasks">¶</a></h2><h3 id="Creating--a-task">Creating  a task<a class="anchor-link" href="#Creating--a-task">¶</a></h3><p>Technically, a task in Julia is a <em>symmetric</em> <a href="https://en.wikipedia.org/wiki/Coroutine"><em>co-routine</em></a>. More informally, a task is a piece of computational work that can be started (scheduled) at some point in the future, and that can be interrupted and resumed.  To create a task, we first need to create a function that represents the work to be done in the task. In the next cell, we generate a task that generates and sums two matrices.</p>
 </div>
 </div>
 </div>
@@ -7910,7 +7910,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="yield"><code>yield</code><a class="anchor-link" href="#yield">¶</a></h3><p>If tasks do not run in parallel, what is the purpose of tasks? Tasks are handy since they can be interrupted and to switch control to other tasks. This is achieved via function <code>yield</code>. When we call yield, we provide the opportunity to switch to another task. The function below is a variation of function <code>compute_π</code> in which we yield every 1000 iterations. At the call to yield we allow other tasks to take over. Without this call to yield, once we start function <code>compute_π</code> we cannot start any other tasks until this function finishes.</p>
+<h3 id="yield"><code>yield</code><a class="anchor-link" href="#yield">¶</a></h3><p>If tasks do not run in parallel, what is the purpose of tasks? Tasks are handy since they can be interrupted and to switch control to other tasks. This is achieved via function <code>yield</code>. When we call <code>yield</code>, we provide the opportunity to switch to another task. The function below is a variation of function <code>compute_π</code> in which we <code>yield</code> every 1000 iterations. At the call to <code>yield</code> we allow other tasks to take over. Without this call to <code>yield</code>, once we start function <code>compute_π</code> we cannot start any other tasks until this function finishes.</p>
 </div>
 </div>
 </div>
@@ -7944,7 +7944,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>You can check this behavior experimentally with the two following cells. The next one creates and schedules a task that computes pi with the function <code>compute_π_yield</code>. Note that you can run the 2nd cell bellow while this task is running since we call to yield often inside  <code>compute_π_yield</code>.</p>
+<p>You can check this behavior experimentally with the two following cells. The next one creates and schedules a task that computes pi with the function <code>compute_π_yield</code>. Note that you can run the 2nd cell bellow while this task is running since we call to <code>yield</code> often inside  <code>compute_π_yield</code>.</p>
 </div>
 </div>
 </div>
@@ -7985,7 +7985,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Example:-Implementing-function-sleep">Example: Implementing function sleep<a class="anchor-link" href="#Example:-Implementing-function-sleep">¶</a></h3><p>Using yield, we can implement our own version of the sleep function as follows:</p>
+<h3 id="Example:-Implementing-function-sleep">Example: Implementing function sleep<a class="anchor-link" href="#Example:-Implementing-function-sleep">¶</a></h3><p>Using <code>yield</code>, we can implement our own version of the sleep function as follows:</p>
 </div>
 </div>
 </div>

@@ -7855,7 +7855,7 @@ d) O(N³)</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Where-can-we-exploit-parallelism?">Where can we exploit parallelism?<a class="anchor-link" href="#Where-can-we-exploit-parallelism?">¶</a></h2><p>The matrix-matrix multiplication is an example of <a href="https://en.wikipedia.org/wiki/Embarrassingly_parallel">embarrassingly parallel algorithm</a>. An embarrassingly parallel (also known as trivially parallel) algorithm is an algorithm that can be split in parallel tasks with no (or very few) dependences between them. Such algorithms are typically easy to parallelize.</p>
+<h2 id="Where-can-we-exploit-parallelism?">Where can we exploit parallelism?<a class="anchor-link" href="#Where-can-we-exploit-parallelism?">¶</a></h2><p>The matrix-matrix multiplication is an example of <a href="https://en.wikipedia.org/wiki/Embarrassingly_parallel">embarrassingly parallel algorithm</a>. An embarrassingly parallel (also known as trivially parallel) algorithm is an algorithm that can be split in parallel tasks with no (or very few) dependencies between them. Such algorithms are typically easy to parallelize.</p>
 <p>Which parts of an algorithm are completely independent and thus trivially parallel? To answer this question, it is useful to inspect the for loops, which are potential sources of parallelism. If the iterations are independent of each other, then they are trivial to parallelize. An easy check to find out if the iterations are dependent or not is to change their order (for instance changing <code>for j in 1:n</code> by <code>for j in n:-1:1</code>, i.e. doing the loop in reverse). If the result changes, then the iterations are not independent.</p>
 <p>Look at the three nested loops in the sequential implementation of the matrix-matrix product:</p>
 <div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
@@ -7871,7 +7871,7 @@ d) O(N³)</code></pre>
 <p>Note that:</p>
 <ul>
 <li>Loops over <code>i</code> and <code>j</code> are trivially parallel.</li>
-<li>The loop over <code>k</code> is not trivially parallel. The accumulation into the reduction variable <code>Cij</code> introduces extra dependences. In addition, remember that the addition of floating point numbers is not strictly associative due to rounding errors. Thus, the result of this loop may change with the loop order when using floating point numbers. In any case, this loop can also be parallelized, but it requires a parallel <em>fold</em> or a parallel <em>reduction</em>.</li>
+<li>The loop over <code>k</code> is not trivially parallel. The accumulation into the reduction variable <code>Cij</code> introduces extra dependencies. In addition, remember that the addition of floating point numbers is not strictly associative due to rounding errors. Thus, the result of this loop may change with the loop order when using floating point numbers. In any case, this loop can also be parallelized, but it requires a parallel <em>fold</em> or a parallel <em>reduction</em>.</li>
 </ul>
 </div>
 </div>

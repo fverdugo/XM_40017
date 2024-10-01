@@ -7692,20 +7692,20 @@ a.anchor-link {
 <p>In Julia (option 1, recommended):</p>
 <div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
 <span class="n">MPI</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
-<span class="c"># Your MPI programm here</span>
+<span class="c"># Your MPI program here</span>
 <span class="n">MPI</span><span class="o">.</span><span class="n">Finalize</span><span class="p">()</span><span class="w"> </span><span class="c"># Optional</span>
 </pre></div>
 <p>In Julia (option 2, advanced):</p>
 <div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">MPI</span>
 <span class="n">MPI</span><span class="o">.</span><span class="n">Init</span><span class="p">(</span><span class="n">finalize_atexit</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
-<span class="c"># Your MPI programm here</span>
+<span class="c"># Your MPI program here</span>
 <span class="n">MPI</span><span class="o">.</span><span class="n">Finalize</span><span class="p">()</span><span class="w"> </span><span class="c"># Mandatory</span>
 </pre></div>
 <p>In C:</p>
 <div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
-<span class="w">    </span><span class="cm">/* Your MPI Programm here */</span>
+<span class="w">    </span><span class="cm">/* Your MPI Program here */</span>
 <span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
@@ -8216,7 +8216,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>So, the full MPI program needs to be in the source file passed to Julia or the quote block. In practice, long MPI programms are written as Julia packages using several files, which are then loaded by each MPI process. For our simple example, we just need to include the definition of <code>foo</code> inside the quote block.</p>
+<p>So, the full MPI program needs to be in the source file passed to Julia or the quote block. In practice, long MPI programs are written as Julia packages using several files, which are then loaded by each MPI process. For our simple example, we just need to include the definition of <code>foo</code> inside the quote block.</p>
 </div>
 </div>
 </div>
@@ -8547,7 +8547,7 @@ a.anchor-link {
 <span class="w">        </span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">ANY_SOURCE</span>
 <span class="w">        </span><span class="n">tag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">ANY_TAG</span>
 <span class="w">        </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Probe</span><span class="p">(</span><span class="n">comm</span><span class="p">,</span><span class="n">MPI</span><span class="o">.</span><span class="n">Status</span><span class="p">;</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="p">)</span>
-<span class="w">        </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Get_count</span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="c"># Get incomming message length</span>
+<span class="w">        </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Get_count</span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="kt">Int</span><span class="p">)</span><span class="w"> </span><span class="c"># Get incoming message length</span>
 <span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">"I am about to receive </span><span class="si">$count</span><span class="s"> integers."</span><span class="p">)</span>
 <span class="w">        </span><span class="n">rcvbuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="n">count</span><span class="p">)</span><span class="w"> </span><span class="c"># Allocate        </span>
 <span class="w">        </span><span class="n">MPI</span><span class="o">.</span><span class="n">Recv!</span><span class="p">(</span><span class="n">rcvbuf</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="p">,</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Status</span><span class="p">;</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="p">)</span>
@@ -8608,7 +8608,7 @@ a.anchor-link {
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">rank</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span>
 <span class="w">        </span><span class="n">rcvbuf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="kt">Int</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 <span class="w">        </span><span class="n">MPI</span><span class="o">.</span><span class="n">Recv!</span><span class="p">(</span><span class="n">rcvbuf</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="p">,</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Status</span><span class="p">;</span><span class="w"> </span><span class="n">source</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="w">        </span><span class="c"># recvbuf will have the incomming message fore sure. Recv! has returned.</span>
+<span class="w">        </span><span class="c"># recvbuf will have the incoming message fore sure. Recv! has returned.</span>
 <span class="w">        </span><span class="nd">@show</span><span class="w"> </span><span class="n">rcvbuf</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="k">end</span>

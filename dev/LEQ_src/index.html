@@ -7618,7 +7618,7 @@ $$</p>
 <p>This is just a small example with three unknowns, but practical applications need to solve linear equations with large number of unknowns. Parallel processing is needed in these cases.</p>
 <h3 id="Problem-statement">Problem statement<a class="anchor-link" href="#Problem-statement">¶</a></h3><p>Let us consider a system of linear equations written in matrix form $Ax=b$, where $A$ is a nonsingular square matrix, and $x$ and $b$ are vectors. $A$ and $b$ are given, and $x$ is unknown. The goal of Gaussian elimination is to transform the system $Ax=b$, into a new system $Ux=c$ such that</p>
 <ul>
-<li>both system have the same solution vector $x$,</li>
+<li>both systems have the same solution vector $x$,</li>
 <li>the matrix $U$ of the new system is <em>upper triangular</em> with unit diagonal, namely $U_{ii} = 1$ and $U_{ij} = 0$ for $i&gt;j$.</li>
 </ul>
 <p>For the particular system shown above, the transformed one is the following:</p>
@@ -7933,7 +7933,7 @@ d) only the first inner loop</code></pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Data-partition">Data partition<a class="anchor-link" href="#Data-partition">¶</a></h3><p>Let start considering a row-wise block partition, as we did in previous algorithms.</p>
+<h3 id="Data-partition">Data partition<a class="anchor-link" href="#Data-partition">¶</a></h3><p>Let's start considering a row-wise block partition, as we did in previous algorithms.</p>
 <p>In the figure below, we use different colors to illustrate which entries are assigned to a CPU. All entries with the same color are assigned to the same CPU.</p>
 </div>
 </div>
@@ -7986,7 +7986,7 @@ d) only the first inner loop</code></pre>
 <div class="alert alert-block alert-info">
 <b>Definition:</b> *Load imbalance*: is the problem when work is not equally distributed over all processes and consequently some processes do more work than others.
 </div>
-<p>Having processors waiting for others is a waist of computational resources and affects negatively parallel speedups. The optimal speedup (speedup equal to the number of processors) assumes that the work is perfectly parallel and that it is evenly distributed. If there is load imbalance, the last assumption is not true anymore and the speedup will be suboptimal.</p>
+<p>Having processors waiting for others is a waste of computational resources and affects negatively parallel speedups. The optimal speedup (speedup equal to the number of processors) assumes that the work is perfectly parallel and that it is evenly distributed. If there is load imbalance, the last assumption is not true anymore and the speedup will be suboptimal.</p>
 </div>
 </div>
 </div>

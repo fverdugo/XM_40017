@@ -7671,7 +7671,7 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Last cell created 3 new Julia processes. By default, they run locally in the same computer as the current Julia session, using multiple cores if possible. However, it is also possible to start the new processes in other machines as long as they are interconnected (more details on this later).</p>
 <div class="alert alert-block alert-info">
-<b>Tip:</b> We can also start new processes when launching Julia from the command line by suing the `-p` command-line argument. E.g., `$ julia -p 3 ` would launch Julia with 3 extra processes.
+<b>Tip:</b> We can also start new processes when launching Julia from the command line by using the `-p` command-line argument. E.g., `$ julia -p 3 ` would launch Julia with 3 extra processes.
 </div>
 </div>
 </div>
@@ -7813,7 +7813,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Creating-workers-in-other-machines">Creating workers in other machines<a class="anchor-link" href="#Creating-workers-in-other-machines">¶</a></h3><p>For large parallel computations, one typically needs to use different computers in parallel. Function <code>addprocs</code> also provides a low-level method to start workers in other machines. Next code example would create 3 workers in <code>server1</code> and 4 new workers in server <code>server2</code> (see figure below). Under the hood, Julia connects via ssh to the other machines and starts the new processes there. In order this to work, the local computer and the remote servers need to be properly configured (see the Julia manual for details).</p>
+<h3 id="Creating-workers-in-other-machines">Creating workers in other machines<a class="anchor-link" href="#Creating-workers-in-other-machines">¶</a></h3><p>For large parallel computations, one typically needs to use different computers in parallel. Function <code>addprocs</code> also provides a low-level method to start workers in other machines. Next code example would create 3 workers in <code>server1</code> and 4 new workers in <code>server2</code> (see figure below). Under the hood, Julia connects via ssh to the other machines and starts the new processes there. In order this to work, the local computer and the remote servers need to be properly configured (see the Julia manual for details).</p>
 <div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Distributed</span>
 <span class="n">machines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[(</span><span class="s">"user@server1"</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="s">"user@server2"</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>
 <span class="n">addprocs</span><span class="p">(</span><span class="n">machines</span><span class="p">)</span>
@@ -8133,7 +8133,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Another-usefull-macro:-@fetchfrom">Another usefull macro: <code>@fetchfrom</code><a class="anchor-link" href="#Another-usefull-macro:-@fetchfrom">¶</a></h3><p>Macro <code>@fetchfrom</code> is the blocking version of <code>@spawnat</code>. It blocks and returns the corresponding result instead of a <code>Future</code> object.</p>
+<h3 id="Another-useful-macro:-@fetchfrom">Another useful macro: <code>@fetchfrom</code><a class="anchor-link" href="#Another-useful-macro:-@fetchfrom">¶</a></h3><p>Macro <code>@fetchfrom</code> is the blocking version of <code>@spawnat</code>. It blocks and returns the corresponding result instead of a <code>Future</code> object.</p>
 </div>
 </div>
 </div>
@@ -8173,7 +8173,7 @@ bottlenecks. Being aware of the data we are moving when using functions such as 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Explicit-data-movement-in-remotecall-/-fetch">Explicit data movement in <code>remotecall</code> / <code>fetch</code><a class="anchor-link" href="#Explicit-data-movement-in-remotecall-/-fetch">¶</a></h3><p>When usig <code>remotecall</code> we send to the remote process a function and its arguments. In this example, we send function name <code>+</code> and matrices <code>a</code> and <code>b</code> to proc 4. When fetching the result we receive a copy of the matrix from proc 4.</p>
+<h3 id="Explicit-data-movement-in-remotecall-/-fetch">Explicit data movement in <code>remotecall</code> / <code>fetch</code><a class="anchor-link" href="#Explicit-data-movement-in-remotecall-/-fetch">¶</a></h3><p>When using <code>remotecall</code> we send to the remote process a function and its arguments. In this example, we send function name <code>+</code> and matrices <code>a</code> and <code>b</code> to proc 4. When fetching the result we receive a copy of the matrix from proc 4.</p>
 </div>
 </div>
 </div>

@@ -7543,7 +7543,7 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Contents">Contents<a class="anchor-link" href="#Contents">¶</a></h2><p>In this notebook, we will learn</p>
 <ul>
-<li>How to paralleize the Jacobi method</li>
+<li>How to parallelize the Jacobi method</li>
 <li>How the data partition can impact the performance of a distributed algorithm</li>
 <li>How to use latency hiding to improve parallel performance</li>
 </ul>
@@ -8009,7 +8009,7 @@ a.anchor-link {
 <li>We need to get remote entries from 2 neighbors (2 messages per iteration)</li>
 <li>We need to communicate 1 entry per message</li>
 <li>Thus, communication complexity is $O(1)$</li>
-<li>Communication/computation ration is $O(P/N)$, making the algorithm potentially scalable if $P&lt;&lt;N$.</li>
+<li>Communication/computation ratio is $O(P/N)$, making the algorithm potentially scalable if $P&lt;&lt;N$.</li>
 </ul>
 </div>
 </div>
@@ -8232,7 +8232,7 @@ a.anchor-link {
 <span class="k">end</span>
 </pre></div>
 <ul>
-<li>The outer loop cannot be parallelized (like in the 1d case).</li>
+<li>The outer loop cannot be parallelized (like in the 1D case).</li>
 <li>The two inner loops are trivially parallel</li>
 </ul>
 </div>
@@ -8245,7 +8245,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Parallelization-strategies">Parallelization strategies<a class="anchor-link" href="#Parallelization-strategies">¶</a></h3><p>In 2d one has more flexibility in order to distribute the data over the processes. We consider these three alternatives:</p>
+<h3 id="Parallelization-strategies">Parallelization strategies<a class="anchor-link" href="#Parallelization-strategies">¶</a></h3><p>In 2D, one has more flexibility in order to distribute the data over the processes. We consider these three alternatives:</p>
 <ul>
 <li>1D block row partition (each worker handles a subset of consecutive rows and all columns)</li>
 <li>2D block partition (each worker handles a subset of consecutive rows and columns)</li>
@@ -8457,21 +8457,21 @@ a.anchor-link {
 </thead>
 <tbody>
 <tr>
-<td>1d block</td>
+<td>1D block</td>
 <td>2</td>
 <td>O(N)</td>
 <td>N²/P</td>
 <td>O(P/N)</td>
 </tr>
 <tr>
-<td>2d block</td>
+<td>2D block</td>
 <td>4</td>
 <td>O(N/√P)</td>
 <td>N²/P</td>
 <td>O(√P/N)</td>
 </tr>
 <tr>
-<td>2d cyclic</td>
+<td>2D cyclic</td>
 <td>4</td>
 <td>O(N²/P)</td>
 <td>N²/P</td>
@@ -8490,9 +8490,9 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Which-partition-is-the-best-one?">Which partition is the best one?<a class="anchor-link" href="#Which-partition-is-the-best-one?">¶</a></h3><ul>
-<li>Both 1d and 2d block partitions are potentially scalable if $P&lt;&lt;N$</li>
-<li>The 2d block partition has the lowest communication complexity</li>
-<li>The 1d block partition requires to send less messages (It can be useful if the fixed cost of sending a message is high)</li>
+<li>Both 1D and 2D block partitions are potentially scalable if $P&lt;&lt;N$</li>
+<li>The 2D block partition has the lowest communication complexity</li>
+<li>The 1D block partition requires to send less messages (It can be useful if the fixed cost of sending a message is high)</li>
 <li>The best strategy for a given problem size will thus depend on the machine.</li>
 <li>Cyclic partitions are impractical for this application (but they are useful in others)</li>
 </ul>
