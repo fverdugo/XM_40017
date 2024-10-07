@@ -389,7 +389,7 @@ This will crate a minimal package consisting of a new folder `MyPackage` with tw
 
 !!! tip
     This approach only generates a very minimal package. To create a more sophisticated package skeleton (including unit testing, code coverage, readme file, licence, etc.) use
-    [`PkgTemplates.jl`](https://github.com/JuliaCI/PkgTemplates.jl) or [`BestieTemplate.jl`](https://github.com/abelsiqueira/BestieTemplate.jl). The later one is developed in Amsterdam at the
+    [`PkgTemplates.jl`](https://github.com/JuliaCI/PkgTemplates.jl) or [`BestieTemplate.jl`](https://github.com/JuliaBesties/BestieTemplate.jl). The later one is developed in Amsterdam at the
     [Netherlands eScience Center](https://www.esciencecenter.nl/).
 
 You can add dependencies to the package by activating the `MyPackage` folder in package mode and adding new dependencies as always:
