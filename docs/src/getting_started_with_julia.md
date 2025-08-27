@@ -210,11 +210,11 @@ To install a package, we need to enter *package* mode. Remember that we entered 
 ```julia
 julia> ]
 ```
-At this point, the prompt should have changed to `(@v1.10) pkg>` indicating that we are in package mode. The text between the parentheses indicates which is the active *project*, i.e., where packages are going to be installed. In this case, we are working with the global project associated with our Julia installation (which is Julia 1.10 in this example, but it can be another version in your case).
+At this point, the prompt should have changed to `(@v1.11) pkg>` indicating that we are in package mode. The text between the parentheses indicates which is the active *project*, i.e., where packages are going to be installed. In this case, we are working with the global project associated with our Julia installation (which is Julia 1.11 in this example, but it can be another version in your case).
 
 To install the MPI package, type
 ```julia
-(@v1.10) pkg> add MPI
+(@v1.11) pkg> add MPI
 ```
 Congrats, you have installed MPI!
 
@@ -222,7 +222,8 @@ Congrats, you have installed MPI!
     Many Julia package names end with `.jl`. This is just a way of signaling that a package is written in Julia. When using such packages, the `.jl` needs to be omitted. In this case, we have installed the `MPI.jl` package even though we have only typed `MPI` in the REPL.
 
 !!! note
-    The package you have installed is the Julia interface to MPI, called  `MPI.jl`. Note that it is not a MPI library by itself. It is just a thin wrapper between MPI and Julia. To use this interface, you need an actual MPI library installed in your system such as OpenMPI or MPICH. Julia downloads and installs a MPI library for you, but it is also possible to use a MPI library already available in your system. This is useful, e.g., when running on HPC clusters. See the [documentation](https://juliaparallel.org/MPI.jl/stable/configuration/) of `MPI.jl` for further details.
+    The package you have installed is the Julia interface to MPI, called  `MPI.jl`. Note that it is not an MPI library by itself. It is just a thin wrapper between MPI and Julia. To use this interface, you need an actual MPI library installed in your system such as OpenMPI or MPICH. Julia downloads and installs an MPI library for you, but it is also possible to use an MPI library already available in your system. This is useful, e.g., when running on HPC clusters. See the [documentation](https://juliaparallel.org/MPI.jl/stable/configuration/) of `MPI.jl` for further details.
+
 
 To check that the package was installed properly, exit package mode by pressing the backspace key several times, and run it again
 
@@ -241,7 +242,7 @@ $ mpiexec -np 4 julia hello_mpi.jl
 But it will probably not work since the version of `mpiexec` needs to match with the MPI version we are using from Julia. Don't worry if you could not make it work! A more elegant way to run MPI code is from the Julia REPL directly, by using these commands:
 ```julia
 julia> using MPI
-julia> run(`$(mpiexec()) -np 4 julia hello_mpi.jl`)
+julia> run(`$(mpiexec()) -np 4 julia hello_mpi.jl`);
 ```
 
 Now, you should see output from 4 ranks.
@@ -254,7 +255,7 @@ We have installed the `MPI` package globally and it will be available in all Jul
 
 A project is simply a folder in your file system. To use a particular folder as your project, you need to *activate* it. This is done by entering package mode and using the `activate` command followed by the path to the folder you want to activate.
 ```julia
-(@v1.10) pkg> activate .
+(@v1.11) pkg> activate .
 ```
  The previous command will activate the current working directory. Note that the dot `.` is indeed the path to the current folder.
 
@@ -264,7 +265,7 @@ The prompt has changed to `(lessons) pkg>` indicating that we are in the project
     You can activate a project directly when opening Julia from the terminal using the `--project` flag. The command `$ julia --project=.` will open Julia and activate a project in the current directory. You can also achieve the same effect by setting the environment variable  `JULIA_PROJECT` with the path of the folder you want to activate.
 
 !!! note
-    The active project folder and the current working directory are two independent concepts! For instance,  `(@v1.10) pkg> activate folderB` and then `julia> cd("folderA")`, will activate the project in `folderB` and change the current working directory to `folderA`.
+    The active project folder and the current working directory are two independent concepts! For instance,  `(@v1.11) pkg> activate folderB` and then `julia> cd("folderA")`, will activate the project in `folderB` and change the current working directory to `folderA`.
 
 At this point all package-related operations will be local to the new project. For instance, install the `DataFrames` package.
 
@@ -282,7 +283,7 @@ Now, we can return to the global project to check that `DataFrames` has not been
 ```julia
 (lessons) pkg> activate
 ```
-The prompt is again `(@v1.10) pkg>`
+The prompt is again `(@v1.11) pkg>`
 
 Now, try to use `DataFrames`.
 
@@ -306,13 +307,13 @@ In other words, `Project.toml` contains the packages relevant for the user, wher
 You can see the path to the current `Project.toml` file by using the `status` operator (or `st` in its short form) while in package mode
 
 ```julia
-(@v1.10) pkg> status
+(@v1.11) pkg> status
 ```
 
 The information about the `Manifest.toml` can be inspected by passing the `-m` flag.
 
 ```julia
-(@v1.10) pkg> status -m
+(@v1.11) pkg> status -m
 ```
 
 ### Installing packages from a project file
@@ -336,7 +337,7 @@ julia> mkdir("newproject")
 
 To install all the packages registered in this file you need to activate the folder containing your `Project.toml` file
 ```julia
-(@v1.10) pkg> activate newproject
+(@v1.11) pkg> activate newproject
 ```
 and then *instantiating* it
 ```julia
@@ -350,12 +351,12 @@ The instantiate command will download and install all listed packages and their 
 You can get help about a particular package operator by writing `help` in front of it
 
 ```julia
-(@v1.10) pkg> help activate
+(@v1.11) pkg> help activate
 ```
 
 You can get an overview of all package commands by typing `help` alone
 ```julia
-(@v1.10) pkg> help
+(@v1.11) pkg> help
 ```
 
 ### Package operations in Julia code
@@ -368,7 +369,7 @@ julia> Pkg.status()
 ```
 is equivalent to calling `status` in package mode.
 ```julia
-(@v1.10) pkg> status
+(@v1.11) pkg> status
 ```
 
 ### Creating you own package
@@ -379,7 +380,7 @@ or if you want to eventually [register your package](https://github.com/JuliaReg
 The simplest way of generating a package (called `MyPackage`) is as follows. Open Julia, go to package mode, and type
 
 ```julia
-(@v1.10) pkg> generate MyPackage
+(@v1.11) pkg> generate MyPackage
 ```
 
 This will crate a minimal package consisting of a new folder `MyPackage` with two files:
@@ -395,7 +396,7 @@ This will crate a minimal package consisting of a new folder `MyPackage` with tw
 You can add dependencies to the package by activating the `MyPackage` folder in package mode and adding new dependencies as always:
 
 ```julia
-(@v1.10) pkg> activate MyPackage
+(@v1.11) pkg> activate MyPackage
 (MyPackage) pkg> add MPI
 ```
 
@@ -406,7 +407,7 @@ This will add MPI to your package dependencies.
 To use your package you first need to add it to a package environment of your choice. This is done by changing to package mode and typing `develop ` followed by the path to the folder containing the package. For instance:
 
 ```julia
-(@v1.10) pkg> develop MyPackage
+(@v1.11) pkg> develop MyPackage
 ```
 
 !!! note
