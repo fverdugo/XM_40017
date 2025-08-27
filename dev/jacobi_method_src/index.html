@@ -7314,6 +7314,7 @@ a.anchor-link {
                     processEnvironments: true
                 },
                 displayAlign: 'center',
+                messageStyle: 'none',
                 CommonHTML: {
                     linebreaks: {
                     automatic: true
@@ -8886,7 +8887,7 @@ d) Loop over i only</code></pre>
 <b>Note:</b> The programming model of MPI is generally better suited for data-parallel algorithms like this one than the task-based model provided by Distributed.jl. In any case, one can also implement it using Distributed.jl, but it requires some extra effort to setup the remote channels right for the communication between neighbor processes. 
 </div>
 <p>We are going to implement the method in a function with the following signature</p>
-<div class="highlight"><pre><span></span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jacobi_mpi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">niters</span><span class="p">,</span><span class="n">comm</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="w">    </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jacobi_mpi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">niters</span><span class="p">,</span><span class="n">comm</span><span class="p">)</span>
 </pre></div>
 <p>The signature will be very similar to the sequential function <code>jacobi</code>, but there are some important differences:</p>
 <ol>
@@ -9096,7 +9097,7 @@ d) Loop over i only</code></pre>
 <div class="alert alert-block alert-success">
 <b>Question:</b>  Is this other implementation based on `MPI.Send` and `MPI.Recv!` correct?
 </div>
-<div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">ghost_exchange!</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">comm</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="n">ghost_exchange!</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">comm</span><span class="p">)</span>
 <span class="w">        </span><span class="n">load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span>
 <span class="w">        </span><span class="n">rank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_rank</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
 <span class="w">        </span><span class="n">nranks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI</span><span class="o">.</span><span class="n">Comm_size</span><span class="p">(</span><span class="n">comm</span><span class="p">)</span>
