@@ -27,12 +27,17 @@ ex2(f,g) = x -> f(x) + g(x)
 ### Exercise 3
 
 ```julia
-using GLMakie
-max_iters = 100
 n = 1000
 x = LinRange(-1.7,0.7,n)
 y = LinRange(-1.2,1.2,n)
-heatmap(x,y,(i,j)->mandel(i,j,max_iters))
+values = zeros(n,n)
+for j in 1:n
+    for i in 1:n
+        values[i,j] = surprise(x[i],y[j])
+    end
+end
+using GLMakie
+heatmap(x,y,values)
 ```
 
 ## Asynchronous programming in Julia
