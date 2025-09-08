@@ -8442,7 +8442,8 @@ a.anchor-link {
 <ul>
 <li><code>put!</code> will wait for a <code>take!</code> if there is not space left in the channel's buffer.</li>
 <li><code>take!</code> will wait for a <code>put!</code> if there is no data to be consumed in the channel.</li>
-<li>Both <code>put!</code> and <code>take!</code> will raise an error if the channel is closed.</li>
+<li><code>put!</code> will raise an error if the channel is closed.</li>
+<li><code>take!</code> will raise an error if the channel is closed <em>and</em> empty.</li>
 </ul>
 </div>
 </div>

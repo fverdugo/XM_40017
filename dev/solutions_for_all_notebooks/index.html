@@ -20,11 +20,12 @@ for j in 1:n
 end
 using GLMakie
 heatmap(x,y,values)</code></pre><h2 id="Asynchronous-programming-in-Julia"><a class="docs-heading-anchor" href="#Asynchronous-programming-in-Julia">Asynchronous programming in Julia</a><a id="Asynchronous-programming-in-Julia-1"></a><a class="docs-heading-anchor-permalink" href="#Asynchronous-programming-in-Julia" title="Permalink"></a></h2><h2 id="Distributed-computing-in-Julia"><a class="docs-heading-anchor" href="#Distributed-computing-in-Julia">Distributed computing in Julia</a><a id="Distributed-computing-in-Julia-1"></a><a class="docs-heading-anchor-permalink" href="#Distributed-computing-in-Julia" title="Permalink"></a></h2><h3 id="Exercise-1-2"><a class="docs-heading-anchor" href="#Exercise-1-2">Exercise 1</a><a class="docs-heading-anchor-permalink" href="#Exercise-1-2" title="Permalink"></a></h3><pre><code class="language-julia hljs">f = () -&gt; Channel{Int}(1)
-chnls = [ RemoteChannel(f,w) for w in workers() ]
-@sync for (iw,w) in enumerate(workers())
+worker_ids = workers()
+chnls = [ RemoteChannel(f,w) for w in worker_ids ]
+@sync for (iw,w) in enumerate(worker_ids)
     @spawnat w begin
         chnl_snd = chnls[iw]
-        if w == 2
+        if iw == 1
             chnl_rcv = chnls[end]
             msg = 2
             println(&quot;msg = $msg&quot;)
@@ -39,17 +40,21 @@ chnls = [ RemoteChannel(f,w) for w in workers() ]
            put!(chnl_snd,msg)
         end
     end
-end</code></pre><p>This is another possible solution.</p><pre><code class="language-julia hljs">@everywhere function work(msg)
+end</code></pre><p>This is another possible solution that does not use remote channels.</p><pre><code class="language-julia hljs">@everywhere function work(msg,iw,worker_ids)
     println(&quot;msg = $msg&quot;)
-    if myid() != nprocs()
-        next = myid() + 1
-        @fetchfrom next work(msg+1)
+    if iw &lt; length(worker_ids)
+        inext = iw+1
+        next = worker_ids[iw+1]
+        @fetchfrom next work(msg+1,inext,worker_ids)
     else
-        @fetchfrom 2 println(&quot;msg = $msg&quot;)
+        @fetchfrom worker_ids[1] println(&quot;msg = $msg&quot;)
     end
+    return nothing
 end
 msg = 2
-@fetchfrom 2 work(msg)</code></pre><h2 id="Matrix-matrix-multiplication"><a class="docs-heading-anchor" href="#Matrix-matrix-multiplication">Matrix-matrix multiplication</a><a id="Matrix-matrix-multiplication-1"></a><a class="docs-heading-anchor-permalink" href="#Matrix-matrix-multiplication" title="Permalink"></a></h2><h3 id="Exercise-1-3"><a class="docs-heading-anchor" href="#Exercise-1-3">Exercise 1</a><a class="docs-heading-anchor-permalink" href="#Exercise-1-3" title="Permalink"></a></h3><pre><code class="language-julia hljs">function matmul_dist_3!(C,A,B)
+iw = 1
+worker_ids = workers()
+@fetchfrom worker_ids[iw] work(msg,iw,worker_ids)</code></pre><h2 id="Matrix-matrix-multiplication"><a class="docs-heading-anchor" href="#Matrix-matrix-multiplication">Matrix-matrix multiplication</a><a id="Matrix-matrix-multiplication-1"></a><a class="docs-heading-anchor-permalink" href="#Matrix-matrix-multiplication" title="Permalink"></a></h2><h3 id="Exercise-1-3"><a class="docs-heading-anchor" href="#Exercise-1-3">Exercise 1</a><a class="docs-heading-anchor-permalink" href="#Exercise-1-3" title="Permalink"></a></h3><pre><code class="language-julia hljs">function matmul_dist_3!(C,A,B)
     m = size(C,1)
     n = size(C,2)
     l = size(A,2)
@@ -338,4 +343,4 @@ end</code></pre><h2 id="All-pairs-of-shortest-paths"><a class="docs-heading-anch
         end
     end
     myC
-end</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../tsp/">« Traveling salesperson problem</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.14.1 on <span class="colophon-date" title="Friday 5 September 2025 13:21">Friday 5 September 2025</span>. Using Julia version 1.11.6.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+end</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../tsp/">« Traveling salesperson problem</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.14.1 on <span class="colophon-date" title="Monday 8 September 2025 10:08">Monday 8 September 2025</span>. Using Julia version 1.11.6.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
