@@ -48,11 +48,12 @@ heatmap(x,y,values)
 
 ```julia
 f = () -> Channel{Int}(1)
-chnls = [ RemoteChannel(f,w) for w in workers() ]
-@sync for (iw,w) in enumerate(workers())
+worker_ids = workers()
+chnls = [ RemoteChannel(f,w) for w in worker_ids ]
+@sync for (iw,w) in enumerate(worker_ids)
     @spawnat w begin
         chnl_snd = chnls[iw]
-        if w == 2
+        if iw == 1
             chnl_rcv = chnls[end]
             msg = 2
             println("msg = $msg")
@@ -70,22 +71,25 @@ chnls = [ RemoteChannel(f,w) for w in workers() ]
 end
 ```
 
-This is another possible solution.
+This is another possible solution that does not use remote channels.
 
 ```julia
-@everywhere function work(msg)
+@everywhere function work(msg,iw,worker_ids)
     println("msg = $msg")
-    if myid() != nprocs()
-        next = myid() + 1
-        @fetchfrom next work(msg+1)
+    if iw < length(worker_ids)
+        inext = iw+1
+        next = worker_ids[iw+1]
+        @fetchfrom next work(msg+1,inext,worker_ids)
     else
-        @fetchfrom 2 println("msg = $msg")
+        @fetchfrom worker_ids[1] println("msg = $msg")
     end
+    return nothing
 end
 msg = 2
-@fetchfrom 2 work(msg)
+iw = 1
+worker_ids = workers()
+@fetchfrom worker_ids[iw] work(msg,iw,worker_ids)
 ```
-
 
 ## Matrix-matrix multiplication
 
